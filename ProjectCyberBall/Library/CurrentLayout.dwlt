@@ -108,7 +108,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 492}
   m_MaxSize: {x: 18008, y: 14042}
   vertical: 1
-  controlID: 5870
+  controlID: 3390
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 492}
   m_MaxSize: {x: 18008, y: 14042}
   vertical: 0
-  controlID: 5871
+  controlID: 3391
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 492}
   m_MaxSize: {x: 10004, y: 14042}
   vertical: 1
-  controlID: 5872
+  controlID: 3392
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -287,7 +287,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 2
     y: 19
-    width: 908
+    width: 774
     height: 439
   m_MaximizeOnPlay: 1
   m_Gizmos: 0
@@ -367,9 +367,9 @@ MonoBehaviour:
     height: 710
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 46010000
-    m_LastClickedID: 0
-    m_ExpandedIDs: d256ffffb0f4ffffa0fbffff0000000002280000
+    m_SelectedIDs: 20280000
+    m_LastClickedID: 10272
+    m_ExpandedIDs: a0fbffff00000000e627000016280000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -461,14 +461,14 @@ MonoBehaviour:
     width: 774
     height: 439
   m_SceneLighting: 1
-  lastFramingTime: 682.7295758266755
+  lastFramingTime: 93.74926686506643
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.3914088, y: 0, z: 0}
+    m_Target: {x: -0.24074998, y: 0, z: 0}
     speed: 2
-    m_Value: {x: -0.3914088, y: 0, z: 0}
+    m_Value: {x: -0.24074998, y: 0, z: 0}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -491,13 +491,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.18523361, y: 0.0050084344, z: -0.0009420423, w: -0.9826933}
+    m_Target: {x: -0.69681203, y: -0.020003663, z: 0.019449688, w: -0.71672755}
     speed: 2
-    m_Value: {x: -0.18523361, y: 0.005008434, z: -0.0009420422, w: -0.98269325}
+    m_Value: {x: -0.6968121, y: -0.020003665, z: 0.01944969, w: -0.7167276}
   m_Size:
-    m_Target: 1.118077
+    m_Target: 0.96595556
     speed: 2
-    m_Value: 1.118077
+    m_Value: 0.96595556
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -547,19 +547,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/models
+    - Assets/Prefabs
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/models
+  - Assets/Prefabs
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\avkar\Documents\GitHub\ProjectCyberB\ProjectCyberBall
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 74270000
-    m_LastClickedID: 10100
-    m_ExpandedIDs: 000000004a270000b227000000ca9a3bffffff7f
+    m_SelectedIDs: ea2d0000
+    m_LastClickedID: 11754
+    m_ExpandedIDs: 000000004e270000c827000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -587,7 +587,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000004a270000b227000000ca9a3bffffff7f
+    m_ExpandedIDs: 000000004e270000c827000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -666,7 +666,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 325
     y: 552
-    width: 908
+    width: 774
     height: 250
 --- !u!114 &18
 MonoBehaviour:
