@@ -94,6 +94,15 @@ public class mobBase : MonoBehaviour {
 
     }
 
+    private int moveDistance;
+    public int MoveDistance {
+
+        get { return this.moveDistance; }
+
+        set { this.moveDistance = value; }
+
+    }
+
 	// Use this for initialization
 	void Start () {
 		
