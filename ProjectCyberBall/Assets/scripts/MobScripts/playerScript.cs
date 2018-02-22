@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerScript : MonoBehaviour {
+public class playerScript : mobBase {
 
 	// Use this for initialization
 	void Start () {

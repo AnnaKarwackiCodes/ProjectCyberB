@@ -122,7 +122,7 @@ public class mobBase : MonoBehaviour {
     /// <summary>
     /// Move the mob around the grid
     /// </summary>
-    public virtual void Move(Map map, Hex newHex) {
+    public virtual void Move(Hex newHex) {
 
 
 
