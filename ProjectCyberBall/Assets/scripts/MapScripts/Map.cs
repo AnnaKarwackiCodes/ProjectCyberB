@@ -10,6 +10,9 @@ public class Map : MonoBehaviour {
     public int height; //height of the map
     public Hex[,] map; //array that keeps track //stored in offset coordinates
 
+    /// <summary>
+    /// the 6 neigbors a hex can have
+    /// </summary>
     static int[,] cubeDirs = new int[,]
         { { 1, -1, 0 }, { 1, 0, -1 }, { 0, 1, -1 },
           { -1, 1, 0 }, { -1, 0, 1 }, { 0, -1, 1 } };
@@ -25,6 +28,12 @@ public class Map : MonoBehaviour {
 	}
 
     //static functionsa and variables
+
+    /// <summary>
+    /// gets the offset coords and changes them into cubic coords
+    /// (x,y) --> (x,y,z)
+    /// x + y + z = 0
+    /// </summary>
     static public int[] offsetToCube(int r, int q) //offset coords to cube coords
     {
         int[] arr = new int[3];
@@ -34,6 +43,10 @@ public class Map : MonoBehaviour {
         return arr; // [x,y,z]
     }
 
+    /// <summary>
+    /// gets the cubic coords and changes them into offset coords
+    /// (x,y,z) --> (x,y)
+    /// </summary>
     static public int[] cubeToOffset(int xx, int zz) //offset 
     {
         int[] arr = new int[2];
@@ -69,7 +82,9 @@ public class Map : MonoBehaviour {
         map[tile.Row, tile.Col] = tile;
     }
 
-
+    /// <summary>
+    /// gets one of the 6 neighbors in a direction
+    /// </summary>
     public Hex getNeigbor(Hex tile, int dir)//get neighbor of tile in direction
     {
 

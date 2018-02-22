@@ -8,11 +8,25 @@ public class Hex : MonoBehaviour {
     private int x;
     private int y;
     private int z;
-    //offsetcoord
+    
+    //offset coord
     private int row;
     private int col;
 
-    
+    /// <summary>
+    /// who is currently on the hex
+    /// </summary>
+    public agentScript occupant;
+
+    /// <summary>
+    /// What Type of hex the hex is
+    /// </summary>
+    private TYPE type;
+
+    /// <summary>
+    /// The different types of hexs that a hex can be
+    /// </summary>
+    public enum TYPE { NULL = -1, FLOOR = 0, SPAWN = 1, START = 2, INFO = 3, WALL = 4};
 
 
     // Use this for initialization
@@ -71,5 +85,17 @@ public class Hex : MonoBehaviour {
         x = xx;
         z = zz;
         y = -xx - zz;
+    }
+
+    /// <summary>
+    ///Figures out if the hex is solid or not
+    /// </summary>
+    public bool isSolid()
+    {
+        if (type == TYPE.WALL || type == TYPE.NULL)
+        {
+            return true;
+        }
+        return false;
     }
 }
