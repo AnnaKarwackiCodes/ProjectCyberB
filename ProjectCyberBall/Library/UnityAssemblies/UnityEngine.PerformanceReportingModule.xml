@@ -1,18 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+﻿<?xml version="1.0"?>
 <doc>
-  <members>
-    <assembly>
-      <name>UnityEngine.PerformanceReportingModule</name>
-    </assembly>
-    <member name="T:UnityEngine.Analytics.PerformanceReporting">
-      <summary>
-        <para>Unity Performace provides insight into your game performace.</para>
-      </summary>
-    </member>
-    <member name="P:UnityEngine.Analytics.PerformanceReporting.enabled">
-      <summary>
-        <para>Controls whether the Performance Reporting service is enabled at runtime.</para>
-      </summary>
-    </member>
-  </members>
+	<assembly>
+		<name>UnityEngine.PerformanceReportingModule</name>
+	</assembly>
+	<members>
+	</members>
 </doc>
