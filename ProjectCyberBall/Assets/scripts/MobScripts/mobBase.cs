@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class mobBase : MonoBehaviour {
+public class mobBase : agentScript {
 
     /// <summary>
     ///Stores mobds attack/damage value
@@ -36,39 +36,12 @@ public class mobBase : MonoBehaviour {
     }
 
     /// <summary>
-    /// Tracks wether or not mob has ball in hand
-    /// return true if mob has ball in hand
-    /// return false if mob does not have ball in hand
-    /// </summary>
-    private bool hasBall;
-    public bool HasBall
-    {
-
-        get { return this.hasBall; }
-
-        set { this.hasBall = value; }
-
-    }
-
-    /// <summary>
-    /// Stores mob health.
-    /// </summary>
-    private int health;
-    public int Health {
-
-        get { return this.health; }
-
-        set { this.health = value; }
-
-    }
-
-    /// <summary>
     /// Tracks which hex the mob is currently standing on: [row, column]
     /// Stores position of hex in array.
     /// Can use physical hex position to position the mob
     /// </summary>
-    private int[,] standingHex;
-    public int[,] StandingHex {
+    private int[] standingHex;
+    public int[] StandingHex {
 
         get { return this.standingHex; }
 
@@ -112,21 +85,6 @@ public class mobBase : MonoBehaviour {
 	void Update () {
 		
 	}
-
-    public virtual void pickUpBall() {
-
-
-
-    }
-
-    /// <summary>
-    /// Move the mob around the grid
-    /// </summary>
-    public virtual void Move(Hex newHex) {
-
-
-
-    }
 
     /// <summary>
     /// Make an attack against an enemy Mob

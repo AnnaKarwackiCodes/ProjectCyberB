@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerScript : mobBase {
+public class playerScript : agentScript {
 
 	// Use this for initialization
 	void Start () {
