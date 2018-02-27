@@ -26,7 +26,7 @@ public class Hex : MonoBehaviour {
     /// <summary>
     /// The different types of hexs that a hex can be
     /// </summary>
-    public enum TYPE { NULL = -1, FLOOR = 0, SPAWN = 1, START = 2, INFO = 3, WALL = 4};
+    public enum TYPE { NULL = -1, FLOOR = 0, SPAWN = 1, START = 2, INFO = 3, END = 4, WALL = 5};
 
 
     // Use this for initialization
@@ -43,7 +43,7 @@ public class Hex : MonoBehaviour {
     {
         Debug.Log("(" + x + ", " + y + ", " + z + ")");
         //GameObject.FindGameObjectWithTag("Player").GetComponent<Agent>().setLocation(x, y, z);
-        GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(transform.position.x, transform.position.y + .3f, transform.position.z);
+        //GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(transform.position.x, transform.position.y + .3f, transform.position.z);
     }
 
     //get/set functions
@@ -63,6 +63,12 @@ public class Hex : MonoBehaviour {
     {
         get { return z; }
         set { z = value; }
+    }
+
+    public TYPE Type
+    {
+        get { return type; }
+        set { type = value; }
     }
 
     public int Row

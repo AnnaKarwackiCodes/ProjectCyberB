@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class agentScript : MonoBehaviour {
 
+    private GameController gameController;
 
     //cube coord
     private int x;
@@ -23,6 +24,11 @@ public class agentScript : MonoBehaviour {
     {
         get { return this.z; }
     }
+
+     /// <summary>
+     /// the height off the hex that an agent's model will be
+     /// </summary>
+    private float yOffset = 0f;
 
     /// <summary>
     /// Sets the location of the agent
@@ -69,7 +75,7 @@ public class agentScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
+       gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 	}
 	
 	// Update is called once per frame
@@ -78,13 +84,25 @@ public class agentScript : MonoBehaviour {
 	}
 
     /// <summary>
-    /// Move the mob around the grid
+    /// Move agent to hex
     /// </summary>
     public virtual void Move(Hex newHex)
     {
+        if (gameController != null) //agent is in a game
+        {
+            if (gameController.theMap.hexExists(newHex.X, newHex.Y, newHex.Z))//hex exist to move to
+            {
+                gameController.theMap.getHex(x, y, z).occupant = null; //remove from start hex
+                gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this; //new hex know something is now on it
 
-
-
+                setLocation(newHex.X, newHex.Y, newHex.Z); //agent knows where it is
+                GameObject g = gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).gameObject;
+                this.gameObject.transform.position = new Vector3(g.transform.position.x, g.transform.position.y + yOffset, g.transform.position.z);  //agent's gameObjects move to proper location
+                return;
+            }
+            return;
+        }
+        Debug.LogError("game Controller not found");
     }
 
     public virtual void pickUpBall()
