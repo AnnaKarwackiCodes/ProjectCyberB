@@ -19,7 +19,7 @@ public class Map : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        createRectangleMap(10, 10, 0);
+        createRectangleMap(width, height, offset);
     }
 	
 	// Update is called once per frame
@@ -90,6 +90,49 @@ public class Map : MonoBehaviour {
 
         int[] arr = cubeToOffset(tile.X + cubeDirs[dir,0], tile.Z + cubeDirs[dir,2]); //gets offset location of neighboring tiles
         return map[arr[0], arr[1]];
+    }
+
+    /// <summary>
+    /// gets the hex from the map
+    /// </summary>
+    public Hex getHex(int xx, int yy, int zz)
+    {
+        if(inBounds(xx,yy, zz))
+        {
+            int[] loc = cubeToOffset(xx, zz);
+            return map[loc[0], loc[1]];
+        }
+        return null;
+    }
+
+
+    /// <summary>
+    /// checks to see if a hex is in bounds and not type 'null'
+    /// </summary>
+    public bool hexExists(int xx, int yy, int zz)
+    {
+        Hex h = getHex(xx, yy, zz);
+        if (h != null) //hex exists
+        {
+            if(h.Type != Hex.TYPE.NULL) //not null
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// checks to see if hex is inbounds of the map
+    /// </summary>
+    private bool inBounds(int xx, int yy, int zz)
+    {
+        int[] loc = cubeToOffset(xx, zz);
+        if (loc[0] >= 0 && loc[0] < width && loc[1] >= 0 && loc[1] < height) //hex is in bounds
+        {
+            return true;
+        }
+        return false;
     }
 
 }
