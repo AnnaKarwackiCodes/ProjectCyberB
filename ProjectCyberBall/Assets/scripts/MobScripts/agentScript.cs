@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class agentScript : MonoBehaviour {
 
+    /// <summary>
+    /// agentScript is responsible for the inheritance of all major universal functions
+    /// position saving
+    /// holding a ball
+    /// the health
+    /// movement
+    /// setting current hex
+    /// </summary>
+
     private GameController gameController;
 
     //cube coord

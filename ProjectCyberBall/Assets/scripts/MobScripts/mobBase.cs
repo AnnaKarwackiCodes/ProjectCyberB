@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class mobBase : agentScript {
+    
+    /// <summary>
+    /// mobBase acts as the base class for all autonomous mobs in the game
+    /// attack values
+    /// allignment
+    /// quick reference to map position
+    /// move distance
+    /// </summary>
 
     /// <summary>
     ///Stores mobds attack/damage value
@@ -32,6 +40,18 @@ public class mobBase : agentScript {
         get { return this.foe; }
 
         set { this.foe = value; }
+
+    }
+
+    /// <summary>
+    /// Tracks whether or not the unit has been selected by the player
+    /// </summary>
+    private bool selected;
+    public bool Selected {
+
+        get { return this.selected; }
+
+        set { this.selected = value; }
 
     }
 

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class playerScript : agentScript {
 
+    /// <summary>
+    /// the player
+    /// </summary>
+
 	// Use this for initialization
 	void Start () {
 		
