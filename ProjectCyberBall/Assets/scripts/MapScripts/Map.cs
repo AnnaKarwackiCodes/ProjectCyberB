@@ -92,6 +92,44 @@ public class Map : MonoBehaviour {
         return map[arr[0], arr[1]];
     }
 
+    public int distanceBetween(Hex center, Hex target) {
+
+        int distance = 0;
+
+        distance = Mathf.Max(Mathf.Abs(center.X - target.X), Mathf.Abs(center.Y - target.Y), Mathf.Abs(center.Z - target.Z));
+
+        return distance;
+
+    }
+
+    public List<Hex> getNeighborAOE(Hex center, int radius)
+    {
+
+        //this is going to have errors
+
+        List<Hex> area = new List<Hex>();
+
+        for (int i = (center.X - radius); i <= (center.X + radius); i++) {
+
+            for (int j = Mathf.Max(-radius, -center.X-radius); j <= Mathf.Min(radius, -center.X+radius); j++) {
+
+                int z = -center.X - center.Y;
+
+                if (hexExists(i, j, z))
+                {
+
+                    area.Add(getHex(i, j, z));
+
+                }
+
+            }
+
+        }
+
+        return area;
+
+    }
+
     /// <summary>
     /// gets the hex from the map
     /// </summary>

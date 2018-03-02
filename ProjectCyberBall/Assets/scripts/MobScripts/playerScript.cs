@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class playerScript : agentScript {
 
-<<<<<<< HEAD
+
     /// <summary>
     /// the player
     /// </summary>
-=======
     private int mana;
     private bool canPunch;
     private GameObject selectedObj;
@@ -20,10 +19,11 @@ public class playerScript : agentScript {
     public GameObject ray;
     public GameObject smolMinion;
     public GameObject bigMinion;
->>>>>>> ae1e47547023f702a20bb1072ebec3f70362edf4
+    public mobBase selectedMinion;
+    public Map mapReference;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         mana = 10; //amount of mana the player will have may change
         maxEachMin = 10; //to make changing this easier
         canPunch = true;
@@ -102,9 +102,15 @@ public class playerScript : agentScript {
     //if the player doesnt have the ball then you are picking up the ball
     public void UseBall()
     {
-        if (HasBall)
+
+        int range = MapLocal.distanceBetween(StandingHex, selectedMinion.StandingHex);
+
+        if (range <= 3 && selectedMinion.HasBall == false)//temperary value of range
         {
             //passing the ball to someone
+
+            this.selectedMinion.HasBall = true;
+
             //you will need to have a minion in range to pass the ball
             //once you select the minion then the ball gets passed to them
             HasBall = false;
@@ -130,20 +136,33 @@ public class playerScript : agentScript {
         }
     }
     //get setters
+    /// <summary>
+    /// Players mana pool
+    /// used to cast spells
+    /// </summary>
     public int Mana
     {
         get { return mana; }
         set { mana = value; }
     }
+    /// <summary>
+    /// Whether player can make an attack
+    /// </summary>
     public bool CanPunch
     {
         get { return canPunch; }
         set { canPunch = value; }
     }
+    /// <summary>
+    /// Stores selected tile
+    /// </summary>
     public GameObject SelectedObj
     {
         set { selectedObj = value; }
     }
+    /// <summary>
+    /// ?
+    /// </summary>
     public string Action
     {
         get { return action; }

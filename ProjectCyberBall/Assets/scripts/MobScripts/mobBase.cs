@@ -55,38 +55,6 @@ public class mobBase : agentScript {
 
     }
 
-    /// <summary>
-    /// Tracks which hex the mob is currently standing on: [row, column]
-    /// Stores position of hex in array.
-    /// Can use physical hex position to position the mob
-    /// </summary>
-    private int[] standingHex;
-    public int[] StandingHex {
-
-        get { return this.standingHex; }
-
-        set { this.standingHex = value; }
-
-    }
-
-    /// <summary>
-    /// Stores a local copy of the map for mobs to be able to see and use
-    /// Does this need to be a property?
-    /// No
-    /// Is it a property?
-    /// Yes
-    /// Why?
-    /// Because it can be, ergo it is.
-    /// </summary>
-    private Map mapLocal;
-    public Map MapLocal {
-
-        get { return this.mapLocal; }
-
-        set { this.mapLocal = value; }
-
-    }
-
     private int moveDistance;
     public int MoveDistance {
 
