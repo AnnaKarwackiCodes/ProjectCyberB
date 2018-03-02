@@ -1053,5 +1053,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ray: {fileID: 1334067177}
-  smolMinion: {fileID: 1754357065383818, guid: c0e9c98c840d94f4986400ba8c34411c, type: 2}
-  bigMinion: {fileID: 1251130672453104, guid: ac8b654a539fe2847943c2c516ab13d9, type: 2}
+  smolMinion: {fileID: 1689849309989444, guid: af350a9ef14a8bd46b3a1a57ba9e3fbf, type: 2}
+  bigMinion: {fileID: 1547143660218358, guid: 89ed64bd7e5d0ae438419c1a1b827a59, type: 2}

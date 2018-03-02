@@ -55,7 +55,6 @@ public class playerScript : agentScript {
         {
             action = "";
             allMinions[curNumMins] = Instantiate(bigMinion, (selectedObj.transform.position + new Vector3(0,1.2f,0)), new Quaternion(0, 0, 0, 0));
-            //allMinions.Add(Instantiate(bigMinion, new Vector3(300, 300, 300), new Quaternion(0, 0, 0, 0)));
             //allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
             curNumMins++;
             selectedObj = null;
@@ -72,7 +71,6 @@ public class playerScript : agentScript {
         {
             action = "";
             allMinions[curNumMins] = Instantiate(smolMinion, (selectedObj.transform.position + new Vector3(0, .5f, 0)), new Quaternion(0, 0, 0, 0));
-            //allMinions.Add(Instantiate(bigMinion, new Vector3(300, 300, 300), new Quaternion(0, 0, 0, 0)));
             //allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
             curNumMins++;
             selectedObj = null;
