@@ -148,8 +148,10 @@ public class agentScript : MonoBehaviour {
     /// </summary>
     public virtual void Move(Hex newHex)
     {
-
-        int dist = MapLocal.distanceBetween(standingHex, newHex);
+        if (standingHex == null) Debug.Log("standing null");
+        if (newHex == null) Debug.Log("newHex null");
+        if (mapLocal == null) Debug.Log("map null");
+        int dist = mapLocal.distanceBetween(standingHex, newHex);
 
         if (gameController != null) //agent is in a game
         {
