@@ -114,8 +114,11 @@ public class MotionControllers : MonoBehaviour {
                         AdditionalMenus(0);
                         break;
                     case 3:
-                        gameObject.GetComponent<playerScript>().Action = "Move";
-                        Input.ResetInputAxes();
+                        if (gameObject.GetComponent<playerScript>().CanMove)
+                        {
+                            gameObject.GetComponent<playerScript>().Action = "Move";
+                            Input.ResetInputAxes();
+                        }
                         break;
                     default:
                         Debug.Log("yeah no this wont work.");
@@ -154,8 +157,14 @@ public class MotionControllers : MonoBehaviour {
             if (Input.GetButtonDown("Left_Touchpad_Pressed"))
             {
                 Debug.Log("add menu press");
-                if (curOption == 0) gameObject.GetComponent<playerScript>().Action = "Big";
-                else if (curOption == 1) gameObject.GetComponent<playerScript>().Action = "Small";
+                if (curOption == 0 && (gameObject.GetComponent<playerScript>().Mana - gameObject.GetComponent<playerScript>().BigSumCost >= 0))
+                {
+                    gameObject.GetComponent<playerScript>().Action = "Big";
+                }
+                else if (curOption == 1 && (gameObject.GetComponent<playerScript>().Mana - gameObject.GetComponent<playerScript>().SmolSumCost >= 0))
+                {
+                    gameObject.GetComponent<playerScript>().Action = "Small";
+                }
                 openSub = false;
                 lUI.transform.GetChild(0).GetComponent<Text>().text = "Summon";
                 lUI.transform.GetChild(1).GetComponent<Text>().text = "Attack";
