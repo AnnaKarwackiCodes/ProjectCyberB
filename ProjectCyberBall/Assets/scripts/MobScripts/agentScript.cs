@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class agentScript : MonoBehaviour {
 
+<<<<<<< HEAD
     /// <summary>
     /// agentScript is responsible for the inheritance of all major universal functions
     /// position saving
@@ -14,6 +15,9 @@ public class agentScript : MonoBehaviour {
     /// </summary>
 
     private GameController gameController;
+=======
+    public GameController gameController;
+>>>>>>> 83c3c3cd479891cdcbf6bbe8bca1b4bce870c6c7
 
     //cube coord
     private int x;
@@ -120,6 +124,11 @@ public class agentScript : MonoBehaviour {
     void Start () {
        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 	}
+
+    void Awake()
+    {
+        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -143,6 +152,7 @@ public class agentScript : MonoBehaviour {
                 this.gameObject.transform.position = new Vector3(g.transform.position.x, g.transform.position.y + yOffset, g.transform.position.z);  //agent's gameObjects move to proper location
                 return;
             }
+            Debug.LogError("Hex: " + newHex + " does not exist");
             return;
         }
         Debug.LogError("game Controller not found");

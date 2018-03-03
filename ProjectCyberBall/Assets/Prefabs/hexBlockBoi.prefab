@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114327854893811870}
   m_Layer: 0
   m_Name: hexBlockBoi
-  m_TagString: Untagged
+  m_TagString: Hex
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

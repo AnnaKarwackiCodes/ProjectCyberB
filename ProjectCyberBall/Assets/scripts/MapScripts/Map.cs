@@ -49,6 +49,7 @@ public class Map : MonoBehaviour {
     /// </summary>
     static public int[] cubeToOffset(int xx, int zz) //offset 
     {
+        
         int[] arr = new int[2];
         arr[0] = xx + (zz - (zz & 1)) / 2;
         arr[1] = zz;
@@ -63,14 +64,14 @@ public class Map : MonoBehaviour {
         height = h + 1;
         map = new Hex[width, height];
         offset = off;
-        for (int i = -width / 2; i <= width / 2; i++)
+        for (int i = 0; i < width; i++)
         {
-            for (int j = -height / 2; j <= height / 2; j++)
+            for (int j = 0; j < height; j++)
             {
                 GameObject go = Instantiate(hexagon);
                 int[] arr = offsetToCube(i, j); //gets the cube coords of tile
                 go.GetComponent<Hex>().setLocation(i, j, arr[0], arr[2]); //sets location for the tile
-                //addToMap(go.GetComponent<Hex>());
+                addToMap(go.GetComponent<Hex>());
                 go.transform.position = new Vector3(j % 2 == 0 ? i * (1 + off) : i * (1 + off) + (.5f + off), 0, j * (Mathf.Sqrt(3) / 2 + off)); //moves tile of physical position in space
             }
         }
@@ -79,6 +80,7 @@ public class Map : MonoBehaviour {
 
     public void addToMap(Hex tile)
     {
+        Debug.Log(tile.Row + ", " + tile.Col);
         map[tile.Row, tile.Col] = tile;
     }
 

@@ -61,8 +61,7 @@ public class playerScript : agentScript {
         {
             action = "";
             allMinions[curNumMins] = Instantiate(bigMinion, (selectedObj.transform.position + new Vector3(0,1.2f,0)), new Quaternion(0, 0, 0, 0));
-            //allMinions.Add(Instantiate(bigMinion, new Vector3(300, 300, 300), new Quaternion(0, 0, 0, 0)));
-            //allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
+            allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
             curNumMins++;
             selectedObj = null;
         }
@@ -78,8 +77,7 @@ public class playerScript : agentScript {
         {
             action = "";
             allMinions[curNumMins] = Instantiate(smolMinion, (selectedObj.transform.position + new Vector3(0, .5f, 0)), new Quaternion(0, 0, 0, 0));
-            //allMinions.Add(Instantiate(bigMinion, new Vector3(300, 300, 300), new Quaternion(0, 0, 0, 0)));
-            //allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
+            allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
             curNumMins++;
             selectedObj = null;
         }
@@ -130,8 +128,8 @@ public class playerScript : agentScript {
         if(selectedObj != null)
         {
             action = "";
-            this.gameObject.transform.position = selectedObj.transform.position; //this was for testing
-            //Move(selectedObj.GetComponent<Hex>()); //this is for when in use
+            //this.gameObject.transform.position = selectedObj.transform.position; //this was for testing
+            Move(selectedObj.GetComponent<Hex>()); //this is for when in use
             selectedObj = null;//clear it out
         }
     }
