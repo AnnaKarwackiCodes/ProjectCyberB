@@ -8,7 +8,11 @@ public class Hex : MonoBehaviour {
     public int x;
     public int y;
     public int z;
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 826f4c7f7650d6004e262a275ff7e6e99b18bb82
     //offset coord
     private int row;
     private int col;

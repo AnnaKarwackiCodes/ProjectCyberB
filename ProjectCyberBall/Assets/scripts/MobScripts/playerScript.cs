@@ -10,11 +10,16 @@ public class playerScript : agentScript {
     /// </summary>
     private int mana;
     private bool canPunch;
+    private bool canMove;
     private GameObject selectedObj;
     private string action;
     private GameObject[] allMinions;
     private int maxEachMin;
     private int curNumMins; //total number of player minions on the field;
+    private int bigSumCost;
+    private int smolSumCost;
+    private int fireBallCost;
+    private int useBallCost;
 
     public GameObject ray;
     public GameObject smolMinion;
@@ -28,15 +33,16 @@ public class playerScript : agentScript {
         maxEachMin = 10; //to make changing this easier
         canPunch = true;
         allMinions = new GameObject[maxEachMin];
+
+        bigSumCost = 3;
+        smolSumCost = 2;
+        fireBallCost = 3;
+        useBallCost = 1;
+        canMove = true;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (action == "Move")
-        {
-            Debug.Log("is moving");
-            MovePlayer();
-        }
         switch (action)
         {
             case "Big":
@@ -46,7 +52,7 @@ public class playerScript : agentScript {
                 SummonSmall();
                 break;
             case "Move":
-                MovePlayer();
+                if(canMove) MovePlayer();
                 break;
         }
 	}
@@ -54,11 +60,12 @@ public class playerScript : agentScript {
     public void SummonBig()
     {
         //use up certain amount of mana
-        mana -= 3; //place holder value
+        
         Debug.Log("Summon Big");
         ray.GetComponent<RayCasting>().SelectingObj(10, "Hex");
         if(selectedObj != null)
         {
+            mana -= bigSumCost; //place holder value
             action = "";
             allMinions[curNumMins] = Instantiate(bigMinion, (selectedObj.transform.position + new Vector3(0,1.2f,0)), new Quaternion(0, 0, 0, 0));
             allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
@@ -70,11 +77,12 @@ public class playerScript : agentScript {
     public void SummonSmall()
     {
         //use up certain amount of mana
-        mana -= 3; //place holder value
+        
         Debug.Log("Summon Small");
         ray.GetComponent<RayCasting>().SelectingObj(10, "Hex");
         if (selectedObj != null)
         {
+            mana -= smolSumCost; //place holder value
             action = "";
             allMinions[curNumMins] = Instantiate(smolMinion, (selectedObj.transform.position + new Vector3(0, .5f, 0)), new Quaternion(0, 0, 0, 0));
             allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
@@ -86,7 +94,7 @@ public class playerScript : agentScript {
     public void CastFireball()
     {
         //use up certain amount of mana
-        mana -= 3; //place holder value
+        mana -= fireBallCost; //place holder value
     }
 
     public void PunchMinion()
@@ -118,7 +126,7 @@ public class playerScript : agentScript {
             //aquire the ball
             HasBall = true;
         }
-        mana += 3; // this is a temp value
+        mana += useBallCost; // this is a temp value
     }
      public void MovePlayer()
     {
@@ -131,7 +139,16 @@ public class playerScript : agentScript {
             //this.gameObject.transform.position = selectedObj.transform.position; //this was for testing
             Move(selectedObj.GetComponent<Hex>()); //this is for when in use
             selectedObj = null;//clear it out
+            //canMove = false;
         }
+    }
+
+    public void newTurn()
+    {
+        canMove = true;
+        mana = 10;
+        canPunch = true;
+        selectedObj = null;
     }
     //get setters
     /// <summary>
@@ -165,5 +182,26 @@ public class playerScript : agentScript {
     {
         get { return action; }
         set { action = value; }
+    }
+
+    public int BigSumCost
+    {
+        get { return bigSumCost; }
+    }
+    public int SmolSumCost
+    {
+        get { return smolSumCost; }
+    }
+    public int FireBallCost
+    {
+        get { return fireBallCost; }
+    }
+    public int UseBallCost
+    {
+        get { return useBallCost; }
+    }
+    public bool CanMove
+    {
+        get { return canMove; }
     }
 }
