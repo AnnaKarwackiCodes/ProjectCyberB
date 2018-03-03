@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class agentScript : MonoBehaviour {
 
-<<<<<<< HEAD
     /// <summary>
     /// agentScript is responsible for the inheritance of all major universal functions
     /// position saving
@@ -15,9 +14,7 @@ public class agentScript : MonoBehaviour {
     /// </summary>
 
     private GameController gameController;
-=======
-    public GameController gameController;
->>>>>>> 83c3c3cd479891cdcbf6bbe8bca1b4bce870c6c7
+    //public GameController gameController;
 
     //cube coord
     private int x;
