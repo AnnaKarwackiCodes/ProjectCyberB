@@ -37,15 +37,10 @@ public class Map : MonoBehaviour {
     static public int[] offsetToCube(int r, int q) //offset coords to cube coords
     {
         int[] arr = new int[3];
-<<<<<<< HEAD
         //arr[0] = q - (r - (r & 1)) / 2;
         //arr[2] = r;
         arr[0] = q;
-        arr[2] = r - (q - (q & 1)) / 2; 
-=======
-        arr[0] = q;
         arr[2] = r - (q - (q & 1)) / 2;
->>>>>>> 826f4c7f7650d6004e262a275ff7e6e99b18bb82
         arr[1] = -arr[0] - arr[2];
         return arr; // [x,y,z]
     }
@@ -58,11 +53,8 @@ public class Map : MonoBehaviour {
     {
         
         int[] arr = new int[2];
-<<<<<<< HEAD
         //arr[0] = xx + (zz - (zz & 1)) / 2;
         //arr[1] = zz;
-=======
->>>>>>> 826f4c7f7650d6004e262a275ff7e6e99b18bb82
         arr[0] = xx;
         arr[1] = zz + (xx - (xx & 1)) / 2;
         return arr; // [row, col]
@@ -112,6 +104,8 @@ public class Map : MonoBehaviour {
 
         distance = Mathf.Max(Mathf.Abs(center.X - target.X), Mathf.Abs(center.Y - target.Y), Mathf.Abs(center.Z - target.Z));
 
+
+
         return distance;
 
     }
@@ -149,11 +143,8 @@ public class Map : MonoBehaviour {
     /// </summary>
     public Hex getHex(int xx, int yy, int zz)
     {
-<<<<<<< HEAD
-        if (inBounds(xx, yy, zz))
-=======
+
         if(inBounds(xx, yy, zz))
->>>>>>> 826f4c7f7650d6004e262a275ff7e6e99b18bb82
         {
             int[] loc = cubeToOffset(xx, zz);
             return map[loc[1], loc[0]];

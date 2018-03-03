@@ -47,20 +47,12 @@ public class mobBase : agentScript {
     /// Tracks whether or not the unit has been selected by the player
     /// </summary>
     private bool selected;
-    public bool Selected {
+    public bool Selected
+    {
 
         get { return this.selected; }
 
         set { this.selected = value; }
-
-    }
-
-    private int moveDistance;
-    public int MoveDistance {
-
-        get { return this.moveDistance; }
-
-        set { this.moveDistance = value; }
 
     }
 

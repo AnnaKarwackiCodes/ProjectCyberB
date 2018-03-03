@@ -98,6 +98,17 @@ public class agentScript : MonoBehaviour {
 
     }
 
+
+    private int moveDistance;
+    public int MoveDistance
+    {
+
+        get { return this.moveDistance; }
+
+        set { this.moveDistance = value; }
+
+    }
+
     /// <summary>
     /// Stores a local copy of the map for mobs to be able to see and use
     /// Does this need to be a property?
@@ -137,17 +148,23 @@ public class agentScript : MonoBehaviour {
     /// </summary>
     public virtual void Move(Hex newHex)
     {
+
+        int dist = MapLocal.distanceBetween(standingHex, newHex);
+
         if (gameController != null) //agent is in a game
         {
             if (gameController.theMap.hexExists(newHex.X, newHex.Y, newHex.Z))//hex exist to move to
             {
-                gameController.theMap.getHex(x, y, z).occupant = null; //remove from start hex
-                gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this; //new hex know something is now on it
+                if (dist <= moveDistance)
+                    {
+                        gameController.theMap.getHex(x, y, z).occupant = null; //remove from start hex
+                        gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this; //new hex know something is now on it
 
-                setLocation(newHex.X, newHex.Y, newHex.Z); //agent knows where it is
-                GameObject g = gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).gameObject;
-                this.gameObject.transform.position = new Vector3(g.transform.position.x, g.transform.position.y + yOffset, g.transform.position.z);  //agent's gameObjects move to proper location
-                return;
+                        setLocation(newHex.X, newHex.Y, newHex.Z); //agent knows where it is
+                        GameObject g = gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).gameObject;
+                        this.gameObject.transform.position = new Vector3(g.transform.position.x, g.transform.position.y + yOffset, g.transform.position.z);  //agent's gameObjects move to proper location
+                        return;
+                    }
             }
             Debug.LogError("Hex: " + newHex + " does not exist");
             return;
