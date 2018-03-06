@@ -112,52 +112,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &472773483
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4706289513516970, guid: 243f2bf10dd286042bafa2a8b75e50ce, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706289513516970, guid: 243f2bf10dd286042bafa2a8b75e50ce, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706289513516970, guid: 243f2bf10dd286042bafa2a8b75e50ce, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706289513516970, guid: 243f2bf10dd286042bafa2a8b75e50ce, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706289513516970, guid: 243f2bf10dd286042bafa2a8b75e50ce, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706289513516970, guid: 243f2bf10dd286042bafa2a8b75e50ce, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706289513516970, guid: 243f2bf10dd286042bafa2a8b75e50ce, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706289513516970, guid: 243f2bf10dd286042bafa2a8b75e50ce, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1823415723545948, guid: 243f2bf10dd286042bafa2a8b75e50ce, type: 2}
-      propertyPath: m_TagString
-      value: MainCamera
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 243f2bf10dd286042bafa2a8b75e50ce, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &935295904
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theMap: {fileID: 0}
+  userPrefab: {fileID: 1002022269300498, guid: 243f2bf10dd286042bafa2a8b75e50ce, type: 2}
 --- !u!114 &935295907
 MonoBehaviour:
   m_ObjectHideFlags: 0

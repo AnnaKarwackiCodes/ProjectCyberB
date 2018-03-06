@@ -35,8 +35,13 @@ public class RayCasting : MonoBehaviour {
         {
             if (hit.collider.gameObject.tag == wantedTag && Input.GetAxis("Right_Trigger") == 1.0f)
             {
-                GameObject.FindGameObjectWithTag("Player").GetComponent<playerScript>().SelectedObj = hit.collider.gameObject;
-                line.enabled = false;
+                if (wantedTag == "Hex" && hit.collider.gameObject.GetComponent<Hex>().occupant != null) { return; }
+                else
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<playerScript>().SelectedObj = hit.collider.gameObject;
+                    line.enabled = false;
+                    Input.ResetInputAxes();
+                }
                 
             }
         }

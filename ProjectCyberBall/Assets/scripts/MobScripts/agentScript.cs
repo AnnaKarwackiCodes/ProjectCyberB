@@ -129,13 +129,14 @@ public class agentScript : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
+    public virtual void Start () {
+       Debug.Log("AGENT START");
        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+       MapLocal = gameController.theMap;
 	}
 
     void Awake()
     {
-        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
     }
 	
 	// Update is called once per frame
@@ -148,10 +149,10 @@ public class agentScript : MonoBehaviour {
     /// </summary>
     public virtual void Move(Hex newHex)
     {
-        if (standingHex == null) Debug.Log("standing null");
+        if (StandingHex == null) Debug.Log("standing null");
         if (newHex == null) Debug.Log("newHex null");
-        if (mapLocal == null) Debug.Log("map null");
-        int dist = mapLocal.distanceBetween(standingHex, newHex);
+        if (MapLocal == null) Debug.Log("map null");
+        int dist = MapLocal.distanceBetween(standingHex, newHex);
 
         if (gameController != null) //agent is in a game
         {
@@ -161,7 +162,7 @@ public class agentScript : MonoBehaviour {
                     {
                         gameController.theMap.getHex(x, y, z).occupant = null; //remove from start hex
                         gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this; //new hex know something is now on it
-
+                        StandingHex = newHex;
                         setLocation(newHex.X, newHex.Y, newHex.Z); //agent knows where it is
                         GameObject g = gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).gameObject;
                         this.gameObject.transform.position = new Vector3(g.transform.position.x, g.transform.position.y + yOffset, g.transform.position.z);  //agent's gameObjects move to proper location
@@ -172,6 +173,18 @@ public class agentScript : MonoBehaviour {
             return;
         }
         Debug.LogError("game Controller not found");
+    }
+
+    public virtual void spawnIn(Hex newHex)
+    {
+        if (newHex == null) Debug.Log("dfbdskjbkds");
+        if (gameController == null) Debug.Log("but why");
+        if (gameController.theMap == null) Debug.Log("fuck me");
+        gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this;
+        setLocation(newHex.X, newHex.Y, newHex.Z); //agent knows where it is
+        GameObject g = gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).gameObject;
+        standingHex = newHex;
+        this.gameObject.transform.position = new Vector3(g.transform.position.x, g.transform.position.y + yOffset, g.transform.position.z);
     }
 
     public virtual void pickUpBall()

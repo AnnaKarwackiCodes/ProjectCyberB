@@ -92,7 +92,7 @@ public class Map : MonoBehaviour {
 
     public void addToMap(Hex tile)
     {
-        Debug.Log(tile.Row + ", " + tile.Col);
+        //Debug.Log(tile.Row + ", " + tile.Col);
         map[tile.Row, tile.Col] = tile;
     }
 

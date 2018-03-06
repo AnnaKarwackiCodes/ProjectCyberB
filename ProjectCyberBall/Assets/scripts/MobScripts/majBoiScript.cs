@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class majBoiScript : mobBase {
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    public virtual new void Start () {
+        base.Start();
         MoveDistance = 2;
 	}
 	
