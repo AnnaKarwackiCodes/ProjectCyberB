@@ -10,6 +10,8 @@ public class Map : MonoBehaviour {
     public int height; //height of the map
     public Hex[,] map; //array that keeps track //stored in offset coordinates
 
+    private GameObject player;
+
     /// <summary>
     /// the 6 neigbors a hex can have
     /// </summary>
@@ -20,6 +22,11 @@ public class Map : MonoBehaviour {
     // Use this for initialization
     void Start () {
         createRectangleMap(width, height, offset);
+
+        //player = GameObject.Find("Player_obj");
+
+        //player.GetComponent<playerScript>().mapReference = this.GetComponent<Map>();
+
     }
 	
 	// Update is called once per frame
@@ -80,11 +87,12 @@ public class Map : MonoBehaviour {
             }
         }
         Debug.Log(map);
+
     }
 
     public void addToMap(Hex tile)
     {
-        Debug.Log(tile.Row + ", " + tile.Col);
+        //Debug.Log(tile.Row + ", " + tile.Col);
         map[tile.Row, tile.Col] = tile;
     }
 

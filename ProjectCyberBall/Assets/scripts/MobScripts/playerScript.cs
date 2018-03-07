@@ -25,22 +25,32 @@ public class playerScript : agentScript {
     public GameObject smolMinion;
     public GameObject bigMinion;
     public mobBase selectedMinion;
-    public Map mapReference;
 
     // Use this for initialization
-    void Start () {
+    new void Start () {
+        base.Start();
         mana = 10; //amount of mana the player will have may change
         maxEachMin = 10; //to make changing this easier
         canPunch = true;
         allMinions = new GameObject[maxEachMin];
+
+        //StandingHex = mapReference.map[1, 1];
 
         bigSumCost = 3;
         smolSumCost = 2;
         fireBallCost = 3;
         useBallCost = 1;
         canMove = true;
+        MoveDistance = 3;
     }
-	
+
+    void Awake() {
+
+        //GameObject gController = GameObject.Find("Game Controller");
+        //mapReference = gController.GetComponent<Map>();
+
+    }
+
 	// Update is called once per frame
 	void Update () {
         switch (action)
@@ -62,13 +72,15 @@ public class playerScript : agentScript {
         //use up certain amount of mana
         
         Debug.Log("Summon Big");
-        ray.GetComponent<RayCasting>().SelectingObj(10, "Hex");
+        ray.GetComponent<RayCasting>().SelectingObj(3, "Hex");
         if(selectedObj != null)
         {
             mana -= bigSumCost; //place holder value
             action = "";
             allMinions[curNumMins] = Instantiate(bigMinion, (selectedObj.transform.position + new Vector3(0,1.2f,0)), new Quaternion(0, 0, 0, 0));
-            allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
+            //allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
+            allMinions[curNumMins].GetComponent<agentScript>().MapLocal = GameObject.Find("Game Controller").GetComponent<Map>();
+            allMinions[curNumMins].GetComponent<agentScript>().spawnIn(selectedObj.GetComponent<Hex>());
             curNumMins++;
             selectedObj = null;
         }
@@ -79,13 +91,15 @@ public class playerScript : agentScript {
         //use up certain amount of mana
         
         Debug.Log("Summon Small");
-        ray.GetComponent<RayCasting>().SelectingObj(10, "Hex");
+        ray.GetComponent<RayCasting>().SelectingObj(3, "Hex");
         if (selectedObj != null)
         {
             mana -= smolSumCost; //place holder value
             action = "";
             allMinions[curNumMins] = Instantiate(smolMinion, (selectedObj.transform.position + new Vector3(0, .5f, 0)), new Quaternion(0, 0, 0, 0));
-            allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
+            //allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
+            allMinions[curNumMins].GetComponent<agentScript>().MapLocal = GameObject.Find("Game Controller").GetComponent<Map>();
+            allMinions[curNumMins].GetComponent<agentScript>().spawnIn(selectedObj.GetComponent<Hex>());
             curNumMins++;
             selectedObj = null;
         }
@@ -131,7 +145,7 @@ public class playerScript : agentScript {
      public void MovePlayer()
     {
         //use the raycast to select spot to move
-        ray.GetComponent<RayCasting>().SelectingObj(10, "Hex");
+        ray.GetComponent<RayCasting>().SelectingObj(3, "Hex");
         //move to that spot
         if(selectedObj != null)
         {
