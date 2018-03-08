@@ -5,9 +5,9 @@ using UnityEngine;
 public class Hex : MonoBehaviour {
 
     //cube coord
-    private int x;
-    private int y;
-    private int z;
+    public int x;
+    public int y;
+    public int z;
     //offset coord
     private int row;
     private int col;

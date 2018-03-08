@@ -179,7 +179,7 @@ public class agentScript : MonoBehaviour {
     {
         if (newHex == null) Debug.Log("dfbdskjbkds");
         if (gameController == null) Debug.Log("but why");
-        if (gameController.theMap == null) Debug.Log("fuck me");
+        //if (gameController.theMap == null) Debug.Log("fuck me");
         gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this;
         setLocation(newHex.X, newHex.Y, newHex.Z); //agent knows where it is
         GameObject g = gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).gameObject;
