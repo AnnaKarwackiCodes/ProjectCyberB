@@ -13,7 +13,7 @@ public class agentScript : MonoBehaviour {
     /// setting current hex
     /// </summary>
 
-    private GameController gameController;
+    public GameController gameController;
     //public GameController gameController;
 
     //cube coord
@@ -131,7 +131,7 @@ public class agentScript : MonoBehaviour {
     // Use this for initialization
     public virtual void Start () {
        Debug.Log("AGENT START");
-       gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+       gameController = GameObject.Find("Game Controller").GetComponent<GameController>();
        MapLocal = gameController.theMap;
 	}
 
@@ -149,9 +149,7 @@ public class agentScript : MonoBehaviour {
     /// </summary>
     public virtual void Move(Hex newHex)
     {
-        if (StandingHex == null) Debug.Log("standing null");
-        if (newHex == null) Debug.Log("newHex null");
-        if (MapLocal == null) Debug.Log("map null");
+        Debug.Log(newHex.Row + " " + newHex.Col);
         int dist = MapLocal.distanceBetween(standingHex, newHex);
 
         if (gameController != null) //agent is in a game
@@ -160,14 +158,15 @@ public class agentScript : MonoBehaviour {
             {
                 if (dist <= moveDistance)
                     {
-                        gameController.theMap.getHex(x, y, z).occupant = null; //remove from start hex
-                        gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this; //new hex know something is now on it
-                        StandingHex = newHex;
-                        setLocation(newHex.X, newHex.Y, newHex.Z); //agent knows where it is
-                        GameObject g = gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).gameObject;
-                        this.gameObject.transform.position = new Vector3(g.transform.position.x, g.transform.position.y + yOffset, g.transform.position.z);  //agent's gameObjects move to proper location
-                        return;
+                        
                     }
+                gameController.theMap.getHex(x, y, z).occupant = null; //remove from start hex
+                gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this; //new hex know something is now on it
+                StandingHex = newHex;
+                setLocation(newHex.X, newHex.Y, newHex.Z); //agent knows where it is
+                GameObject g = gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).gameObject;
+                this.gameObject.transform.position = new Vector3(g.transform.position.x, g.transform.position.y + yOffset, g.transform.position.z);  //agent's gameObjects move to proper location
+                return;
             }
             Debug.LogError("Hex: " + newHex + " does not exist");
             return;
@@ -175,14 +174,14 @@ public class agentScript : MonoBehaviour {
         Debug.LogError("game Controller not found");
     }
 
-    public virtual void spawnIn(Hex newHex)
+    public virtual void spawnIn(Hex newHex, GameController gCon)
     {
         if (newHex == null) Debug.Log("dfbdskjbkds");
-        if (gameController == null) Debug.Log("but why");
-        if (gameController.theMap == null) Debug.Log("fuck me");
-        gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this;
+        if (gCon == null) Debug.Log("but why");
+        if (gCon.theMap == null) Debug.Log("fuck me");
+        //gCon.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this; //NULL REFERENCE ERROR
         setLocation(newHex.X, newHex.Y, newHex.Z); //agent knows where it is
-        GameObject g = gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).gameObject;
+        GameObject g = gCon.theMap.getHex(newHex.X, newHex.Y, newHex.Z).gameObject;
         standingHex = newHex;
         this.gameObject.transform.position = new Vector3(g.transform.position.x, g.transform.position.y + yOffset, g.transform.position.z);
     }

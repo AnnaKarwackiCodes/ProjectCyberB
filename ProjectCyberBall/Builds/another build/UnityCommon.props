@@ -1,0 +1,9 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <UnityWSASolutionName>ProjectCyberBall</UnityWSASolutionName>
+        <UnityWSASolutionDir>C:\Users\avkar\Documents\GitHub\ProjectCyberB\ProjectCyberBall\Builds\another build\</UnityWSASolutionDir>
+        <UnityProjectDir>C:\Users\avkar\Documents\GitHub\ProjectCyberB\ProjectCyberBall\</UnityProjectDir>
+        <UnityWSAPlayerDir>C:\Program Files\Unity\Editor\Data\PlaybackEngines\MetroSupport\</UnityWSAPlayerDir>
+        <UnityWSAToolsDir>$(UnityWSASolutionDir)Unity\Tools\</UnityWSAToolsDir>
+    </PropertyGroup>
+</Project>
