@@ -218,6 +218,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -410,9 +411,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7472941cec60c0e4d8534ee653cc9e19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 0}
+  yOffset: 1
   ray: {fileID: 1513978668939468}
   smolMinion: {fileID: 1689849309989444, guid: af350a9ef14a8bd46b3a1a57ba9e3fbf, type: 2}
   bigMinion: {fileID: 1547143660218358, guid: 89ed64bd7e5d0ae438419c1a1b827a59, type: 2}
+  selectedMinion: {fileID: 0}
 --- !u!120 &120045024969696242
 LineRenderer:
   m_ObjectHideFlags: 1

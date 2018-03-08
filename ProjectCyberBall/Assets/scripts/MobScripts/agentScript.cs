@@ -35,10 +35,10 @@ public class agentScript : MonoBehaviour {
         get { return this.z; }
     }
 
-     /// <summary>
-     /// the height off the hex that an agent's model will be
-     /// </summary>
-    private float yOffset = 0f;
+    /// <summary>
+    /// the height off the hex that an agent's model will be
+    /// </summary>
+    [SerializeField] protected float yOffset = 0f;
 
     /// <summary>
     /// Sets the location of the agent
@@ -149,7 +149,7 @@ public class agentScript : MonoBehaviour {
     /// </summary>
     public virtual void Move(Hex newHex)
     {
-        Debug.Log(newHex.Row + " " + newHex.Col);
+        Debug.Log("(" + newHex.X + ", " + newHex.Y + ", " + newHex.Z + ") (" + newHex.Row + ", " + newHex.Col + ")");
         int dist = MapLocal.distanceBetween(standingHex, newHex);
 
         if (gameController != null) //agent is in a game
