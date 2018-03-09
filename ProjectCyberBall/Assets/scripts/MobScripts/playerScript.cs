@@ -25,6 +25,9 @@ public class playerScript : agentScript {
     public GameObject smolMinion;
     public GameObject bigMinion;
     public mobBase selectedMinion;
+    public GameObject endTurnPop;
+    private bool endPopCreate;
+    private GameObject etPop;
 
     // Use this for initialization
     new void Start () {
@@ -42,6 +45,8 @@ public class playerScript : agentScript {
         useBallCost = 1;
         canMove = true;
         MoveDistance = 3;
+
+        endPopCreate = false;
     }
 
     void Awake() {
@@ -53,26 +58,42 @@ public class playerScript : agentScript {
 
 	// Update is called once per frame
 	void Update () {
-        switch (action)
+        if (gameController.PlayersTurn)
         {
-            case "Big":
-                SummonBig();
-                break;
-            case "Small":
-                SummonSmall();
-                break;
-            case "Move":
-                if(canMove) MovePlayer();
-                break;
+            switch (action)
+            {
+                case "Big":
+                    SummonBig();
+                    break;
+                case "Small":
+                    SummonSmall();
+                    break;
+                case "Move":
+                    if (canMove) MovePlayer();
+                    break;
+            }
+
+            if (Input.GetAxis("Right_Grip_Button") == 1)
+            {
+                MinionInteract();
+            }
+            else if (Input.GetAxis("Right_Grip_Button") < 1 && Input.GetAxis("Left_Grip_Button") != 1)
+            {
+                ray.GetComponent<RayCasting>().Line = false;
+                selectedMinion = null;
+            }
+
+            endTurn();
         }
-	}
+
+    }
 
     public void SummonBig()
     {
         //use up certain amount of mana
         
         Debug.Log("Summon Big");
-        ray.GetComponent<RayCasting>().SelectingObj(3, "Hex");
+        ray.GetComponent<RayCasting>().SelectingObj(9, "Hex");
         if(selectedObj != null)
         {
             mana -= bigSumCost; //place holder value
@@ -81,6 +102,7 @@ public class playerScript : agentScript {
             //allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
             allMinions[curNumMins].GetComponent<agentScript>().MapLocal = GameObject.Find("Game Controller").GetComponent<GameController>().theMap;
             allMinions[curNumMins].GetComponent<agentScript>().spawnIn(selectedObj.GetComponent<Hex>(), this.gameController);
+            allMinions[curNumMins].GetComponent<mobBase>().Foe = false;
             curNumMins++;
             selectedObj = null;
         }
@@ -91,7 +113,7 @@ public class playerScript : agentScript {
         //use up certain amount of mana
         
         Debug.Log("Summon Small");
-        ray.GetComponent<RayCasting>().SelectingObj(3, "Hex");
+        ray.GetComponent<RayCasting>().SelectingObj(9, "Hex");
         if (selectedObj != null)
         {
             mana -= smolSumCost; //place holder value
@@ -100,6 +122,7 @@ public class playerScript : agentScript {
             //allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
             allMinions[curNumMins].GetComponent<agentScript>().MapLocal = GameObject.Find("Game Controller").GetComponent<Map>();
             allMinions[curNumMins].GetComponent<agentScript>().spawnIn(selectedObj.GetComponent<Hex>(), this.gameController);
+            allMinions[curNumMins].GetComponent<mobBase>().Foe = false;
             curNumMins++;
             selectedObj = null;
         }
@@ -145,7 +168,7 @@ public class playerScript : agentScript {
      public void MovePlayer()
     {
         //use the raycast to select spot to move
-        ray.GetComponent<RayCasting>().SelectingObj(3, "Hex");
+        ray.GetComponent<RayCasting>().SelectingObj(9, "Hex");
         //move to that spot
         if(selectedObj != null)
         {
@@ -163,6 +186,62 @@ public class playerScript : agentScript {
         mana = 10;
         canPunch = true;
         selectedObj = null;
+    }
+
+    public void endTurn() //doing this will end the player turn
+    {
+        if(Input.GetAxis("Left_Trigger") == 1 && Input.GetAxis("Right_Trigger") == 1)
+        {
+            if (!endPopCreate)
+            {
+                etPop = Instantiate(endTurnPop, transform.GetChild(2).GetChild(1).transform.position, new Quaternion(0, 0, 0, 0),transform.GetChild(2).GetChild(1).transform);
+                endPopCreate = true;
+            }
+            //pop up an end turn? menu
+            if(Input.GetAxis("Left_Grip_Button") == 1 && Input.GetAxis("Right_Grip_Button") == 1)
+            {
+                gameController.PlayersTurn = false;
+                if (endPopCreate)
+                {
+                    Destroy(etPop);
+                    endPopCreate = false;
+                }
+            }
+        }
+        else
+        {
+
+            if (endPopCreate)
+            {
+                Destroy(etPop);
+                endPopCreate = false;
+            }
+        }
+    }
+
+    public void MinionInteract()
+    {
+        if (selectedMinion == null)
+        {
+            ray.GetComponent<RayCasting>().SelectingMinion(3);
+        }
+        else if(selectedObj == null)
+        {
+            selectedMinion.Selected = true;
+            ray.GetComponent<RayCasting>().SelectingObj(12, "Hex");
+            //ray.GetComponent<RayCasting>().SelectingObj(1, "Boi");
+        }
+
+        if(selectedObj != null && selectedObj.tag == "Hex")
+        {
+            selectedMinion.Move(selectedObj.GetComponent<Hex>());
+            //Input.ResetInputAxes();
+            selectedMinion.Selected = false;
+            selectedMinion.CanMove = false;
+            selectedObj = null;
+            selectedMinion = null;
+            ray.GetComponent<RayCasting>().text.text = "no boi";
+        }
     }
     //get setters
     /// <summary>
@@ -196,6 +275,11 @@ public class playerScript : agentScript {
     {
         get { return action; }
         set { action = value; }
+    }
+
+    public mobBase SelectedMinion
+    {
+        set { selectedMinion = value; }
     }
 
     public int BigSumCost

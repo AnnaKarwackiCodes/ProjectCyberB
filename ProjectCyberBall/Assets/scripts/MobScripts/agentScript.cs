@@ -158,15 +158,19 @@ public class agentScript : MonoBehaviour {
             {
                 if (dist <= moveDistance)
                     {
-                        
-                    }
-                gameController.theMap.getHex(x, y, z).occupant = null; //remove from start hex
-                gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this; //new hex know something is now on it
-                StandingHex = newHex;
-                setLocation(newHex.X, newHex.Y, newHex.Z); //agent knows where it is
-                GameObject g = gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).gameObject;
-                this.gameObject.transform.position = new Vector3(g.transform.position.x, g.transform.position.y + yOffset, g.transform.position.z);  //agent's gameObjects move to proper location
-                return;
+                    gameController.theMap.getHex(x, y, z).occupant = null; //remove from start hex
+                    gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this; //new hex know something is now on it
+                    StandingHex = newHex;
+                    setLocation(newHex.X, newHex.Y, newHex.Z); //agent knows where it is
+                    GameObject g = gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).gameObject;
+                    this.gameObject.transform.position = new Vector3(g.transform.position.x, g.transform.position.y + yOffset, g.transform.position.z);  //agent's gameObjects move to proper location
+                    return;
+                }
+                else
+                {
+                    Debug.LogError("hex not within range");
+                    return;
+                }
             }
             Debug.LogError("Hex: " + newHex + " does not exist");
             return;
