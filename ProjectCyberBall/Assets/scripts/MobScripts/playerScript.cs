@@ -186,6 +186,13 @@ public class playerScript : agentScript {
         mana = 10;
         canPunch = true;
         selectedObj = null;
+        for(int i = 0; i < maxEachMin; i++)
+        {
+            if(allMinions[i] != null)
+            {
+                allMinions[i].GetComponent<mobBase>().CanMove = true;
+            }
+        }
     }
 
     public void endTurn() //doing this will end the player turn
@@ -223,7 +230,7 @@ public class playerScript : agentScript {
     {
         if (selectedMinion == null)
         {
-            ray.GetComponent<RayCasting>().SelectingMinion(3);
+            ray.GetComponent<RayCasting>().SelectingMinion(10);
         }
         else if(selectedObj == null)
         {

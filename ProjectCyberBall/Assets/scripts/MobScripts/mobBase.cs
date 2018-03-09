@@ -66,6 +66,7 @@ public class mobBase : agentScript {
 	// Use this for initialization
 	public virtual new void Start () {
         base.Start();
+        canMove = true;
 	}
 	
 	// Update is called once per frame
