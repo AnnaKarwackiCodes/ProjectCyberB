@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class mobBase : agentScript {
+    
+    /// <summary>
+    /// mobBase acts as the base class for all autonomous mobs in the game
+    /// attack values
+    /// allignment
+    /// quick reference to map position
+    /// move distance
+    /// </summary>
 
     /// <summary>
     ///Stores mobds attack/damage value
@@ -26,7 +34,7 @@ public class mobBase : agentScript {
     /// Reason: Foe is shorter to type. Name can be changed
     /// </summary>
     private bool foe;
-    private bool Foe
+    public bool Foe
     {
 
         get { return this.foe; }
@@ -36,49 +44,29 @@ public class mobBase : agentScript {
     }
 
     /// <summary>
-    /// Tracks which hex the mob is currently standing on: [row, column]
-    /// Stores position of hex in array.
-    /// Can use physical hex position to position the mob
+    /// Tracks whether or not the unit has been selected by the player
     /// </summary>
-    private int[] standingHex;
-    public int[] StandingHex {
+    private bool selected;
+    public bool Selected
+    {
 
-        get { return this.standingHex; }
+        get { return this.selected; }
 
-        set { this.standingHex = value; }
+        set { this.selected = value; }
 
     }
+    private bool canMove;
+    public bool CanMove
+    {
+        get { return this.canMove; }
 
-    /// <summary>
-    /// Stores a local copy of the map for mobs to be able to see and use
-    /// Does this need to be a property?
-    /// No
-    /// Is it a property?
-    /// Yes
-    /// Why?
-    /// Because it can be, ergo it is.
-    /// </summary>
-    private Map mapLocal;
-    public Map MapLocal {
-
-        get { return this.mapLocal; }
-
-        set { this.mapLocal = value; }
-
-    }
-
-    private int moveDistance;
-    public int MoveDistance {
-
-        get { return this.moveDistance; }
-
-        set { this.moveDistance = value; }
-
+        set { this.canMove = value; }
     }
 
 	// Use this for initialization
-	void Start () {
-		
+	public virtual new void Start () {
+        base.Start();
+        canMove = true;
 	}
 	
 	// Update is called once per frame

@@ -1,56 +1,58 @@
-2017.2.0f3:2.3.0.0
-WSAPlayer
-C:/Program Files/Unity 2017.2/Unity/Editor/Data/Managed/UnityEditor.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.CoreModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.AccessibilityModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.ParticleSystemModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.PhysicsModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.VehiclesModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.ClothModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.AIModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.AnimationModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.TextRenderingModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.UIModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.TerrainPhysicsModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.IMGUIModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.UnityWebRequestModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.UnityWebRequestAudioModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.UnityWebRequestTextureModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.UnityWebRequestWWWModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.UNETModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.DirectorModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.UnityAnalyticsModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.CrashReportingModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.PerformanceReportingModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.UnityConnectModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.WebModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.ARModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.VRModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.UIElementsModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.StyleSheetsModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.AudioModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.GameCenterModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.GridModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.ImageConversionModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.InputModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.JSONSerializeModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.ParticlesLegacyModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.Physics2DModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.ScreenCaptureModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.SpriteMaskModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.TerrainModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.TilemapModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.VideoModule.dll
-C:\Program Files\Unity 2017.2\Unity\Editor\Data\PlaybackEngines\MetroSupport/Tools/UnityEngine.WindModule.dll
-C:/Program Files/Unity 2017.2/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll
-C:/Program Files/Unity 2017.2/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll
-C:/Program Files/Unity 2017.2/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll
-C:/Program Files/Unity 2017.2/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll
-C:/Program Files/Unity 2017.2/Unity/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll
-C:/Program Files/Unity 2017.2/Unity/Editor/Data/UnityExtensions/Unity/UIAutomation/UnityEngine.UIAutomation.dll
-C:/Program Files/Unity 2017.2/Unity/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/RuntimeEditor/UnityEngine.GoogleAudioSpatializer.dll
-C:/Program Files/Unity 2017.2/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll
-C:/Program Files/Unity 2017.2/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll
-C:/Users/Noah Parker/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@1.0.1/UnityEngine.Analytics.dll
-C:/Users/Noah Parker/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/UnityEngine.Purchasing.dll
+2017.2.0f3:3.0.0.1
+StandaloneWindows
+D:/Unity/Editor/Data/Managed/UnityEditor.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.CoreModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AccessibilityModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.ParticleSystemModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.PhysicsModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.VehiclesModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.ClothModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AnimationModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.TextRenderingModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.UIModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.TerrainPhysicsModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.IMGUIModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestAudioModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestTextureModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestWWWModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.ClusterInputModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.ClusterRendererModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.UNETModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.DirectorModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.UnityAnalyticsModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.CrashReportingModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.PerformanceReportingModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.UnityConnectModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.WebModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.ARModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.VRModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.UIElementsModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.StyleSheetsModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AudioModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.GameCenterModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.GridModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.ImageConversionModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.InputModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.JSONSerializeModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.ParticlesLegacyModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.Physics2DModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.ScreenCaptureModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.SpriteMaskModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.TerrainModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.TilemapModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.VideoModule.dll
+D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.WindModule.dll
+D:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll
+D:/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll
+D:/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll
+D:/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll
+D:/Unity/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll
+D:/Unity/Editor/Data/UnityExtensions/Unity/UIAutomation/UnityEngine.UIAutomation.dll
+D:/Unity/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/RuntimeEditor/UnityEngine.GoogleAudioSpatializer.dll
+D:/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll
+D:/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll
+C:/Users/ray80/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@1.0.1/UnityEngine.Analytics.dll
+C:/Users/ray80/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@1.0.1/UnityEngine.Purchasing.dll

@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Hex
   - Enemy
+  - LeftHand
+  - RightHand
+  - Smol
+  - Big
+  - Minion
+  - Boi
   layers:
   - Default
   - TransparentFX

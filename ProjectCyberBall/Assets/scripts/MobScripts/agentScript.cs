@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class agentScript : MonoBehaviour {
 
+    /// <summary>
+    /// agentScript is responsible for the inheritance of all major universal functions
+    /// position saving
+    /// holding a ball
+    /// the health
+    /// movement
+    /// setting current hex
+    /// </summary>
+
+    public GameController gameController;
+    //public GameController gameController;
 
     //cube coord
     private int x;
@@ -23,6 +34,11 @@ public class agentScript : MonoBehaviour {
     {
         get { return this.z; }
     }
+
+    /// <summary>
+    /// the height off the hex that an agent's model will be
+    /// </summary>
+    [SerializeField] protected float yOffset = 0f;
 
     /// <summary>
     /// Sets the location of the agent
@@ -67,10 +83,61 @@ public class agentScript : MonoBehaviour {
 
     }
 
+    /// <summary>
+    /// Tracks which hex the mob is currently standing on: [row, column]
+    /// Stores position of hex in array.
+    /// Can use physical hex position to position the mob
+    /// </summary>
+    private Hex standingHex;
+    public Hex StandingHex
+    {
+
+        get { return this.standingHex; }
+
+        set { this.standingHex = value; }
+
+    }
+
+
+    private int moveDistance;
+    public int MoveDistance
+    {
+
+        get { return this.moveDistance; }
+
+        set { this.moveDistance = value; }
+
+    }
+
+    /// <summary>
+    /// Stores a local copy of the map for mobs to be able to see and use
+    /// Does this need to be a property?
+    /// No
+    /// Is it a property?
+    /// Yes
+    /// Why?
+    /// Because it can be, ergo it is.
+    /// </summary>
+    private Map mapLocal;
+    public Map MapLocal
+    {
+
+        get { return this.mapLocal; }
+
+        set { this.mapLocal = value; }
+
+    }
+
     // Use this for initialization
-    void Start () {
-		
+    public virtual void Start () {
+       Debug.Log("AGENT START");
+       gameController = GameObject.Find("Game Controller").GetComponent<GameController>();
+       MapLocal = gameController.theMap;
 	}
+
+    void Awake()
+    {
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -78,13 +145,49 @@ public class agentScript : MonoBehaviour {
 	}
 
     /// <summary>
-    /// Move the mob around the grid
+    /// Move agent to hex
     /// </summary>
     public virtual void Move(Hex newHex)
     {
+        Debug.Log("(" + newHex.X + ", " + newHex.Y + ", " + newHex.Z + ") (" + newHex.Row + ", " + newHex.Col + ")");
+        int dist = MapLocal.distanceBetween(standingHex, newHex);
 
+        if (gameController != null) //agent is in a game
+        {
+            if (gameController.theMap.hexExists(newHex.X, newHex.Y, newHex.Z))//hex exist to move to
+            {
+                if (dist <= moveDistance)
+                    {
+                    gameController.theMap.getHex(x, y, z).occupant = null; //remove from start hex
+                    gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this; //new hex know something is now on it
+                    StandingHex = newHex;
+                    setLocation(newHex.X, newHex.Y, newHex.Z); //agent knows where it is
+                    GameObject g = gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).gameObject;
+                    this.gameObject.transform.position = new Vector3(g.transform.position.x, g.transform.position.y + yOffset, g.transform.position.z);  //agent's gameObjects move to proper location
+                    return;
+                }
+                else
+                {
+                    Debug.LogError("hex not within range");
+                    return;
+                }
+            }
+            Debug.LogError("Hex: " + newHex + " does not exist");
+            return;
+        }
+        Debug.LogError("game Controller not found");
+    }
 
-
+    public virtual void spawnIn(Hex newHex, GameController gCon)
+    {
+        if (newHex == null) Debug.Log("dfbdskjbkds");
+        if (gCon == null) Debug.Log("but why");
+        if (gCon.theMap == null) Debug.Log("fuck me");
+        //gCon.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this; //NULL REFERENCE ERROR
+        setLocation(newHex.X, newHex.Y, newHex.Z); //agent knows where it is
+        GameObject g = gCon.theMap.getHex(newHex.X, newHex.Y, newHex.Z).gameObject;
+        standingHex = newHex;
+        this.gameObject.transform.position = new Vector3(g.transform.position.x, g.transform.position.y + yOffset, g.transform.position.z);
     }
 
     public virtual void pickUpBall()
