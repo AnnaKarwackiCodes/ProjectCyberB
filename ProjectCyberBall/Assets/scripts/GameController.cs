@@ -5,25 +5,25 @@ using UnityEngine;
 public class GameController : MonoBehaviour {
 
     public Map theMap;
+    public enemyController enemyControl;
     public GameObject userPrefab;
     private GameObject theUser;
     private bool userIsIn = false;
+    private bool playersTurn;
+    private bool inGame;
 
 	// Use this for initializations
 	void Awake () {
         theMap = gameObject.GetComponent<Map>();
+        enemyControl = gameObject.GetComponent<enemyController>();
         theUser = Instantiate(userPrefab, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
-
-        
     }
 
     void Start()
     {
         Debug.Log("start");
-        //theUser.GetComponent<playerScript>().spawnIn(theMap.map[1, 1]);
-        //theUser.GetComponent<playerScript>().MapLocal = theMap;
-        //if (theMap.map == null) { Debug.Log("NO HEX"); }
-        //theUser.GetComponent<playerScript>().GetComponent<playerScript>().spawnIn(theMap.map[1, 1]);
+        playersTurn = true;
+        inGame = true;
 
     }
 	
@@ -35,5 +35,29 @@ public class GameController : MonoBehaviour {
             theUser.GetComponent<playerScript>().GetComponent<playerScript>().spawnIn(theMap.map[0, 0], this);
             userIsIn = true;
         }
+
+        //game loop
+        if (inGame)
+        {
+            if (playersTurn)
+            {
+                Debug.Log("Player turn");
+            }
+            else
+            {
+                //call enemies to do their thing
+                Debug.Log("Baddie turn");
+
+                //when finished set it up for the player to be able to do their thing
+                theUser.GetComponent<playerScript>().newTurn();
+                playersTurn = true;
+            }
+        }
+    }
+
+    public bool PlayersTurn
+    {
+        set { playersTurn = value; }
+        get { return playersTurn; }
     }
 }

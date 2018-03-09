@@ -34,7 +34,7 @@ public class mobBase : agentScript {
     /// Reason: Foe is shorter to type. Name can be changed
     /// </summary>
     private bool foe;
-    private bool Foe
+    public bool Foe
     {
 
         get { return this.foe; }
@@ -55,10 +55,18 @@ public class mobBase : agentScript {
         set { this.selected = value; }
 
     }
+    private bool canMove;
+    public bool CanMove
+    {
+        get { return this.canMove; }
+
+        set { this.canMove = value; }
+    }
 
 	// Use this for initialization
 	public virtual new void Start () {
         base.Start();
+        canMove = true;
 	}
 	
 	// Update is called once per frame

@@ -174,6 +174,7 @@ public class Map : MonoBehaviour {
                 return true;
             }
         }
+        printMap();
         return false;
     }
 
@@ -183,11 +184,38 @@ public class Map : MonoBehaviour {
     private bool inBounds(int xx, int yy, int zz)
     {
         int[] loc = cubeToOffset(xx, zz);
-        if (loc[0] >= 0 && loc[0] < width && loc[1] >= 0 && loc[1] < height) //hex is in bounds
+        if (loc[1] >= 0 && loc[1] < width && loc[0] >= 0 && loc[0] < height) //hex is in bounds
         {
             return true;
         }
         return false;
+    }
+
+    private void printMap()
+    {
+        string s = "";
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+
+                //int[] a = offsetToCube(i, j);
+                //if (hexExists(a[0], a[1], a[2]))
+                //{
+                //    s += "o ";
+                //}
+                if (i == 0 && j == 0)
+                {
+                    s += "o ";
+                }
+                else
+                {
+                    s +=  i + " ";
+                }
+            }
+            s += "\n";
+        }
+        Debug.Log(s);
     }
 
 }

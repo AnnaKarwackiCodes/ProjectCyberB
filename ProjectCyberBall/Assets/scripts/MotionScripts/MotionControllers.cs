@@ -21,21 +21,27 @@ public class MotionControllers : MonoBehaviour {
     private int curOption;
     private bool openSub;
     private int addMenu;
+    private GameController gCon;
 
 	// Use this for initialization
 	void Start () {
 		leftUICreate = false;
         curOption = -1; //this will select none of the menu options
         openSub = false;
+        gCon = this.gameObject.GetComponent<playerScript>().gameController;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		Track ();
-		LeftHandInteractions ();
-        if (leftUICreate)
+        gCon = this.gameObject.GetComponent<playerScript>().gameController;
+        if (gCon.PlayersTurn)
         {
-            lUI.transform.localPosition = leftPosition;
+            LeftHandInteractions();
+            if (leftUICreate)
+            {
+                lUI.transform.localPosition = leftPosition;
+            }
         }
 	}
 	//everything that deals with tracking the controllers goes here
@@ -61,7 +67,7 @@ public class MotionControllers : MonoBehaviour {
 
     //this is menu control with the left controller
 	private void LeftHandInteractions(){
-		if (Input.GetAxis("Left_Trigger") == 1.0f && !openSub) {
+		if (Input.GetAxis("Left_Grip_Button") == 1.0f && !openSub) {
 			if(leftUICreate == false){
 				lUI = Instantiate(LeftUIInteract, leftPosition, new Quaternion(0,0,0,0),LeftUICan.transform);
 				leftUICreate = true;
@@ -74,36 +80,36 @@ public class MotionControllers : MonoBehaviour {
                 //summon minion
                 curOption = 0;
                 lUI.transform.GetChild(0).GetComponent<Text>().color = Color.blue;
-                lUI.transform.GetChild(1).GetComponent<Text>().color = Color.white;
-                lUI.transform.GetChild(2).GetComponent<Text>().color = Color.white;
-                lUI.transform.GetChild(3).GetComponent<Text>().color = Color.white;
+                lUI.transform.GetChild(1).GetComponent<Text>().color = Color.black;
+                lUI.transform.GetChild(2).GetComponent<Text>().color = Color.black;
+                lUI.transform.GetChild(3).GetComponent<Text>().color = Color.black;
             }
             if (Input.GetAxis("Left_Touchpad_X") == -1 && Input.GetAxis("Left_Touchpad_Y") == 1)
             {
                 //attack
                 curOption = 1;
                 lUI.transform.GetChild(1).GetComponent<Text>().color = Color.blue;
-                lUI.transform.GetChild(0).GetComponent<Text>().color = Color.white;
-                lUI.transform.GetChild(2).GetComponent<Text>().color = Color.white;
-                lUI.transform.GetChild(3).GetComponent<Text>().color = Color.white;
+                lUI.transform.GetChild(0).GetComponent<Text>().color = Color.black;
+                lUI.transform.GetChild(2).GetComponent<Text>().color = Color.black;
+                lUI.transform.GetChild(3).GetComponent<Text>().color = Color.black;
             }
             if (Input.GetAxis("Left_Touchpad_X") == 1 && Input.GetAxis("Left_Touchpad_Y") == 1)
             {
                 //pass ball
                 curOption = 3;
                 lUI.transform.GetChild(3).GetComponent<Text>().color = Color.blue;
-                lUI.transform.GetChild(1).GetComponent<Text>().color = Color.white;
-                lUI.transform.GetChild(0).GetComponent<Text>().color = Color.white;
-                lUI.transform.GetChild(2).GetComponent<Text>().color = Color.white;
+                lUI.transform.GetChild(1).GetComponent<Text>().color = Color.black;
+                lUI.transform.GetChild(0).GetComponent<Text>().color = Color.black;
+                lUI.transform.GetChild(2).GetComponent<Text>().color = Color.black;
             }
             if (Input.GetAxis("Left_Touchpad_X") == -1 && Input.GetAxis("Left_Touchpad_Y") == -1)
             {
                 //move
                 curOption = 2;
                 lUI.transform.GetChild(2).GetComponent<Text>().color = Color.blue;
-                lUI.transform.GetChild(1).GetComponent<Text>().color = Color.white;
-                lUI.transform.GetChild(3).GetComponent<Text>().color = Color.white;
-                lUI.transform.GetChild(0).GetComponent<Text>().color = Color.white;
+                lUI.transform.GetChild(1).GetComponent<Text>().color = Color.black;
+                lUI.transform.GetChild(3).GetComponent<Text>().color = Color.black;
+                lUI.transform.GetChild(0).GetComponent<Text>().color = Color.black;
             }
             if (Input.GetButtonDown("Left_Touchpad_Pressed"))
             {
@@ -117,7 +123,7 @@ public class MotionControllers : MonoBehaviour {
                         if (gameObject.GetComponent<playerScript>().CanMove)
                         {
                             gameObject.GetComponent<playerScript>().Action = "Move";
-                            Input.ResetInputAxes();
+                            //Input.ResetInputAxes();
                         }
                         break;
                     default:
@@ -141,13 +147,13 @@ public class MotionControllers : MonoBehaviour {
                     {
                         curOption = 0;
                         lUI.transform.GetChild(3).GetComponent<Text>().color = Color.blue;
-                        lUI.transform.GetChild(2).GetComponent<Text>().color = Color.white;
+                        lUI.transform.GetChild(2).GetComponent<Text>().color = Color.black;
                     }
                     else if (Input.GetAxis("Left_Touchpad_Y") == -1)
                     {
                         curOption = 1;
                         lUI.transform.GetChild(2).GetComponent<Text>().color = Color.blue;
-                        lUI.transform.GetChild(3).GetComponent<Text>().color = Color.white;
+                        lUI.transform.GetChild(3).GetComponent<Text>().color = Color.black;
                     }
                     break;
                 default:
