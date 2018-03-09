@@ -86,6 +86,7 @@ public class Map : MonoBehaviour {
                 go.transform.position = new Vector3(j % 2 == 0 ? i * (1 + off) : i * (1 + off) + (.5f + off), 0, j * (Mathf.Sqrt(3) / 2 + off)); //moves tile of physical position in space
             }
         }
+
         Debug.Log(map);
 
     }

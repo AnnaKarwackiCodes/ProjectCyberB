@@ -29,14 +29,11 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(userIsIn);
 		if(theMap.map != null && !userIsIn)
         {
-            Debug.Log("loaded");
             theUser.GetComponent<playerScript>().MapLocal = theMap;
-            theUser.GetComponent<playerScript>().GetComponent<playerScript>().spawnIn(theMap.map[0, 0]);
+            theUser.GetComponent<playerScript>().GetComponent<playerScript>().spawnIn(theMap.map[0, 0], this);
             userIsIn = true;
         }
-        Debug.Log(userIsIn);
     }
 }

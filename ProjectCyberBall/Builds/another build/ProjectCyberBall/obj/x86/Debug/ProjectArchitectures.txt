@@ -1,0 +1,2 @@
+C:\Users\avkar\Documents\GitHub\ProjectCyberB\ProjectCyberBall\Builds\another build\GeneratedProjects\UWP\Assembly-CSharp\Assembly-CSharp.csproj;x86
+C:\Users\avkar\Documents\GitHub\ProjectCyberB\ProjectCyberBall\Builds\another build\ProjectCyberBall\ProjectCyberBall.csproj;x86
