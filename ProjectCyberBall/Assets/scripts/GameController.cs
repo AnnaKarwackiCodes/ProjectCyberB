@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour {
 
     public Map theMap;
+    public enemyController enemyControl;
     public GameObject userPrefab;
     private GameObject theUser;
     private bool userIsIn = false;
@@ -14,6 +15,7 @@ public class GameController : MonoBehaviour {
 	// Use this for initializations
 	void Awake () {
         theMap = gameObject.GetComponent<Map>();
+        enemyControl = gameObject.GetComponent<enemyController>();
         theUser = Instantiate(userPrefab, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
     }
 
