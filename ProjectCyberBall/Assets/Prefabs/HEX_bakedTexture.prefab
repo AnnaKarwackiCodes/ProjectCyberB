@@ -128,3 +128,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   occupant: {fileID: 0}
+  FLOOR_FC: {fileID: 4300000, guid: 269a124fba6bf634baacec8e4c89edaa, type: 3}
+  FLOOR_R: {fileID: 2100000, guid: a235ecfb3735b98469c39d10ceed4bd4, type: 2}
+  WALL_FC: {fileID: 4300094, guid: 673cfe34f8fc68c4991f40c7f875534b, type: 3}
+  WALL_R: {fileID: 2100000, guid: 507373ce08e305c42aa5945c99e7b410, type: 2}
+  INFO_FC: {fileID: 4300094, guid: 673cfe34f8fc68c4991f40c7f875534b, type: 3}
+  INFO_R: {fileID: 2100000, guid: 4560f00443174dd42bdde821fdd5f940, type: 2}

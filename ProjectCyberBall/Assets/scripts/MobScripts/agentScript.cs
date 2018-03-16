@@ -71,6 +71,18 @@ public class agentScript : MonoBehaviour {
     }
 
     /// <summary>
+    /// what side agent is on
+    /// true = player's side
+    /// false = enemy's side
+    /// </summary>
+    private bool alligence;
+    public bool Alligence
+    {
+        get { return alligence; }
+        set { this.alligence = value; }
+    }
+
+    /// <summary>
     /// Stores mob health.
     /// </summary>
     private int health;
@@ -145,6 +157,48 @@ public class agentScript : MonoBehaviour {
 	}
 
     /// <summary>
+    /// Gets list of all possible moves the agent can make, taking into account other agents, walls, etc.
+    /// </summary>
+    /// <returns>All hexs that the agent can move to</returns>
+    public Hex[] getPossibleMoves()
+    {
+        List<Hex> visited = new List<Hex>(); //list of hexs that already been visited
+        visited.Add(standingHex);
+        Dictionary<int, List<Hex>> fringe = new Dictionary<int, List<Hex>>(); //layered list of fringe hexs
+        fringe.Add(0, new List<Hex>());
+        fringe[0].Add(standingHex);
+        List<Hex> possibleMoves = new List<Hex>(); //hexs the agent can actually move to
+
+        for(int i = 1; i <= moveDistance; i++)
+        {
+            fringe.Add(i, new List<Hex>());
+            foreach(Hex h in fringe[i - 1])
+            {
+                for(int j = 0; j < 6; j++) //checks each direction
+                {
+                    Hex neighbor = MapLocal.getNeigbor(h, j); //returns neighbor that is in bounds and not NULL type
+                    if(neighbor != null) //got a hex
+                    {
+                        if (!visited.Contains(neighbor)) //hex has not be visited yet
+                        {
+                            visited.Add(neighbor);
+                            if (!neighbor.isSolid() && !(neighbor.occupant != null && neighbor.occupant.Alligence != this.alligence))
+                            {
+                                fringe[i].Add(neighbor);
+                                if(neighbor.occupant == null) //no one is on the hex
+                                {
+                                    possibleMoves.Add(neighbor);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return possibleMoves.ToArray();
+    }
+
+    /// <summary>
     /// Move agent to hex
     /// </summary>
     public virtual void Move(Hex newHex)
@@ -180,9 +234,8 @@ public class agentScript : MonoBehaviour {
 
     public virtual void spawnIn(Hex newHex, GameController gCon)
     {
-        if (newHex == null) Debug.Log("dfbdskjbkds");
-        if (gCon == null) Debug.Log("but why");
-        if (gCon.theMap == null) Debug.Log("fuck me");
+        if (newHex == null) Debug.LogError("newHex not found");
+        if (gCon == null) Debug.LogError("game controller not found");
         //gCon.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this; //NULL REFERENCE ERROR
         setLocation(newHex.X, newHex.Y, newHex.Z); //agent knows where it is
         GameObject g = gCon.theMap.getHex(newHex.X, newHex.Y, newHex.Z).gameObject;

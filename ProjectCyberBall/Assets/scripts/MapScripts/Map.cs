@@ -23,15 +23,15 @@ public class Map : MonoBehaviour {
         { 0, 0, 0, 0,-1,-1, 0, 2, 0,-1,-1, 0, 0, 0, 0,
           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
           1, 1, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 1, 1,
-          1, 0, 0, 0, 0, 5, 0, 5, 0, 5, 0, 0, 0, 0, 1,
+          1, 0, 0, 0, 5, 0, 0, 0, 0, 5, 0, 0, 0, 0, 1,
           0, 0, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 5, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 5, 0, 3, 0, 5, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
           0, 0, 0, 0, 0, 0, 0,-1, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 5,-1,-1, 5, 5, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 5, 5,-1,-1, 5, 5, 0, 0, 0, 0, 0,
           0, 0, 0, 5, 0, 0,-1,-1,-1, 0, 0, 5, 0, 0, 0,
-          0, 0, 0, 5, 1, 0, 0, 0, 0, 0, 1, 5, 0, 0, 0,
+          0, 0, 5, 1, 0, 0, 0, 0, 0, 0, 1, 5, 0, 0, 0,
           0, 0, 0, 5, 5, 5, 0, 0, 0, 5, 5, 5, 0, 0, 0,
           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -138,9 +138,12 @@ public class Map : MonoBehaviour {
     /// </summary>
     public Hex getNeigbor(Hex tile, int dir)//get neighbor of tile in direction
     {
-
-        int[] arr = cubeToOffset(tile.X + cubeDirs[dir,0], tile.Z + cubeDirs[dir,2]); //gets offset location of neighboring tiles
-        return map[arr[0], arr[1]];
+        if (hexExists(tile.X, tile.Y, tile.Z))
+        {
+            int[] arr = cubeToOffset(tile.X + cubeDirs[dir, 0], tile.Z + cubeDirs[dir, 2]); //gets offset location of neighboring tiles
+            return map[arr[1], arr[0]];
+        }
+        return null;
     }
 
     public int distanceBetween(Hex center, Hex target) {
@@ -210,7 +213,7 @@ public class Map : MonoBehaviour {
                 return true;
             }
         }
-        printMap();
+        //printMap();
         return false;
     }
 

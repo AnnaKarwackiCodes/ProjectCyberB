@@ -27,6 +27,16 @@ public class Hex : MonoBehaviour {
     /// </summary>
     public enum TYPE { NULL = -1, FLOOR = 0, SPAWN = 1, START = 2, INFO = 3, END = 4, WALL = 5};
 
+    //hex type mesh filter, renderers, and colliders
+    [SerializeField] private Mesh FLOOR_FC;
+    [SerializeField] private Material FLOOR_R;
+
+    [SerializeField] private Mesh WALL_FC;
+    [SerializeField] private Material WALL_R;
+
+    [SerializeField] private Mesh INFO_FC;
+    [SerializeField] private Material INFO_R;
+
 
     // Use this for initialization
     void Start () {
@@ -79,13 +89,19 @@ public class Hex : MonoBehaviour {
                 case TYPE.END :
                     //break;
                 case TYPE.SPAWN :
-
+                    gameObject.GetComponent<MeshFilter>().mesh = FLOOR_FC;
+                    gameObject.GetComponent<MeshRenderer>().material = FLOOR_R;
+                    gameObject.GetComponent<MeshCollider>().sharedMesh = FLOOR_FC;
                     break;
                 case TYPE.INFO :
-
+                    gameObject.GetComponent<MeshFilter>().mesh = INFO_FC;
+                    gameObject.GetComponent<MeshRenderer>().material = INFO_R;
+                    gameObject.GetComponent<MeshCollider>().sharedMesh = INFO_FC;
                     break;
                 case TYPE.WALL :
-
+                    gameObject.GetComponent<MeshFilter>().mesh = WALL_FC;
+                    gameObject.GetComponent<MeshRenderer>().material = WALL_R;
+                    gameObject.GetComponent<MeshCollider>().sharedMesh = WALL_FC;
                     break;
                 case TYPE.NULL:
                 default:
