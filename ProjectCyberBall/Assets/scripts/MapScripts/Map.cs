@@ -19,10 +19,29 @@ public class Map : MonoBehaviour {
         { { 1, -1, 0 }, { 1, 0, -1 }, { 0, 1, -1 },
           { -1, 1, 0 }, { -1, 0, 1 }, { 0, -1, 1 } };
 
+    static int[] testMap = new int[]
+        { 0, 0, 0, 0,-1,-1, 0, 2, 0,-1,-1, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+          1, 1, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 1, 1,
+          1, 0, 0, 0, 0, 5, 0, 5, 0, 5, 0, 0, 0, 0, 1,
+          0, 0, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0,-1, 0, 0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 5,-1,-1, 5, 5, 0, 0, 0, 0, 0,
+          0, 0, 0, 5, 0, 0,-1,-1,-1, 0, 0, 5, 0, 0, 0,
+          0, 0, 0, 5, 1, 0, 0, 0, 0, 0, 1, 5, 0, 0, 0,
+          0, 0, 0, 5, 5, 5, 0, 0, 0, 5, 5, 5, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0 };
+
     // Use this for initialization
     void Start () {
-        createRectangleMap(width, height, offset);
-
+        //createRectangleMap(width, height, offset);
+        createMapFromArray(testMap);
         //player = GameObject.Find("Player_obj");
 
         //player.GetComponent<playerScript>().mapReference = this.GetComponent<Map>();
@@ -67,14 +86,18 @@ public class Map : MonoBehaviour {
         return arr; // [row, col]
     }
 
-    private void createMapFromArray(int[,] newMap) //NEEDS TO BE TESTED
+    /// <summary>
+    /// creates a map from an array of numbers
+    /// </summary>
+    /// <param name="newMap">the map that is being used</param>
+    private void createMapFromArray(int[] newMap)
     {
         createRectangleMap(width, height, offset); //reset everything
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
             {
-                map[j, i].Type = (Hex.TYPE)newMap[j, i]; //this is why it needs to be tested
+                map[i, j].Type = (Hex.TYPE)newMap[(j * width) + i];
             }
         }
     }
@@ -97,7 +120,7 @@ public class Map : MonoBehaviour {
                 int[] arr = offsetToCube(i, j); //gets the cube coords of tile
                 go.GetComponent<Hex>().setLocation(i, j, arr[0], arr[2]); //sets location for the tile
                 addToMap(go.GetComponent<Hex>());
-                go.transform.position = new Vector3(j % 2 == 0 ? i * (1 + off) : i * (1 + off) + (.5f + off), 0, j * (Mathf.Sqrt(3) / 2 + off)); //moves tile of physical position in space
+                go.transform.position = new Vector3(j % 2 == 0 ? i * (1 + off) : i * (1 + off) + (.5f + (off/2)), 0, j * (Mathf.Sqrt(3) / 2 + off)); //moves tile of physical position in space
             }
         }
         Debug.Log(map);
