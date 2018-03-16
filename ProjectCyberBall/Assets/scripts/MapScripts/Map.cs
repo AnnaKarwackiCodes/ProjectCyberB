@@ -67,6 +67,18 @@ public class Map : MonoBehaviour {
         return arr; // [row, col]
     }
 
+    private void createMapFromArray(int[,] newMap) //NEEDS TO BE TESTED
+    {
+        createRectangleMap(width, height, offset); //reset everything
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                map[j, i].Type = (Hex.TYPE)newMap[j, i]; //this is why it needs to be tested
+            }
+        }
+    }
+
     private void createRectangleMap(int w, int h, float off) //creates a 'rectangular' map
     {
         if (w % 2 == 1) { w--; }
@@ -74,6 +86,8 @@ public class Map : MonoBehaviour {
         width = w + 1;
         height = h + 1;
         map = new Hex[width, height];
+        GameObject[] TBD = GameObject.FindGameObjectsWithTag("Hex");
+        while(TBD.Length < 0) { GameObject.Destroy(TBD[0]); } //clears all tiles so there is no overlap
         offset = off;
         for (int i = 0; i < width; i++)
         {

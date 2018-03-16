@@ -156,8 +156,8 @@ public class agentScript : MonoBehaviour {
         {
             if (gameController.theMap.hexExists(newHex.X, newHex.Y, newHex.Z))//hex exist to move to
             {
-                if (dist <= moveDistance)
-                    {
+                if (dist <= moveDistance && !newHex.isSolid()) //hex within distance and not solid
+                {
                     gameController.theMap.getHex(x, y, z).occupant = null; //remove from start hex
                     gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this; //new hex know something is now on it
                     StandingHex = newHex;

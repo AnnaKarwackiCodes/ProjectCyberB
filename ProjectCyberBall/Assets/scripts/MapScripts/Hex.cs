@@ -64,10 +64,36 @@ public class Hex : MonoBehaviour {
         set { z = value; }
     }
 
-    public TYPE Type
+    public TYPE Type //need to figure out how to switch around shapes. Only really matters for walls and info orb ped
     {
         get { return type; }
-        set { type = value; }
+        set {
+            type = value;
+            gameObject.GetComponent<MeshRenderer>().enabled = true;
+            gameObject.GetComponent<MeshCollider>().enabled = true;
+            switch (type){
+                case TYPE.FLOOR:
+                    //break;
+                case TYPE.START:
+                    //break;
+                case TYPE.END :
+                    //break;
+                case TYPE.SPAWN :
+
+                    break;
+                case TYPE.INFO :
+
+                    break;
+                case TYPE.WALL :
+
+                    break;
+                case TYPE.NULL:
+                default:
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    break;
+            }
+        }
     }
 
     public int Row

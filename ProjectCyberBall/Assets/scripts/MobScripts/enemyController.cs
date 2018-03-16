@@ -20,6 +20,9 @@ public class enemyController : MonoBehaviour {
 		
 	}
 
+    /// <summary>
+    /// The full turn that the enemy takes
+    /// </summary>
     private void turn()
     {
         newTurn();
@@ -30,31 +33,49 @@ public class enemyController : MonoBehaviour {
         endTurn();
     }
 
+    /// <summary>
+    /// resets everything for the beginning of the turn
+    /// </summary>
     private void newTurn()
     {
 
     }
 
+    /// <summary>
+    /// does anything at the end of the turn
+    /// </summary>
     public void endTurn() //doing this will end the player turn
     {
 
     }
 
+    /// <summary>
+    /// Figures out what the overaching goal is the enemy need to complete
+    /// </summary>
     private void determineGoal()
     {
 
     }
 
+    /// <summary>
+    /// Figures out how many, what type, and where enemies should be spawned
+    /// </summary>
     private void spawnEnemies()
     {
 
     }
 
+    /// <summary>
+    /// moves each enemy towards their goal
+    /// </summary>
     private void moveEnemies()
     {
 
     }
 
+    /// <summary>
+    /// attacks player or minion of next to the enemy
+    /// </summary>
     private void attackWithEnemies()
     {
 
