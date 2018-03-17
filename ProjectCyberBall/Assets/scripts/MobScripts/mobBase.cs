@@ -77,7 +77,7 @@ public class mobBase : agentScript {
     /// <summary>
     /// Make an attack against an enemy Mob
     /// </summary>
-    public virtual void mobAttack(mobBase target) {
+    public virtual void mobAttack(agentScript target) {
 
 
 

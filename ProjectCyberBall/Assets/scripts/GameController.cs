@@ -5,9 +5,11 @@ using UnityEngine;
 public class GameController : MonoBehaviour {
 
     public Map theMap;
-    public enemyController enemyControl;
+    private enemyController enemyControl;
     public GameObject userPrefab;
+    public GameObject infoPrefab;
     private GameObject theUser;
+    public GameObject theInfo;
     private bool userIsIn = false;
     private bool playersTurn;
     private bool inGame;
@@ -17,6 +19,8 @@ public class GameController : MonoBehaviour {
         theMap = gameObject.GetComponent<Map>();
         enemyControl = gameObject.GetComponent<enemyController>();
         theUser = Instantiate(userPrefab, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
+        theInfo = Instantiate(infoPrefab, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
+
     }
 
     void Start()
@@ -36,13 +40,22 @@ public class GameController : MonoBehaviour {
             Hex[] startHex = theMap.getHexsWithType(Hex.TYPE.START);
             if (startHex.Length == 1) //moves player to start hex
             {
-                theUser.GetComponent<playerScript>().GetComponent<playerScript>().spawnIn(startHex[0], this);
+                theUser.GetComponent<playerScript>().spawnIn(startHex[0], this);
             }
-            else { theUser.GetComponent<playerScript>().GetComponent<playerScript>().spawnIn(theMap.map[0, 0], this); }
-            
+            else { theUser.GetComponent<playerScript>().spawnIn(theMap.map[0, 0], this); }
+
+            theInfo.GetComponent<InfoBall>().mapLocal = theMap;
+            enemyControl.theInfo = theInfo.GetComponent<InfoBall>();
+            startHex = theMap.getHexsWithType(Hex.TYPE.INFO);
+            if (startHex.Length == 1) //moves info to info hex
+            {
+                theInfo.GetComponent<InfoBall>().spawnIn(startHex[0], this);
+            }
+            else { theInfo.GetComponent<InfoBall>().spawnIn(theMap.map[0, 0], this); }
+
             userIsIn = true;
-            Hex[] path = theMap.pathfinding(theMap.getHex(0, -7, 7), theMap.getHex(13, -14, 1));
-            string s = "";
+            //Hex[] path = theMap.pathfinding(theMap.getHex(0, -7, 7), theMap.getHex(13, -14, 1));
+            //string s = "";
             //for(int i = 0; i < path.Length; i++) //path finding testing
             //{
             //    s += path[i].ToString() + " -> ";

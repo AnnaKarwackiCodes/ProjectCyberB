@@ -44,7 +44,7 @@ public class playerScript : agentScript {
         fireBallCost = 3;
         useBallCost = 1;
         canMove = true;
-        MoveDistance = 3;
+        MoveDistance = 2;
         Alligence = true;
 
         endPopCreate = false;

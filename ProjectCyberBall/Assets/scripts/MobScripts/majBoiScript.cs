@@ -7,7 +7,7 @@ public class majBoiScript : mobBase {
     // Use this for initialization
     public virtual new void Start () {
         base.Start();
-        MoveDistance = 1;
+        MoveDistance = 2;
 	}
 	
 	// Update is called once per frame
