@@ -2,19 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// agentScript is responsible for the inheritance of all major universal functions
+/// position saving
+/// holding a ball
+/// the health
+/// movement
+/// setting current hex
+/// </summary>
+
 public class agentScript : MonoBehaviour {
 
-    /// <summary>
-    /// agentScript is responsible for the inheritance of all major universal functions
-    /// position saving
-    /// holding a ball
-    /// the health
-    /// movement
-    /// setting current hex
-    /// </summary>
-
     public GameController gameController;
-    //public GameController gameController;
+
+    /// <summary>
+    /// Stores a local copy of the map for mobs to be able to see and use
+    /// Does this need to be a property?
+    /// No
+    /// Is it a property?
+    /// Yes
+    /// Why?
+    /// Because it can be, ergo it is.
+    /// </summary>
+    public Map mapLocal;
 
     //cube coord
     private int x;
@@ -121,30 +131,13 @@ public class agentScript : MonoBehaviour {
 
     }
 
-    /// <summary>
-    /// Stores a local copy of the map for mobs to be able to see and use
-    /// Does this need to be a property?
-    /// No
-    /// Is it a property?
-    /// Yes
-    /// Why?
-    /// Because it can be, ergo it is.
-    /// </summary>
-    private Map mapLocal;
-    public Map MapLocal
-    {
-
-        get { return this.mapLocal; }
-
-        set { this.mapLocal = value; }
-
-    }
+    
 
     // Use this for initialization
     public virtual void Start () {
        Debug.Log("AGENT START");
        gameController = GameObject.Find("Game Controller").GetComponent<GameController>();
-       MapLocal = gameController.theMap;
+       mapLocal = gameController.theMap;
 	}
 
     void Awake()
@@ -176,7 +169,7 @@ public class agentScript : MonoBehaviour {
             {
                 for(int j = 0; j < 6; j++) //checks each direction
                 {
-                    Hex neighbor = MapLocal.getNeigbor(h, j); //returns neighbor that is in bounds and not NULL type
+                    Hex neighbor = mapLocal.getNeigbor(h, j); //returns neighbor that is in bounds and not NULL type
                     if(neighbor != null) //got a hex
                     {
                         if (!visited.Contains(neighbor)) //hex has not be visited yet
@@ -204,7 +197,7 @@ public class agentScript : MonoBehaviour {
     public virtual void Move(Hex newHex)
     {
         Debug.Log("(" + newHex.X + ", " + newHex.Y + ", " + newHex.Z + ") (" + newHex.Row + ", " + newHex.Col + ")");
-        int dist = MapLocal.distanceBetween(standingHex, newHex);
+        int dist = mapLocal.distanceBetween(standingHex, newHex);
 
         if (gameController != null) //agent is in a game
         {

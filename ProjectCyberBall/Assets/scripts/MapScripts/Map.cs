@@ -134,28 +134,108 @@ public class Map : MonoBehaviour {
     }
 
     /// <summary>
+    /// A* path finding in hex map
+    /// finds quickest path from start to end
+    /// </summary>
+    /// <param name="start">starting hex</param>
+    /// <param name="end">ending hex</param>
+    /// <returns>list of hexs, in order, from start to end</returns>
+    public Hex[] pathfinding(Hex start, Hex end)
+    {
+        List<Hex> visited = new List<Hex>(); //list of hexs that already been visited
+        List<Hex> fringe = new List<Hex>(); //list of hexs that have been discovered, but not visited
+        fringe.Add(start);
+        Dictionary<Hex, Hex> cameFrom = new Dictionary<Hex, Hex>(); //Hex can most efficiently be reached from
+        Dictionary<Hex, int> gScore = new Dictionary<Hex, int>(); //the cost of getting from the start hex to that hex
+        gScore.Add(start, 0);
+
+        while (fringe.Count > 0)
+        {
+            Hex current = fringe[0];
+            if(current.Equals(end)) { return reconstructPath(cameFrom, current).ToArray(); }
+
+            fringe.RemoveAt(0);
+            visited.Add(current);
+
+            if(current.isSolid()) { continue; } //if current is a wallm then skip it
+            for (int j = 0; j < 6; j++) //checks each direction
+            {
+                Hex neighbor = getNeigbor(current, j); //returns neighbor that is in bounds and not NULL type
+                if (neighbor != null) //got a hex
+                {
+                    if (visited.Contains(neighbor)) //if neighbor has already been visited
+                    {
+                        continue; //passes over rest of code in for loop and iterates
+                    }
+                    if (!fringe.Contains(neighbor))
+                    {
+                        fringe.Add(neighbor);
+                    }
+
+                    int tentGScore = gScore[current] + 1;
+                    if(gScore.ContainsKey(neighbor) && tentGScore >= gScore[neighbor]) { continue; }
+                    if (!gScore.ContainsKey(neighbor))//if gscore does not contain neighbor
+                    {
+                        cameFrom.Add(neighbor, current);
+                        gScore.Add(neighbor, tentGScore);
+                    }
+                    else
+                    {
+                        cameFrom[neighbor] = current;
+                        gScore[neighbor] = tentGScore;
+                    }
+                }
+            }
+
+            //sort fringe
+            fringe.Sort(delegate(Hex a, Hex b)
+            {
+                return distanceBetween(a, end) + gScore[a] < distanceBetween(b, end) + gScore[b] ? -1 : 1;
+            });
+        }
+
+        return null; //no path can be found
+    }
+
+    /// <summary>
+    /// reconstructs path from start to end
+    /// recursion bois
+    /// </summary>
+    private List<Hex> reconstructPath(Dictionary<Hex, Hex> cameFrom, Hex current)
+    {
+        if (cameFrom.ContainsKey(current))
+        {
+            List<Hex> path = new List<Hex>();
+            path.AddRange(reconstructPath(cameFrom, cameFrom[current]));
+            path.Add(current);
+            return path;
+        }
+        return new List<Hex>() { current };
+    }
+
+    /// <summary>
+    /// Gets distance between two hexs, ignores type of hex
+    /// </summary>
+    /// <param name="center"></param>
+    /// <param name="target"></param>
+    /// <returns></returns>
+    public int distanceBetween(Hex center, Hex target)
+    {
+        return Mathf.Max(Mathf.Abs(center.X - target.X), Mathf.Abs(center.Y - target.Y), Mathf.Abs(center.Z - target.Z));
+    }
+
+    /// <summary>
     /// gets one of the 6 neighbors in a direction
     /// </summary>
     public Hex getNeigbor(Hex tile, int dir)//get neighbor of tile in direction
     {
-        if (hexExists(tile.X, tile.Y, tile.Z))
+        if (hexExists(tile.X, tile.Y, tile.Z) && hexExists(tile.X + cubeDirs[dir, 0], tile.Y + cubeDirs[dir, 1], tile.Z + cubeDirs[dir, 2]))
         {
             int[] arr = cubeToOffset(tile.X + cubeDirs[dir, 0], tile.Z + cubeDirs[dir, 2]); //gets offset location of neighboring tiles
+            //Debug.Log(arr[1] + ", " + arr[0]);
             return map[arr[1], arr[0]];
         }
         return null;
-    }
-
-    public int distanceBetween(Hex center, Hex target) {
-
-        int distance = 0;
-
-        distance = Mathf.Max(Mathf.Abs(center.X - target.X), Mathf.Abs(center.Y - target.Y), Mathf.Abs(center.Z - target.Z));
-
-
-
-        return distance;
-
     }
 
     public List<Hex> getNeighborAOE(Hex center, int radius)
@@ -184,6 +264,21 @@ public class Map : MonoBehaviour {
 
         return area;
 
+    }
+
+    /// <summary>
+    /// gets all hexs with the type desired
+    /// </summary>
+    /// <param name="type">type of hex desired</param>
+    /// <returns>all hexs in the map with the desired type</returns>
+    public Hex[] getHexsWithType(Hex.TYPE type)
+    {
+        List<Hex> hexs = new List<Hex>();
+        foreach (Hex h in map)
+        {
+            if (h.Type == type) { hexs.Add(h); }
+        }
+        return hexs.ToArray();
     }
 
     /// <summary>

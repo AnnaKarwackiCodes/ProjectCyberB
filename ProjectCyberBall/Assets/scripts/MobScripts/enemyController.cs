@@ -4,16 +4,29 @@ using UnityEngine;
 
 public class enemyController : MonoBehaviour {
 
+    public GameController gameController;
+    public Map mapLocal;
+
+    private static int GOAL_ATTACK_TARGET = 1;
+    private static int GOAL_ATTACK_GENERAL = 2;
+    private static int GOAL_DEFEND_TARGET = 3;
+    private static int GOAL_RETURN_BALL = 4;
+
     private int goal; //what is the current goal of the enemies
+    private Hex goalTarget; //location of the goal
     private int mana;
     private int manaMax;
     private GameObject[] allEnemies;
     private Hex[] spawnHexs;
+    private Hex infoHex;
 
     // Use this for initialization
     void Start () {
-		
-	}
+        gameController = GameObject.Find("Game Controller").GetComponent<GameController>();
+        mapLocal = gameController.theMap;
+        spawnHexs = mapLocal.getHexsWithType(Hex.TYPE.SPAWN);
+        infoHex = mapLocal.getHexsWithType(Hex.TYPE.INFO)[0];
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -38,7 +51,10 @@ public class enemyController : MonoBehaviour {
     /// </summary>
     private void newTurn()
     {
-
+        foreach (GameObject enemy in allEnemies)
+        {
+                enemy.GetComponent<mobBase>().CanMove = true; //resets movement
+        }
     }
 
     /// <summary>

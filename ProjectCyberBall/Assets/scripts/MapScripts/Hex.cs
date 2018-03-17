@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hex : MonoBehaviour {
+public class Hex : MonoBehaviour
+{
 
     //cube coord
     private int x;
@@ -25,7 +26,7 @@ public class Hex : MonoBehaviour {
     /// <summary>
     /// The different types of hexs that a hex can be
     /// </summary>
-    public enum TYPE { NULL = -1, FLOOR = 0, SPAWN = 1, START = 2, INFO = 3, END = 4, WALL = 5};
+    public enum TYPE { NULL = -1, FLOOR = 0, SPAWN = 1, START = 2, INFO = 3, END = 4, WALL = 5 };
 
     //hex type mesh filter, renderers, and colliders
     [SerializeField] private Mesh FLOOR_FC;
@@ -35,18 +36,20 @@ public class Hex : MonoBehaviour {
     [SerializeField] private Material WALL_R;
 
     [SerializeField] private Mesh INFO_FC;
-    [SerializeField] private Material INFO_R;
+    [SerializeField] public Material INFO_R;
 
 
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     void OnMouseDown()
     {
@@ -77,28 +80,30 @@ public class Hex : MonoBehaviour {
     public TYPE Type //need to figure out how to switch around shapes. Only really matters for walls and info orb ped
     {
         get { return type; }
-        set {
+        set
+        {
             type = value;
             gameObject.GetComponent<MeshRenderer>().enabled = true;
             gameObject.GetComponent<MeshCollider>().enabled = true;
-            switch (type){
+            switch (type)
+            {
                 case TYPE.FLOOR:
-                    //break;
+                //break;
                 case TYPE.START:
-                    //break;
-                case TYPE.END :
-                    //break;
-                case TYPE.SPAWN :
+                //break;
+                case TYPE.END:
+                //break;
+                case TYPE.SPAWN:
                     gameObject.GetComponent<MeshFilter>().mesh = FLOOR_FC;
                     gameObject.GetComponent<MeshRenderer>().material = FLOOR_R;
                     gameObject.GetComponent<MeshCollider>().sharedMesh = FLOOR_FC;
                     break;
-                case TYPE.INFO :
+                case TYPE.INFO:
                     gameObject.GetComponent<MeshFilter>().mesh = INFO_FC;
                     gameObject.GetComponent<MeshRenderer>().material = INFO_R;
                     gameObject.GetComponent<MeshCollider>().sharedMesh = INFO_FC;
                     break;
-                case TYPE.WALL :
+                case TYPE.WALL:
                     gameObject.GetComponent<MeshFilter>().mesh = WALL_FC;
                     gameObject.GetComponent<MeshRenderer>().material = WALL_R;
                     gameObject.GetComponent<MeshCollider>().sharedMesh = WALL_FC;
@@ -145,4 +150,7 @@ public class Hex : MonoBehaviour {
         }
         return false;
     }
+
+    public bool Equals(Hex h) { return x == h.X && y == h.Y && z == h.Z ? true : false; }
+    public override string ToString() { return "(" + x + ", " + y + ", " + z + ")"; }
 }

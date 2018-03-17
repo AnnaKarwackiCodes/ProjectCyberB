@@ -14,7 +14,7 @@ public class playerScript : agentScript {
     private GameObject selectedObj;
     private string action;
     private GameObject[] allMinions;
-    private int maxEachMin;
+    private int maxEachMin; //max number of minions a player can have out
     private int curNumMins; //total number of player minions on the field;
     private int bigSumCost;
     private int smolSumCost;
@@ -45,6 +45,7 @@ public class playerScript : agentScript {
         useBallCost = 1;
         canMove = true;
         MoveDistance = 3;
+        Alligence = true;
 
         endPopCreate = false;
     }
@@ -100,7 +101,7 @@ public class playerScript : agentScript {
             action = "";
             allMinions[curNumMins] = Instantiate(bigMinion, (selectedObj.transform.position + new Vector3(0,1.2f,0)), new Quaternion(0, 0, 0, 0));
             //allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
-            allMinions[curNumMins].GetComponent<agentScript>().MapLocal = GameObject.Find("Game Controller").GetComponent<GameController>().theMap;
+            allMinions[curNumMins].GetComponent<agentScript>().mapLocal = GameObject.Find("Game Controller").GetComponent<GameController>().theMap;
             allMinions[curNumMins].GetComponent<agentScript>().spawnIn(selectedObj.GetComponent<Hex>(), this.gameController);
             allMinions[curNumMins].GetComponent<mobBase>().Foe = false;
             curNumMins++;
@@ -120,7 +121,7 @@ public class playerScript : agentScript {
             action = "";
             allMinions[curNumMins] = Instantiate(smolMinion, (selectedObj.transform.position + new Vector3(0, .5f, 0)), new Quaternion(0, 0, 0, 0));
             //allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
-            allMinions[curNumMins].GetComponent<agentScript>().MapLocal = GameObject.Find("Game Controller").GetComponent<Map>();
+            allMinions[curNumMins].GetComponent<agentScript>().mapLocal = GameObject.Find("Game Controller").GetComponent<Map>();
             allMinions[curNumMins].GetComponent<agentScript>().spawnIn(selectedObj.GetComponent<Hex>(), this.gameController);
             allMinions[curNumMins].GetComponent<mobBase>().Foe = false;
             curNumMins++;
@@ -146,7 +147,7 @@ public class playerScript : agentScript {
     public void UseBall()
     {
 
-        int range = MapLocal.distanceBetween(StandingHex, selectedMinion.StandingHex);
+        int range = mapLocal.distanceBetween(StandingHex, selectedMinion.StandingHex);
 
         if (range <= 3 && selectedMinion.HasBall == false)//temperary value of range
         {

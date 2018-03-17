@@ -31,9 +31,24 @@ public class GameController : MonoBehaviour {
 	void Update () {
 		if(theMap.map != null && !userIsIn)
         {
-            theUser.GetComponent<playerScript>().MapLocal = theMap;
-            theUser.GetComponent<playerScript>().GetComponent<playerScript>().spawnIn(theMap.map[0, 0], this);
+            theUser.GetComponent<playerScript>().mapLocal = theMap;
+            enemyControl.mapLocal = theMap;
+            Hex[] startHex = theMap.getHexsWithType(Hex.TYPE.START);
+            if (startHex.Length == 1) //moves player to start hex
+            {
+                theUser.GetComponent<playerScript>().GetComponent<playerScript>().spawnIn(startHex[0], this);
+            }
+            else { theUser.GetComponent<playerScript>().GetComponent<playerScript>().spawnIn(theMap.map[0, 0], this); }
+            
             userIsIn = true;
+            Hex[] path = theMap.pathfinding(theMap.getHex(0, -7, 7), theMap.getHex(13, -14, 1));
+            string s = "";
+            //for(int i = 0; i < path.Length; i++) //path finding testing
+            //{
+            //    s += path[i].ToString() + " -> ";
+            //    path[i].gameObject.GetComponent<MeshRenderer>().material = path[i].INFO_R;
+            //}
+            //Debug.Log(s);
         }
 
         //game loop
