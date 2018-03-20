@@ -14,11 +14,18 @@ public class enemyController : MonoBehaviour
     private static int GOAL_DEFEND_TARGET = 3;
     private static int GOAL_RETURN_BALL = 4;
 
+    private static int MOD_DEFEND_INFO_RANGE = 3;
+    private static int MOD_SMALL_BOI_COST = 2;
+    private static int MOD_BIG_BOI_COST = 3;
+    private static int MOD_SPAWN_BEFORE_INFO_TAKEN = 2;
+    private static int MOD_SPAWN_AFTER_INFO_TAKEN = 3;
+
     private int goal; //what is the current goal of the enemies
     private Hex goalTarget; //location of the goal
     private int mana;
     private int manaMax;
     private bool enemyDiedLastTurn = false;
+    private bool infoBallTaken = false;
     private GameObject[] bigEnemies;
     private GameObject[] lilEnemies;
     private Hex[] spawnHexs;
@@ -62,12 +69,12 @@ public class enemyController : MonoBehaviour
         foreach (GameObject enemy in bigEnemies) //resets big bois
         {
             enemy.GetComponent<mobBase>().CanMove = true; //resets movement
-            temptMana -= 3;
+            temptMana -= MOD_BIG_BOI_COST;
         }
         foreach (GameObject enemy in lilEnemies) //resets lil bois
         {
             enemy.GetComponent<mobBase>().CanMove = true; //resets movement
-            temptMana -= 2;
+            temptMana -= MOD_SMALL_BOI_COST;
         }
         if(mana < temptMana) { enemyDiedLastTurn = true; }
         mana = temptMana;
@@ -86,15 +93,45 @@ public class enemyController : MonoBehaviour
     /// </summary>
     private void determineGoal()
     {
-        //attack target
-        ///player/minion has info --> attack player/minion
-        //attack general
-        ///player/minion are close to ball --> attack closest target
-        //defend target
-        ///player/minion are far away from ball --> defend target 
-        //return ball
-        ///enemy has info --> return to info hex
-        ///rest of enemies defend info holder
+        
+        if(theInfo.X != infoHex.X || theInfo.Y != infoHex.Y || theInfo.Z != infoHex.Z) //if the info is not on starting spot
+        {
+            if(!infoBallTaken) { infoBallTaken = true; }
+            //attack target
+            ///player/minion has info --> attack player/minion
+            if (theInfo.Holder != null && theInfo.Holder.GetComponent<agentScript>().Alligence == true)
+            {
+                goal = GOAL_ATTACK_TARGET;
+                goalTarget = mapLocal.getHex(theInfo.X, theInfo.Y, theInfo.Z);
+                return;
+            }
+
+            //return ball
+            ///enemy has info --> return to info hex
+            ///rest of enemies defend info holder
+            goal = GOAL_RETURN_BALL;
+            goalTarget = mapLocal.getHex(theInfo.X, theInfo.Y, theInfo.Z);
+            return;
+        }
+
+        Hex[] tilesPM = getTilesWithPM();
+        foreach(Hex h in tilesPM)
+        {
+            if(mapLocal.pathfinding(infoHex, h).Length - 1 <= MOD_DEFEND_INFO_RANGE)//if player/min is within the defend info range of the info
+            {
+                //attack general
+                ///player/minion are close to ball --> attack closest target
+                goal = GOAL_ATTACK_GENERAL;
+                goalTarget = infoHex;
+                return;
+            }
+
+            //defend target
+            ///player/minion are far away from ball --> defend target 
+            goal = GOAL_DEFEND_TARGET;
+            goalTarget = mapLocal.getHex(theInfo.X, theInfo.Y, theInfo.Z);
+            return;
+        }
     }
 
     /// <summary>
@@ -102,7 +139,55 @@ public class enemyController : MonoBehaviour
     /// </summary>
     private void spawnEnemies()
     {
+        if(mana > manaMax - MOD_SMALL_BOI_COST) { return; } //nothing can be spawned because not enough points
 
+        ///setup what enemies might be spawned in
+        char[] es = { };
+        if (infoBallTaken) { es = new char[MOD_SPAWN_AFTER_INFO_TAKEN]; }
+        else { es = new char[MOD_SPAWN_BEFORE_INFO_TAKEN]; }
+
+        for(int i = 0; i < es.Length; i++)
+        {
+            switch (i % 3)
+            {
+                case 0:
+                    es[i] = 's';
+                    break;
+                case 1:
+                    if (enemyDiedLastTurn) { es[i] = 'b'; }
+                    else { es[i] = 's'; }
+                    break;
+                case 2:
+                    es[i] = 'b';
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        ///gets list of hexs where enemies can be placed
+        List<Hex> sh = new List<Hex>(); //list of spawn hexs
+        sh.AddRange(spawnHexs);
+        sh.Sort(delegate (Hex a, Hex b)
+        {
+            return mapLocal.pathfinding(a, goalTarget).Length <= mapLocal.pathfinding(b, goalTarget).Length ? -1 : 1;
+        });
+        for(int i = 0; i < sh.Count;) //remove any tiles that have things on them already
+        {
+            if (sh[i].occupant != null)
+            {
+                sh.RemoveAt(i);
+                continue;
+            }
+            i++;
+        }
+        if(sh.Count <= 0) { return; } //no place to put enemies
+
+        //spawn enemy time
+        for(int i = 0; i < es.Length && i < sh.Count; i++)
+        {
+
+        }
     }
 
     /// <summary>
@@ -156,4 +241,15 @@ public class enemyController : MonoBehaviour
             }
         }
     }
+
+    private Hex[] getTilesWithPM()//gets all tiles with players/minions on it
+    {
+        List<Hex> hexs = new List<Hex>();
+        foreach (Hex h in mapLocal.map)
+        {
+            if (!h.isSolid() && h.occupant!=null && h.occupant.Alligence == true) { hexs.Add(h); }
+        }
+        return hexs.ToArray();
+    }
+
 }

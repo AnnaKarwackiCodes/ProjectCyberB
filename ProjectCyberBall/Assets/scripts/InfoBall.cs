@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class InfoBall : agentScript {
 
+    private GameObject holder;
+    public GameObject Holder
+    {
+        get { return holder; }
+        set { holder = value; }
+    }
+
     // Use this for initialization
     void Start () {
 		
