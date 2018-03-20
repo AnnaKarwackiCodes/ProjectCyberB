@@ -384,7 +384,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameController: {fileID: 0}
-  yOffset: 1
+  mapLocal: {fileID: 0}
+  yOffset: 2
   ray: {fileID: 1549890607151296}
   smolMinion: {fileID: 1689849309989444, guid: af350a9ef14a8bd46b3a1a57ba9e3fbf, type: 2}
   bigMinion: {fileID: 1547143660218358, guid: 89ed64bd7e5d0ae438419c1a1b827a59, type: 2}
