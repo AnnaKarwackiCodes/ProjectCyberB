@@ -12,6 +12,7 @@ TagManager:
   - Big
   - Minion
   - Boi
+  - Info
   layers:
   - Default
   - TransparentFX

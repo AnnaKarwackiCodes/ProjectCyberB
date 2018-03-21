@@ -55,7 +55,10 @@ public class RayCasting : MonoBehaviour {
             switch (hit.collider.gameObject.tag)
             {
                 case "Hex":
-                    myControls.HexInteraction(hit.collider.gameObject);
+                    if(user.Action != "Move Boi")
+                    {
+                        myControls.HexInteraction(hit.collider.gameObject);
+                    }
                     user.SelectedObj = hit.collider.gameObject;
                     break;
                 case "Boi":
@@ -91,16 +94,12 @@ public class RayCasting : MonoBehaviour {
 
         if (Physics.Raycast(ray, out hit, distance))
         {
-            Debug.Log("feeling a connection");
             switch (hit.collider.gameObject.tag)
             {
                 case "Hex":
-                    Debug.Log("IMMA HEX");
                     if(look == "Move")
                     {
-                        Debug.Log("HELLLOOOOOOO");
                         user.SelectedObj = hit.collider.gameObject;
-                        //user.MinionInteract("Move");
                     }
                     break;
                 case "Boi":

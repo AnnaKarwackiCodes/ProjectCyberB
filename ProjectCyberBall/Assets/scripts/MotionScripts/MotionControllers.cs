@@ -207,11 +207,7 @@ public class MotionControllers : MonoBehaviour
                     }
                     break;
                 case 2:
-                    if (gameObject.GetComponent<playerScript>().CanMove)
-                    {
-                        gameObject.GetComponent<playerScript>().SelectedMinion = curSel.GetComponent<mobBase>();
-                        gameObject.GetComponent<playerScript>().Action = "Pass Ball to";
-                    }
+                    gameObject.GetComponent<playerScript>().Action = "Pass Ball to";
                     break;
                 default:
                     Debug.Log("yeah no this wont work.");
