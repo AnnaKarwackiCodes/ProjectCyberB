@@ -26,8 +26,10 @@ public class playerScript : agentScript {
     public GameObject bigMinion;
     public mobBase selectedMinion;
     public GameObject endTurnPop;
+
     private bool endPopCreate;
     private GameObject etPop;
+    private bool selectorOn;
 
     // Use this for initialization
     new void Start () {
@@ -48,6 +50,7 @@ public class playerScript : agentScript {
         Alligence = true;
 
         endPopCreate = false;
+        selectorOn = false;
     }
 
     void Awake() {
@@ -70,19 +73,38 @@ public class playerScript : agentScript {
                     SummonSmall();
                     break;
                 case "Move":
-                    if (canMove) MovePlayer();
+                    MovePlayer();
+                    break;
+                case "Move Boi":
+                    MinionInteract("Move");
+                    break;
+                case "Boi Attack":
+                    MinionInteract("Attack");
+                    break;
+                case "Pass Ball to":
                     break;
             }
 
             if (Input.GetAxis("Right_Grip_Button") == 1)
             {
-                MinionInteract();
+                //MinionInteract();
+                ray.GetComponent<RayCasting>().SelectingObj(5);
             }
+            else
+            {
+                ray.GetComponent<RayCasting>().Line = false;
+                gameObject.GetComponent<MotionControllers>().RemoveUI();
+                action = "";
+                selectedMinion = null;
+                selectedObj = null;
+            }
+            /*
             else if (Input.GetAxis("Right_Grip_Button") < 1 && Input.GetAxis("Left_Grip_Button") != 1)
             {
                 ray.GetComponent<RayCasting>().Line = false;
                 selectedMinion = null;
             }
+            */
 
             endTurn();
         }
@@ -94,7 +116,7 @@ public class playerScript : agentScript {
         //use up certain amount of mana
         
         Debug.Log("Summon Big");
-        ray.GetComponent<RayCasting>().SelectingObj(9, "Hex");
+        //ray.GetComponent<RayCasting>().SelectingObj(9, "Hex");
         if(selectedObj != null)
         {
             mana -= bigSumCost; //place holder value
@@ -114,7 +136,7 @@ public class playerScript : agentScript {
         //use up certain amount of mana
         
         Debug.Log("Summon Small");
-        ray.GetComponent<RayCasting>().SelectingObj(9, "Hex");
+        //ray.GetComponent<RayCasting>().SelectingObj(9, "Hex");
         if (selectedObj != null)
         {
             mana -= smolSumCost; //place holder value
@@ -169,7 +191,7 @@ public class playerScript : agentScript {
      public void MovePlayer()
     {
         //use the raycast to select spot to move
-        ray.GetComponent<RayCasting>().SelectingObj(9, "Hex");
+        //ray.GetComponent<RayCasting>().SelectingObj(9, "Hex");
         //move to that spot
         if(selectedObj != null)
         {
@@ -227,30 +249,29 @@ public class playerScript : agentScript {
         }
     }
 
-    public void MinionInteract()
+    public void MinionInteract(string action)
     {
-        if (selectedMinion == null)
-        {
-            ray.GetComponent<RayCasting>().SelectingMinion(10);
-        }
-        else if(selectedObj == null)
-        {
-            selectedMinion.Selected = true;
-            ray.GetComponent<RayCasting>().SelectingObj(12, "Hex");
-            //ray.GetComponent<RayCasting>().SelectingObj(1, "Boi");
-        }
 
-        if(selectedObj != null && selectedObj.tag == "Hex")
+        ray.GetComponent<RayCasting>().BoiFind(10, action);
+        Debug.Log("Selecting new hex");
+        if (selectedMinion != null && selectedObj != null && selectedObj.tag == "Hex" && action == "Move" && Input.GetAxis("Right_Trigger") == 1)
+            {
+                Debug.Log("On a hex");
+                selectedMinion.Move(selectedObj.GetComponent<Hex>());
+                //Input.ResetInputAxes();
+                selectedMinion.Selected = false;
+                selectedMinion.CanMove = false;
+                selectedObj = null;
+                selectedMinion = null;
+                action = "";
+                
+            }
+        else if(selectedObj != null && selectedObj.tag == "Enemy" && action == "Boi Attack")
         {
-            selectedMinion.Move(selectedObj.GetComponent<Hex>());
-            //Input.ResetInputAxes();
-            selectedMinion.Selected = false;
-            selectedMinion.CanMove = false;
-            selectedObj = null;
-            selectedMinion = null;
-            ray.GetComponent<RayCasting>().text.text = "no boi";
+            //do later
         }
     }
+
     //get setters
     /// <summary>
     /// Players mana pool
