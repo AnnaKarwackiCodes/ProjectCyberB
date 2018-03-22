@@ -14,22 +14,26 @@ public class MotionControllers : MonoBehaviour
     public GameObject LeftUICan;
 
     private GameObject lUI;
+
     private Vector3 leftPosition;
     private Quaternion leftRotation;
     private Vector3 rightPosition;
     private Quaternion rightRotation;
+
     private bool leftUICreate;
     private int curOption;
-    private bool openSub;
-    private int addMenu;
     private GameController gCon;
+
+    public GameObject highlight;
+    private bool createHigh;
+    private GameObject myHighlight;
 
     // Use this for initialization
     void Start()
     {
         leftUICreate = false;
+        createHigh = true;
         curOption = -1; //this will select none of the menu options
-        openSub = false;
         gCon = this.gameObject.GetComponent<playerScript>().gameController;
     }
 
@@ -190,6 +194,11 @@ public class MotionControllers : MonoBehaviour
         }
         if (Input.GetButtonDown("Left_Touchpad_Pressed"))
         {
+            if (createHigh)
+            {
+                myHighlight = Instantiate(highlight, curSel.transform.position, new Quaternion(0, 0, 0, 0));
+                createHigh = false;
+            }
             switch (curOption)
             {
                 case 0:
@@ -219,7 +228,11 @@ public class MotionControllers : MonoBehaviour
                 Destroy(lUI);
                 leftUICreate = false;
             }
-        }
-
+        }     
+    }
+    public void RemoveHighlight()
+    {
+        Destroy(myHighlight);
+        createHigh = true;
     }
 }

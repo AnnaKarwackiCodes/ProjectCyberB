@@ -63,6 +63,22 @@ public class mobBase : agentScript {
         set { this.canMove = value; }
     }
 
+    private string type;
+    public string Type
+    {
+        get { return this.type; }
+
+        set { this.type = value; }
+    }
+
+    private int arrayPos;
+    public int ArrayPos
+    {
+        get { return this.arrayPos; }
+
+        set { this.arrayPos = value; }
+    }
+
 	// Use this for initialization
 	public virtual new void Start () {
         base.Start();
@@ -71,7 +87,7 @@ public class mobBase : agentScript {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        
 	}
 
     /// <summary>

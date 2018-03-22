@@ -13,8 +13,8 @@ public class playerScript : agentScript {
     private bool canMove;
     private GameObject selectedObj;
     private string action;
-    private GameObject[] allMinions;
-    private int maxEachMin; //max number of minions a player can have out
+    private List<GameObject> allMinions;
+    private int maxMin; //max number of minions a player can have out
     private int curNumMins; //total number of player minions on the field;
     private int bigSumCost;
     private int smolSumCost;
@@ -31,13 +31,15 @@ public class playerScript : agentScript {
     private GameObject etPop;
     private bool selectorOn;
 
+    private bool testBool;
+
     // Use this for initialization
     new void Start () {
         base.Start();
         mana = 10; //amount of mana the player will have may change
-        maxEachMin = 10; //to make changing this easier
+        maxMin = 10; //to make changing this easier
         canPunch = true;
-        allMinions = new GameObject[maxEachMin];
+        allMinions = new List<GameObject>();
 
         //StandingHex = mapReference.map[1, 1];
 
@@ -51,6 +53,8 @@ public class playerScript : agentScript {
 
         endPopCreate = false;
         selectorOn = false;
+
+        testBool = false;
     }
 
     void Awake() {
@@ -94,19 +98,30 @@ public class playerScript : agentScript {
             {
                 ray.GetComponent<RayCasting>().Line = false;
                 gameObject.GetComponent<MotionControllers>().RemoveUI();
+                gameObject.GetComponent<MotionControllers>().RemoveHighlight();
                 action = "";
                 selectedMinion = null;
                 selectedObj = null;
             }
-            /*
-            else if (Input.GetAxis("Right_Grip_Button") < 1 && Input.GetAxis("Left_Grip_Button") != 1)
-            {
-                ray.GetComponent<RayCasting>().Line = false;
-                selectedMinion = null;
-            }
-            */
 
-            endTurn();
+            //this is to test to make sure that bois are being removed
+            if (Input.GetAxis("Left_Grip_Button") == 1 && !testBool)
+            {
+                Debug.Log("Pressing Enter");
+                allMinions[0].GetComponent<mobBase>().Health = 0;
+                testBool = true;
+            }
+            else if (Input.GetAxis("Left_Grip_Button") == 0 && testBool)
+            {
+                testBool = false;
+            }
+            
+            for(int i = 0; i < curNumMins; i++)
+            {
+                Debug.Log(allMinions[i].GetComponent<mobBase>().Type + " " + allMinions[i].GetComponent<mobBase>().ArrayPos + " " + allMinions[i].GetComponent<mobBase>().Health);
+            }
+
+            //endTurn();
         }
 
     }
@@ -121,11 +136,12 @@ public class playerScript : agentScript {
         {
             mana -= bigSumCost; //place holder value
             action = "";
-            allMinions[curNumMins] = Instantiate(bigMinion, (selectedObj.transform.position + new Vector3(0,1.2f,0)), new Quaternion(0, 0, 0, 0));
+            allMinions.Add(Instantiate(bigMinion, (selectedObj.transform.position + new Vector3(0,1.2f,0)), new Quaternion(0, 0, 0, 0)));
             //allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
             allMinions[curNumMins].GetComponent<agentScript>().mapLocal = GameObject.Find("Game Controller").GetComponent<GameController>().theMap;
             allMinions[curNumMins].GetComponent<agentScript>().spawnIn(selectedObj.GetComponent<Hex>(), this.gameController);
             allMinions[curNumMins].GetComponent<mobBase>().Foe = false;
+            allMinions[curNumMins].GetComponent<mobBase>().ArrayPos = curNumMins;
             curNumMins++;
             selectedObj = null;
         }
@@ -141,11 +157,12 @@ public class playerScript : agentScript {
         {
             mana -= smolSumCost; //place holder value
             action = "";
-            allMinions[curNumMins] = Instantiate(smolMinion, (selectedObj.transform.position + new Vector3(0, .5f, 0)), new Quaternion(0, 0, 0, 0));
+            allMinions.Add(Instantiate(smolMinion, (selectedObj.transform.position + new Vector3(0, .5f, 0)), new Quaternion(0, 0, 0, 0)));
             //allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
             allMinions[curNumMins].GetComponent<agentScript>().mapLocal = GameObject.Find("Game Controller").GetComponent<Map>();
             allMinions[curNumMins].GetComponent<agentScript>().spawnIn(selectedObj.GetComponent<Hex>(), this.gameController);
             allMinions[curNumMins].GetComponent<mobBase>().Foe = false;
+            allMinions[curNumMins].GetComponent<mobBase>().ArrayPos = curNumMins;
             curNumMins++;
             selectedObj = null;
         }
@@ -209,7 +226,7 @@ public class playerScript : agentScript {
         mana = 10;
         canPunch = true;
         selectedObj = null;
-        for(int i = 0; i < maxEachMin; i++)
+        for(int i = 0; i < maxMin; i++)
         {
             if(allMinions[i] != null)
             {
@@ -264,11 +281,25 @@ public class playerScript : agentScript {
                 selectedObj = null;
                 selectedMinion = null;
                 action = "";
-                
+            gameObject.GetComponent<MotionControllers>().RemoveHighlight();
             }
         else if(selectedObj != null && selectedObj.tag == "Enemy" && action == "Boi Attack")
         {
-            //do later
+            //do later when there are actually baddies to attack
+        }
+    }
+
+    public void RemoveBoi(int pos)
+    {
+        Debug.Log("Removing boi");
+        //allMinions[pos].GetComponent<mobBase>().StandingHex.occupant = null;
+        Destroy(allMinions[pos]);
+        allMinions.RemoveAt(pos);
+        curNumMins--;
+        if (curNumMins < 0) curNumMins = 0;
+        for(int i = 0; i < curNumMins; i++)
+        {
+            allMinions[i].GetComponent<mobBase>().ArrayPos = i;
         }
     }
 
@@ -330,5 +361,9 @@ public class playerScript : agentScript {
     public bool CanMove
     {
         get { return canMove; }
+    }
+    public List<GameObject> AllMinions
+    {
+        get { return allMinions; }
     }
 }
