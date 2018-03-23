@@ -229,7 +229,7 @@ public class agentScript : MonoBehaviour {
     {
         if (newHex == null) Debug.LogError("newHex not found");
         if (gCon == null) Debug.LogError("game controller not found");
-        //gCon.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this; //NULL REFERENCE ERROR
+        gCon.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this; //NULL REFERENCE ERROR
         setLocation(newHex.X, newHex.Y, newHex.Z); //agent knows where it is
         GameObject g = gCon.theMap.getHex(newHex.X, newHex.Y, newHex.Z).gameObject;
         standingHex = newHex;

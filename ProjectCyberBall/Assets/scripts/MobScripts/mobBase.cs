@@ -28,22 +28,6 @@ public class mobBase : agentScript {
     }
 
     /// <summary>
-    /// Sets whether or not the minion is under the players thrall or the enemies
-    /// False = Player controlled
-    /// True = AI controlled
-    /// Reason: Foe is shorter to type. Name can be changed
-    /// </summary>
-    private bool foe;
-    public bool Foe
-    {
-
-        get { return this.foe; }
-
-        set { this.foe = value; }
-
-    }
-
-    /// <summary>
     /// Tracks whether or not the unit has been selected by the player
     /// </summary>
     private bool selected;

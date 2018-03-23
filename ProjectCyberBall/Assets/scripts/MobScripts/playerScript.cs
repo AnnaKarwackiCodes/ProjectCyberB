@@ -103,7 +103,7 @@ public class playerScript : agentScript {
             //allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
             allMinions[curNumMins].GetComponent<agentScript>().mapLocal = GameObject.Find("Game Controller").GetComponent<GameController>().theMap;
             allMinions[curNumMins].GetComponent<agentScript>().spawnIn(selectedObj.GetComponent<Hex>(), this.gameController);
-            allMinions[curNumMins].GetComponent<mobBase>().Foe = false;
+            allMinions[curNumMins].GetComponent<agentScript>().Alligence = true;
             curNumMins++;
             selectedObj = null;
         }
@@ -123,7 +123,7 @@ public class playerScript : agentScript {
             //allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
             allMinions[curNumMins].GetComponent<agentScript>().mapLocal = GameObject.Find("Game Controller").GetComponent<Map>();
             allMinions[curNumMins].GetComponent<agentScript>().spawnIn(selectedObj.GetComponent<Hex>(), this.gameController);
-            allMinions[curNumMins].GetComponent<mobBase>().Foe = false;
+            allMinions[curNumMins].GetComponent<agentScript>().Alligence = true;
             curNumMins++;
             selectedObj = null;
         }

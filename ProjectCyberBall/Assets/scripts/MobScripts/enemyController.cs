@@ -23,13 +23,15 @@ public class enemyController : MonoBehaviour
     private int goal; //what is the current goal of the enemies
     private Hex goalTarget; //location of the goal
     private int mana;
-    private int manaMax;
+    private int manaMax = 10;
     private bool enemyDiedLastTurn = false;
     private bool infoBallTaken = false;
-    private GameObject[] bigEnemies;
-    private GameObject[] lilEnemies;
+    private List<GameObject> bigEnemies;
+    private List<GameObject> smallEnemies;
     private Hex[] spawnHexs;
     private Hex infoHex;
+    public GameObject smolMinion;
+    public GameObject bigMinion;
 
     // Use this for initialization
     void Start()
@@ -38,6 +40,9 @@ public class enemyController : MonoBehaviour
         mapLocal = gameController.theMap;
         spawnHexs = mapLocal.getHexsWithType(Hex.TYPE.SPAWN);
         infoHex = mapLocal.getHexsWithType(Hex.TYPE.INFO)[0];
+        bigEnemies = new List<GameObject>();
+        smallEnemies = new List<GameObject>();
+        mana = manaMax;
     }
 
     // Update is called once per frame
@@ -49,7 +54,7 @@ public class enemyController : MonoBehaviour
     /// <summary>
     /// The full turn that the enemy takes
     /// </summary>
-    private void turn()
+    public void turn()
     {
         newTurn();
         determineGoal();
@@ -71,7 +76,7 @@ public class enemyController : MonoBehaviour
             enemy.GetComponent<mobBase>().CanMove = true; //resets movement
             temptMana -= MOD_BIG_BOI_COST;
         }
-        foreach (GameObject enemy in lilEnemies) //resets lil bois
+        foreach (GameObject enemy in smallEnemies) //resets lil bois
         {
             enemy.GetComponent<mobBase>().CanMove = true; //resets movement
             temptMana -= MOD_SMALL_BOI_COST;
@@ -83,7 +88,7 @@ public class enemyController : MonoBehaviour
     /// <summary>
     /// does anything at the end of the turn
     /// </summary>
-    public void endTurn() //doing this will end the player turn
+    private void endTurn() //doing this will end the player turn
     {
 
     }
@@ -93,7 +98,7 @@ public class enemyController : MonoBehaviour
     /// </summary>
     private void determineGoal()
     {
-        
+        //Debug.Log("Determine Goal Start");
         if(theInfo.X != infoHex.X || theInfo.Y != infoHex.Y || theInfo.Z != infoHex.Z) //if the info is not on starting spot
         {
             if(!infoBallTaken) { infoBallTaken = true; }
@@ -139,8 +144,9 @@ public class enemyController : MonoBehaviour
     /// </summary>
     private void spawnEnemies()
     {
-        if(mana > manaMax - MOD_SMALL_BOI_COST) { return; } //nothing can be spawned because not enough points
-
+        //Debug.Log("Spawn Enemies Start");
+        if (mana < MOD_SMALL_BOI_COST) { Debug.Log("Not enough Mana: " + mana); return; } //nothing can be spawned because not enough points
+        
         ///setup what enemies might be spawned in
         char[] es = { };
         if (infoBallTaken) { es = new char[MOD_SPAWN_AFTER_INFO_TAKEN]; }
@@ -165,6 +171,8 @@ public class enemyController : MonoBehaviour
             }
         }
 
+        //Debug.Log("Enemy Spawn Array Comp: " + es[0]);
+
         ///gets list of hexs where enemies can be placed
         List<Hex> sh = new List<Hex>(); //list of spawn hexs
         sh.AddRange(spawnHexs);
@@ -181,13 +189,43 @@ public class enemyController : MonoBehaviour
             }
             i++;
         }
-        if(sh.Count <= 0) { return; } //no place to put enemies
+        if(sh.Count <= 0) { Debug.Log("No Spawn"); return; } //no place to put enemies
+
+        //Debug.Log("Enemy Spawn Array Comp: " + sh[0]);
 
         //spawn enemy time
-        for(int i = 0; i < es.Length && i < sh.Count; i++)
+        for (int i = 0; i < es.Length && i < sh.Count; i++)
         {
-
+            Debug.Log("Spawn Enemy " + i + " " + es[i] + " : " + mana);
+            switch (es[i])
+            {
+                case 'b':
+                    if(mana - MOD_BIG_BOI_COST >= 0)
+                    {
+                        GameObject boi = Instantiate(bigMinion, (sh[i].gameObject.transform.position + new Vector3(0, .5f, 0)), new Quaternion(0, 0, 0, 0));
+                        boi.GetComponent<agentScript>().mapLocal = mapLocal;
+                        boi.GetComponent<agentScript>().spawnIn(sh[i], this.gameController);
+                        boi.GetComponent<agentScript>().Alligence = false;
+                        bigEnemies.Add(boi);
+                        mana -= MOD_BIG_BOI_COST;
+                    }
+                    break;
+                case 's':
+                default:
+                    if (mana - MOD_SMALL_BOI_COST >= 0)
+                    {
+                        //Debug.Log("Spawn smol");
+                        GameObject boi = Instantiate(smolMinion, (sh[i].gameObject.transform.position + new Vector3(0, .5f, 0)), new Quaternion(0, 0, 0, 0));
+                        boi.GetComponent<agentScript>().mapLocal = mapLocal;
+                        boi.GetComponent<agentScript>().spawnIn(sh[i], this.gameController);
+                        boi.GetComponent<agentScript>().Alligence = false;
+                        smallEnemies.Add(boi);
+                        mana -= MOD_SMALL_BOI_COST;
+                    }
+                    break;
+            }
         }
+        //Debug.Log("Spawn Enemies End");
     }
 
     /// <summary>
@@ -195,7 +233,7 @@ public class enemyController : MonoBehaviour
     /// </summary>
     private void moveEnemies()
     {
-
+        //Debug.Log("Move Enemies Start");
     }
 
     /// <summary>
@@ -203,12 +241,13 @@ public class enemyController : MonoBehaviour
     /// </summary>
     private void attackWithEnemies()
     {
+        //Debug.Log("Attack with Enemies Start");
         List<GameObject> allEnemies = new List<GameObject>();
         allEnemies.AddRange(bigEnemies);
-        allEnemies.AddRange(lilEnemies);
+        allEnemies.AddRange(smallEnemies);
         foreach (GameObject enemy in allEnemies)
         {
-            majBoiScript boi = enemy.GetComponent<majBoiScript>();
+            mobBase boi = enemy.GetComponent<mobBase>();
             List<Hex> neigbors = new List<Hex>();
             for(int i = 0; i < 6; i++)
             {
