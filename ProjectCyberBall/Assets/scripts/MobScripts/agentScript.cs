@@ -121,7 +121,7 @@ public class agentScript : MonoBehaviour {
     }
 
 
-    private int moveDistance;
+    [SerializeField] private int moveDistance;
     public int MoveDistance
     {
 
@@ -152,9 +152,10 @@ public class agentScript : MonoBehaviour {
     /// <summary>
     /// Gets list of all possible moves the agent can make, taking into account other agents, walls, etc.
     /// </summary>
-    /// <returns>All hexs that the agent can move to</returns>
+    /// <returns>All hexs that the agent can move to, not including currently hex</returns>
     public Hex[] getPossibleMoves()
     {
+        Debug.Log("start possible moves");
         List<Hex> visited = new List<Hex>(); //list of hexs that already been visited
         visited.Add(standingHex);
         Dictionary<int, List<Hex>> fringe = new Dictionary<int, List<Hex>>(); //layered list of fringe hexs
@@ -196,7 +197,7 @@ public class agentScript : MonoBehaviour {
     /// </summary>
     public virtual void Move(Hex newHex)
     {
-        Debug.Log("(" + newHex.X + ", " + newHex.Y + ", " + newHex.Z + ") (" + newHex.Row + ", " + newHex.Col + ")");
+        //Debug.Log("(" + newHex.X + ", " + newHex.Y + ", " + newHex.Z + ") (" + newHex.Row + ", " + newHex.Col + ")");
         int dist = mapLocal.distanceBetween(standingHex, newHex);
 
         if (gameController != null) //agent is in a game
@@ -231,6 +232,7 @@ public class agentScript : MonoBehaviour {
         if (gCon == null) Debug.LogError("game controller not found");
         gCon.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this; //NULL REFERENCE ERROR
         setLocation(newHex.X, newHex.Y, newHex.Z); //agent knows where it is
+        gameController = gCon;
         GameObject g = gCon.theMap.getHex(newHex.X, newHex.Y, newHex.Z).gameObject;
         standingHex = newHex;
         this.gameObject.transform.position = new Vector3(g.transform.position.x, g.transform.position.y + yOffset, g.transform.position.z);

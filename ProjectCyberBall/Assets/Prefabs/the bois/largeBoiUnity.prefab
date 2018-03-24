@@ -503,7 +503,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameController: {fileID: 0}
+  mapLocal: {fileID: 0}
   yOffset: 1
+  moveDistance: 2
 --- !u!136 &136154314433651152
 CapsuleCollider:
   m_ObjectHideFlags: 1

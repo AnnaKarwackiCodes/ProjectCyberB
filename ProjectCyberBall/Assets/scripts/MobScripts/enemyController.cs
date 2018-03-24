@@ -9,10 +9,10 @@ public class enemyController : MonoBehaviour
     public Map mapLocal;
     public InfoBall theInfo;
 
-    private static int GOAL_ATTACK_TARGET = 1;
-    private static int GOAL_ATTACK_GENERAL = 2;
-    private static int GOAL_DEFEND_TARGET = 3;
-    private static int GOAL_RETURN_BALL = 4;
+    private const int GOAL_ATTACK_TARGET = 1;
+    private const int GOAL_ATTACK_GENERAL = 2;
+    private const int GOAL_DEFEND_TARGET = 3;
+    private const int GOAL_RETURN_BALL = 4;
 
     private static int MOD_DEFEND_INFO_RANGE = 3;
     private static int MOD_SMALL_BOI_COST = 2;
@@ -196,7 +196,7 @@ public class enemyController : MonoBehaviour
         //spawn enemy time
         for (int i = 0; i < es.Length && i < sh.Count; i++)
         {
-            Debug.Log("Spawn Enemy " + i + " " + es[i] + " : " + mana);
+            //Debug.Log("Spawn Enemy " + i + " " + es[i] + " : " + mana);
             switch (es[i])
             {
                 case 'b':
@@ -233,7 +233,84 @@ public class enemyController : MonoBehaviour
     /// </summary>
     private void moveEnemies()
     {
-        //Debug.Log("Move Enemies Start");
+        //Debug.Log("Move Enemies Start, Goal : " + goal + " " + goalTarget.ToString());
+        List<GameObject> allEnemies = new List<GameObject>();
+        allEnemies.AddRange(bigEnemies);
+        allEnemies.AddRange(smallEnemies);
+
+        switch (goal)
+        {
+            case GOAL_RETURN_BALL: //minion with info move towards info hex, other mobs move towards minion with info
+                Hex holdersHex = null;
+                for (int i = 0; i < allEnemies.Count; i++)
+                {
+                    mobBase boi = allEnemies[i].GetComponent<mobBase>();
+                    if (boi.HasBall)
+                    {
+                        List<Hex> moveToHexs = new List<Hex>();
+                        orderToClosest(boi, goalTarget, out moveToHexs);
+                        if (!boi.StandingHex.Equals(moveToHexs[0])) { boi.Move(moveToHexs[0]); } //if not already on the tile
+                        holdersHex = moveToHexs[0];
+                        allEnemies.RemoveAt(i);
+                        break;
+                    }
+                }
+                foreach (GameObject enemy in allEnemies)
+                {
+                    mobBase boi = enemy.GetComponent<mobBase>();
+                    List<Hex> moveToHexs = new List<Hex>();
+                    orderToClosest(boi, holdersHex, out moveToHexs);
+                    if (!boi.StandingHex.Equals(moveToHexs[0])) { boi.Move(moveToHexs[0]); }//if not already on the tile
+                }
+                break;
+            case GOAL_ATTACK_GENERAL: //enemies move towards closest allied force, to hopefully attack
+                foreach (GameObject enemy in allEnemies)
+                {
+                    mobBase boi = enemy.GetComponent<mobBase>();
+                    List<Hex> closestPM = new List<Hex>();
+                    closestPM.AddRange(getTilesWithPM());
+                    closestPM.Sort(delegate (Hex a, Hex b) //orders Allied in order of closest to boi 
+                    {
+                        return mapLocal.pathfinding(a, boi.StandingHex).Length <= mapLocal.pathfinding(b, boi.StandingHex).Length ? -1 : 1;
+                    });
+                    List<Hex> moveToHexs = new List<Hex>();
+                    orderToClosest(boi, closestPM[0], out moveToHexs); //gets closest movement to the closest Allied
+                    if (!boi.StandingHex.Equals(moveToHexs[0])) { boi.Move(moveToHexs[0]); }//if not already on the tile
+                }
+                break;
+            case GOAL_DEFEND_TARGET:
+            case GOAL_ATTACK_TARGET:
+            default: //everyone move towards the target
+                //Debug.Log("move towards a target");
+                if(goalTarget == null) { Debug.LogError("No goal target found"); break;}
+                foreach (GameObject enemy in allEnemies)
+                {
+                    mobBase boi = enemy.GetComponent<mobBase>();
+                    List<Hex> moveToHexs = new List<Hex>();
+                    orderToClosest(boi, goalTarget, out moveToHexs);
+                    //Debug.Log("Enemy move, " + boi.StandingHex.ToString() + " closest " + moveToHexs[0].ToString());
+                    if (!boi.StandingHex.Equals(moveToHexs[0])) { boi.Move(moveToHexs[0]); }//if not already on the tile
+                }
+                break;
+        }
+
+    }
+
+    /// <summary>
+    /// orders a list of hexs that are closest to the target, closes to far, includes the hex the boi is on
+    /// </summary>
+    /// <param name="boi">minion that would move</param>
+    /// <param name="target">hext that the boi wants to get closer to</param>
+    /// <param name="list"></param>
+    private void orderToClosest(mobBase boi, Hex target, out List<Hex> list)
+    {
+        list = new List<Hex>();
+        list.Add(boi.StandingHex); //adds current hex
+        list.AddRange(boi.getPossibleMoves()); //add hexs to list around current hex
+        list.Sort(delegate (Hex a, Hex b)
+        {
+            return mapLocal.pathfinding(a, target).Length <= mapLocal.pathfinding(b, target).Length ? -1 : 1;
+        });
     }
 
     /// <summary>

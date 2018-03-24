@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour {
     private GameObject theUser;
     public GameObject theInfo;
     private bool userIsIn = false;
-    private bool playersTurn;
+    [SerializeField]private bool playersTurn;
     private bool inGame;
 
 	// Use this for initializations
@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour {
     void Start()
     {
         Debug.Log("start");
-        playersTurn = true;
+        playersTurn = false;
         inGame = true;
 
     }

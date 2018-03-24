@@ -62,8 +62,7 @@ public class mobBase : agentScript {
     /// Make an attack against an enemy Mob
     /// </summary>
     public virtual void mobAttack(agentScript target) {
-
-
+        if (HasBall) { return; } //if holding the info, mob cannot attack
 
     }
 
