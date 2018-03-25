@@ -180,7 +180,7 @@ public class playerScript : agentScript {
             //this.gameObject.transform.position = selectedObj.transform.position; //this was for testing
             Move(selectedObj.GetComponent<Hex>()); //this is for when in use
             selectedObj = null;//clear it out
-            //canMove = false;
+            canMove = false;
         }
     }
 

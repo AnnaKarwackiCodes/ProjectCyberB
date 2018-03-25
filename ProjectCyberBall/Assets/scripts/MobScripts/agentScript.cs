@@ -157,11 +157,8 @@ public class agentScript : MonoBehaviour {
             if (gameController.theMap.hexExists(newHex.X, newHex.Y, newHex.Z))//hex exist to move to
             {
                 if (dist <= moveDistance)
-<<<<<<< HEAD
                 {
-=======
-                    {
->>>>>>> 20a7f9c7d61bcd64f3513ac7a1265bcb9b78056e
+
                     gameController.theMap.getHex(x, y, z).occupant = null; //remove from start hex
                     gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this; //new hex know something is now on it
                     StandingHex = newHex;
@@ -170,21 +167,16 @@ public class agentScript : MonoBehaviour {
                     this.gameObject.transform.position = new Vector3(g.transform.position.x, g.transform.position.y + yOffset, g.transform.position.z);  //agent's gameObjects move to proper location
                     return;
                 }
-<<<<<<< HEAD
-=======
                 else
                 {
-                    Debug.LogError("hex not within range");
+                    Debug.LogError("Hex: " + newHex + " does not exist");
                     return;
                 }
->>>>>>> 20a7f9c7d61bcd64f3513ac7a1265bcb9b78056e
-            }
-            Debug.LogError("Hex: " + newHex + " does not exist");
-            return;
-        }
-        Debug.LogError("game Controller not found");
-    }
 
+                Debug.LogError("game Controller not found");
+            }
+        }
+    }
     public virtual void spawnIn(Hex newHex, GameController gCon)
     {
         if (newHex == null) Debug.Log("dfbdskjbkds");
