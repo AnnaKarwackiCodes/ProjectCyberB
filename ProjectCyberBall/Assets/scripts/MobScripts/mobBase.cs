@@ -52,10 +52,10 @@ public class mobBase : agentScript {
         base.Start();
         canMove = true;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+    // Update is called once per frame
+    protected void Update () {
+        base.Update();
 	}
 
     /// <summary>

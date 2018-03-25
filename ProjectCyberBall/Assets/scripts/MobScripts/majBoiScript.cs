@@ -11,6 +11,6 @@ public class majBoiScript : mobBase {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        base.Update();
 	}
 }

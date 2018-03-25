@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour {
     void Start()
     {
         Debug.Log("start");
-        playersTurn = false;
+        playersTurn = true;
         inGame = true;
 
     }

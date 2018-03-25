@@ -271,7 +271,7 @@ public class enemyController : MonoBehaviour
                     closestPM.AddRange(getTilesWithPM());
                     closestPM.Sort(delegate (Hex a, Hex b) //orders Allied in order of closest to boi 
                     {
-                        return mapLocal.pathfinding(a, boi.StandingHex).Length <= mapLocal.pathfinding(b, boi.StandingHex).Length ? -1 : 1;
+                        return mapLocal.pathfinding(a, boi.StandingHex).Length < mapLocal.pathfinding(b, boi.StandingHex).Length ? -1 : 1;
                     });
                     List<Hex> moveToHexs = new List<Hex>();
                     orderToClosest(boi, closestPM[0], out moveToHexs); //gets closest movement to the closest Allied
@@ -309,7 +309,7 @@ public class enemyController : MonoBehaviour
         list.AddRange(boi.getPossibleMoves()); //add hexs to list around current hex
         list.Sort(delegate (Hex a, Hex b)
         {
-            return mapLocal.pathfinding(a, target).Length <= mapLocal.pathfinding(b, target).Length ? -1 : 1;
+            return mapLocal.pathfinding(a, target).Length < mapLocal.pathfinding(b, target).Length ? -1 : 1;
         });
     }
 

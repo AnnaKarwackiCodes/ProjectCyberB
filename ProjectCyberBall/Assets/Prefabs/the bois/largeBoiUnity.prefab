@@ -506,6 +506,7 @@ MonoBehaviour:
   mapLocal: {fileID: 0}
   yOffset: 1
   moveDistance: 2
+  movementSpeed: 2
 --- !u!136 &136154314433651152
 CapsuleCollider:
   m_ObjectHideFlags: 1
