@@ -359,7 +359,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameController: {fileID: 0}
+  mapLocal: {fileID: 0}
   yOffset: 1
+  moveDistance: 3
+  movementSpeed: 6
 --- !u!136 &136365434016633652
 CapsuleCollider:
   m_ObjectHideFlags: 1

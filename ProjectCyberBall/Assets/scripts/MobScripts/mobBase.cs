@@ -28,22 +28,6 @@ public class mobBase : agentScript {
     }
 
     /// <summary>
-    /// Sets whether or not the minion is under the players thrall or the enemies
-    /// False = Player controlled
-    /// True = AI controlled
-    /// Reason: Foe is shorter to type. Name can be changed
-    /// </summary>
-    private bool foe;
-    public bool Foe
-    {
-
-        get { return this.foe; }
-
-        set { this.foe = value; }
-
-    }
-
-    /// <summary>
     /// Tracks whether or not the unit has been selected by the player
     /// </summary>
     private bool selected;
@@ -68,18 +52,17 @@ public class mobBase : agentScript {
         base.Start();
         canMove = true;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+    // Update is called once per frame
+    protected void Update () {
+        base.Update();
 	}
 
     /// <summary>
     /// Make an attack against an enemy Mob
     /// </summary>
-    public virtual void mobAttack(mobBase target) {
-
-
+    public virtual void mobAttack(agentScript target) {
+        if (HasBall) { return; } //if holding the info, mob cannot attack
 
     }
 
