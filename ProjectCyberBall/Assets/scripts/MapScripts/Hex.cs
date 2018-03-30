@@ -55,6 +55,7 @@ public class Hex : MonoBehaviour
     {
         Debug.Log("(" + x + ", " + y + ", " + z + ")");
         GameObject.FindGameObjectWithTag("Player").GetComponent<playerScript>().Move(this);
+        //Debug.Log(occupant);
         //GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(transform.position.x, transform.position.y + .3f, transform.position.z);
     }
 

@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour {
     private GameObject theUser;
     public GameObject theInfo;
     private bool userIsIn = false;
-    private bool playersTurn;
+    [SerializeField]private bool playersTurn;
     private bool inGame;
 
 	// Use this for initializations
@@ -75,7 +75,7 @@ public class GameController : MonoBehaviour {
             {
                 //call enemies to do their thing
                 Debug.Log("Baddie turn");
-
+                enemyControl.turn();
                 //when finished set it up for the player to be able to do their thing
                 theUser.GetComponent<playerScript>().newTurn();
                 playersTurn = true;
