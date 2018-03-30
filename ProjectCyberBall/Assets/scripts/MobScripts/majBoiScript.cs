@@ -14,7 +14,8 @@ public class majBoiScript : mobBase {
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log("Minion update this minions health: " + Health);
+        base.Update();
+        //Debug.Log("Minion update this minions health: " + Health);
         if (Health <= 0)
         {
             Debug.Log("is dead");

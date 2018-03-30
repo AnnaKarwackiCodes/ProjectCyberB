@@ -66,6 +66,7 @@ public class playerScript : agentScript {
 
 	// Update is called once per frame
 	void Update () {
+        base.Update();
         if (gameController.PlayersTurn)
         {
             switch (action)
@@ -103,25 +104,13 @@ public class playerScript : agentScript {
                 selectedMinion = null;
                 selectedObj = null;
             }
-
-            //this is to test to make sure that bois are being removed
-            if (Input.GetAxis("Left_Grip_Button") == 1 && !testBool)
-            {
-                Debug.Log("Pressing Enter");
-                allMinions[0].GetComponent<mobBase>().Health = 0;
-                testBool = true;
-            }
-            else if (Input.GetAxis("Left_Grip_Button") == 0 && testBool)
-            {
-                testBool = false;
-            }
             
             for(int i = 0; i < curNumMins; i++)
             {
                 Debug.Log(allMinions[i].GetComponent<mobBase>().Type + " " + allMinions[i].GetComponent<mobBase>().ArrayPos + " " + allMinions[i].GetComponent<mobBase>().Health);
             }
 
-            //endTurn();
+            endTurn();
         }
 
     }
@@ -140,7 +129,7 @@ public class playerScript : agentScript {
             //allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
             allMinions[curNumMins].GetComponent<agentScript>().mapLocal = GameObject.Find("Game Controller").GetComponent<GameController>().theMap;
             allMinions[curNumMins].GetComponent<agentScript>().spawnIn(selectedObj.GetComponent<Hex>(), this.gameController);
-            allMinions[curNumMins].GetComponent<mobBase>().Foe = false;
+            allMinions[curNumMins].GetComponent<mobBase>().Alligence = true;
             allMinions[curNumMins].GetComponent<mobBase>().ArrayPos = curNumMins;
             curNumMins++;
             selectedObj = null;
@@ -161,7 +150,7 @@ public class playerScript : agentScript {
             //allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
             allMinions[curNumMins].GetComponent<agentScript>().mapLocal = GameObject.Find("Game Controller").GetComponent<Map>();
             allMinions[curNumMins].GetComponent<agentScript>().spawnIn(selectedObj.GetComponent<Hex>(), this.gameController);
-            allMinions[curNumMins].GetComponent<mobBase>().Foe = false;
+            allMinions[curNumMins].GetComponent<mobBase>().Alligence = true;
             allMinions[curNumMins].GetComponent<mobBase>().ArrayPos = curNumMins;
             curNumMins++;
             selectedObj = null;
@@ -226,7 +215,7 @@ public class playerScript : agentScript {
         mana = 10;
         canPunch = true;
         selectedObj = null;
-        for(int i = 0; i < maxMin; i++)
+        for(int i = 0; i < allMinions.Count && i < maxMin; i++)
         {
             if(allMinions[i] != null)
             {

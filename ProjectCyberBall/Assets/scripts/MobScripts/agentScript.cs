@@ -252,7 +252,7 @@ public class agentScript : MonoBehaviour
     /// </summary>
     public virtual void Move(Hex newHex)
     {
-        //Debug.Log("(" + newHex.X + ", " + newHex.Y + ", " + newHex.Z + ") (" + newHex.Row + ", " + newHex.Col + ")");
+        Debug.Log("(" + newHex.X + ", " + newHex.Y + ", " + newHex.Z + ") (" + newHex.Row + ", " + newHex.Col + ")");
         int dist = mapLocal.distanceBetween(standingHex, newHex);
 
         if (gameController != null) //agent is in a game
@@ -264,7 +264,7 @@ public class agentScript : MonoBehaviour
                     gameController.theMap.getHex(x, y, z).occupant = null; //remove from start hex
                     gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this; //new hex know something is now on it
                     movementPath.AddRange(mapLocal.pathfinding(standingHex, newHex));//list hex that agent needs to visit while headin to new location
-                    Debug.Log(movementPath.Count);
+                    //Debug.Log(movementPath.Count);
                     StandingHex = newHex;
                     setLocation(newHex.X, newHex.Y, newHex.Z); //agent knows where it is
                     GameObject g = gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).gameObject;
