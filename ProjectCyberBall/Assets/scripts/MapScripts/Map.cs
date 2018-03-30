@@ -277,7 +277,17 @@ public class Map : MonoBehaviour {
         List<Hex> hexs = new List<Hex>();
         foreach (Hex h in map)
         {
-            if (h.Type == type) { hexs.Add(h); }
+
+            Debug.Log(h);
+
+            if (h.Type == type) {
+
+                Debug.Log("Found: " + h);
+
+                hexs.Add(h);
+
+            }
+
         }
         return hexs.ToArray();
     }
@@ -292,6 +302,7 @@ public class Map : MonoBehaviour {
         {
             int[] loc = cubeToOffset(xx, zz);
             return map[loc[1], loc[0]];
+
         }
         return null;
     }

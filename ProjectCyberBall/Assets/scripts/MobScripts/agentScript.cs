@@ -259,14 +259,8 @@ public class agentScript : MonoBehaviour
         {
             if (gameController.theMap.hexExists(newHex.X, newHex.Y, newHex.Z))//hex exist to move to
             {
-<<<<<<< HEAD
-                if (dist <= moveDistance)
-                {
-
-=======
                 if (dist <= moveDistance && !newHex.isSolid()) //hex within distance and not solid
                 {
->>>>>>> 204c83509c60a6d98263e253a45e1884dcfe742b
                     gameController.theMap.getHex(x, y, z).occupant = null; //remove from start hex
                     gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this; //new hex know something is now on it
                     movementPath.AddRange(mapLocal.pathfinding(standingHex, newHex));//list hex that agent needs to visit while headin to new location
@@ -289,21 +283,21 @@ public class agentScript : MonoBehaviour
     }
     public virtual void spawnIn(Hex newHex, GameController gCon)
     {
-<<<<<<< HEAD
+/*<<<<<<< HEAD
         if (newHex == null) Debug.Log("dfbdskjbkds");
 /*<<<<<<< HEAD
         if (gameController == null) Debug.Log("but why");
         if (gameController.theMap == null) Debug.Log("fuck me");
         gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this;
-=======*/
+
         if (gCon == null) Debug.Log("but why");
         if (gCon.theMap == null) Debug.Log("fuck me");
         //gCon.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this; //NULL REFERENCE ERROR
-=======
+=======*/
         if (newHex == null) Debug.LogError("newHex not found");
         if (gCon == null) Debug.LogError("game controller not found");
         gCon.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this; //NULL REFERENCE ERROR
->>>>>>> 204c83509c60a6d98263e253a45e1884dcfe742b
+
         setLocation(newHex.X, newHex.Y, newHex.Z); //agent knows where it is
         gameController = gCon;
         GameObject g = gCon.theMap.getHex(newHex.X, newHex.Y, newHex.Z).gameObject;

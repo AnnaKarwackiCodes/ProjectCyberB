@@ -121,15 +121,14 @@ public class playerScript : agentScript {
             action = "";
             allMinions[curNumMins] = Instantiate(smolMinion, (selectedObj.transform.position + new Vector3(0, .5f, 0)), new Quaternion(0, 0, 0, 0));
             //allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
-<<<<<<< HEAD
+/*<<<<<<< HEAD
 /*<<<<<<< HEAD
             //allMinions[curNumMins].GetComponent<agentScript>().MapLocal = GameObject.Find("Game Controller").GetComponent<Map>();
             allMinions[curNumMins].GetComponent<agentScript>().spawnIn(selectedObj.GetComponent<Hex>());
-=======*/
-            allMinions[curNumMins].GetComponent<agentScript>().MapLocal = GameObject.Find("Game Controller").GetComponent<Map>();
 =======
+            allMinions[curNumMins].GetComponent<agentScript>().MapLocal = GameObject.Find("Game Controller").GetComponent<Map>();
+=======*/
             allMinions[curNumMins].GetComponent<agentScript>().mapLocal = GameObject.Find("Game Controller").GetComponent<Map>();
->>>>>>> 204c83509c60a6d98263e253a45e1884dcfe742b
             allMinions[curNumMins].GetComponent<agentScript>().spawnIn(selectedObj.GetComponent<Hex>(), this.gameController);
             allMinions[curNumMins].GetComponent<agentScript>().Alligence = true;
             curNumMins++;

@@ -39,6 +39,7 @@ public class enemyController : MonoBehaviour
         gameController = GameObject.Find("Game Controller").GetComponent<GameController>();
         mapLocal = gameController.theMap;
         spawnHexs = mapLocal.getHexsWithType(Hex.TYPE.SPAWN);
+        //infoHex = mapLocal.getHexsWithType(Hex.TYPE.INFO)[0];
         infoHex = mapLocal.getHexsWithType(Hex.TYPE.INFO)[0];
         bigEnemies = new List<GameObject>();
         smallEnemies = new List<GameObject>();

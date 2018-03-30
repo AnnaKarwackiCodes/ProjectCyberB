@@ -49,6 +49,23 @@ public class RayCasting : MonoBehaviour {
         
     }
 
+    public void SelectOption(float distance) {
+
+        Ray ray = new Ray(transform.position, transform.forward);
+
+        if (Physics.Raycast(ray, out hit, distance))
+        {
+
+            if (hit.collider.gameObject.tag == "button" && Input.GetAxis("Right_Trigger") == 1.0f) {
+
+                Debug.Log("Menu option selected: " + hit.collider.gameObject.GetComponent<vrMenu>().buttonId);
+
+            }
+
+        }
+
+    }
+
     public void SelectingMinion(float distance)
     {
         //drawing the line to show what it's interacting with
