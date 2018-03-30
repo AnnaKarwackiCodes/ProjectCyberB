@@ -92,6 +92,7 @@ public class Map : MonoBehaviour {
     /// <param name="newMap">the map that is being used</param>
     private void createMapFromArray(int[] newMap)
     {
+        Debug.Log("Test");
         createRectangleMap(width, height, offset); //reset everything
         for (int i = 0; i < width; i++)
         {
@@ -278,11 +279,11 @@ public class Map : MonoBehaviour {
         foreach (Hex h in map)
         {
 
-            Debug.Log(h);
+           // Debug.Log(h);
 
             if (h.Type == type) {
 
-                Debug.Log("Found: " + h);
+                //Debug.Log("Found: " + h);
 
                 hexs.Add(h);
 
