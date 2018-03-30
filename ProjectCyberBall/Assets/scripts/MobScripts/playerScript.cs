@@ -13,8 +13,8 @@ public class playerScript : agentScript {
     private bool canMove;
     private GameObject selectedObj;
     private string action;
-    private GameObject[] allMinions;
-    private int maxEachMin; //max number of minions a player can have out
+    private List<GameObject> allMinions;
+    private int maxMin; //max number of minions a player can have out
     private int curNumMins; //total number of player minions on the field;
     private int bigSumCost;
     private int smolSumCost;
@@ -26,16 +26,20 @@ public class playerScript : agentScript {
     public GameObject bigMinion;
     public mobBase selectedMinion;
     public GameObject endTurnPop;
+
     private bool endPopCreate;
     private GameObject etPop;
+    private bool selectorOn;
+
+    private bool testBool;
 
     // Use this for initialization
     new void Start () {
         base.Start();
         mana = 10; //amount of mana the player will have may change
-        maxEachMin = 10; //to make changing this easier
+        maxMin = 10; //to make changing this easier
         canPunch = true;
-        allMinions = new GameObject[maxEachMin];
+        allMinions = new List<GameObject>();
 
         //StandingHex = mapReference.map[1, 1];
 
@@ -48,6 +52,9 @@ public class playerScript : agentScript {
         Alligence = true;
 
         endPopCreate = false;
+        selectorOn = false;
+
+        testBool = false;
     }
 
     void Awake() {
@@ -59,6 +66,7 @@ public class playerScript : agentScript {
 
 	// Update is called once per frame
 	void Update () {
+        base.Update();
         if (gameController.PlayersTurn)
         {
             switch (action)
@@ -70,18 +78,36 @@ public class playerScript : agentScript {
                     SummonSmall();
                     break;
                 case "Move":
-                    if (canMove) MovePlayer();
+                    MovePlayer();
+                    break;
+                case "Move Boi":
+                    MinionInteract("Move");
+                    break;
+                case "Boi Attack":
+                    MinionInteract("Attack");
+                    break;
+                case "Pass Ball to":
                     break;
             }
 
             if (Input.GetAxis("Right_Grip_Button") == 1)
             {
-                MinionInteract();
+                //MinionInteract();
+                ray.GetComponent<RayCasting>().SelectingObj(5);
             }
-            else if (Input.GetAxis("Right_Grip_Button") < 1 && Input.GetAxis("Left_Grip_Button") != 1)
+            else
             {
                 ray.GetComponent<RayCasting>().Line = false;
+                gameObject.GetComponent<MotionControllers>().RemoveUI();
+                gameObject.GetComponent<MotionControllers>().RemoveHighlight();
+                action = "";
                 selectedMinion = null;
+                selectedObj = null;
+            }
+            
+            for(int i = 0; i < curNumMins; i++)
+            {
+                Debug.Log(allMinions[i].GetComponent<mobBase>().Type + " " + allMinions[i].GetComponent<mobBase>().ArrayPos + " " + allMinions[i].GetComponent<mobBase>().Health);
             }
 
             endTurn();
@@ -94,16 +120,17 @@ public class playerScript : agentScript {
         //use up certain amount of mana
         
         Debug.Log("Summon Big");
-        ray.GetComponent<RayCasting>().SelectingObj(9, "Hex");
+        //ray.GetComponent<RayCasting>().SelectingObj(9, "Hex");
         if(selectedObj != null)
         {
             mana -= bigSumCost; //place holder value
             action = "";
-            allMinions[curNumMins] = Instantiate(bigMinion, (selectedObj.transform.position + new Vector3(0,1.2f,0)), new Quaternion(0, 0, 0, 0));
+            allMinions.Add(Instantiate(bigMinion, (selectedObj.transform.position + new Vector3(0,1.2f,0)), new Quaternion(0, 0, 0, 0)));
             //allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
             allMinions[curNumMins].GetComponent<agentScript>().mapLocal = GameObject.Find("Game Controller").GetComponent<GameController>().theMap;
             allMinions[curNumMins].GetComponent<agentScript>().spawnIn(selectedObj.GetComponent<Hex>(), this.gameController);
-            allMinions[curNumMins].GetComponent<agentScript>().Alligence = true;
+            allMinions[curNumMins].GetComponent<mobBase>().Alligence = true;
+            allMinions[curNumMins].GetComponent<mobBase>().ArrayPos = curNumMins;
             curNumMins++;
             selectedObj = null;
         }
@@ -114,12 +141,12 @@ public class playerScript : agentScript {
         //use up certain amount of mana
         
         Debug.Log("Summon Small");
-        ray.GetComponent<RayCasting>().SelectingObj(9, "Hex");
+        //ray.GetComponent<RayCasting>().SelectingObj(9, "Hex");
         if (selectedObj != null)
         {
             mana -= smolSumCost; //place holder value
             action = "";
-            allMinions[curNumMins] = Instantiate(smolMinion, (selectedObj.transform.position + new Vector3(0, .5f, 0)), new Quaternion(0, 0, 0, 0));
+            allMinions.Add(Instantiate(smolMinion, (selectedObj.transform.position + new Vector3(0, .5f, 0)), new Quaternion(0, 0, 0, 0)));
             //allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
 /*<<<<<<< HEAD
 /*<<<<<<< HEAD
@@ -130,7 +157,8 @@ public class playerScript : agentScript {
 =======*/
             allMinions[curNumMins].GetComponent<agentScript>().mapLocal = GameObject.Find("Game Controller").GetComponent<Map>();
             allMinions[curNumMins].GetComponent<agentScript>().spawnIn(selectedObj.GetComponent<Hex>(), this.gameController);
-            allMinions[curNumMins].GetComponent<agentScript>().Alligence = true;
+            allMinions[curNumMins].GetComponent<mobBase>().Alligence = true;
+            allMinions[curNumMins].GetComponent<mobBase>().ArrayPos = curNumMins;
             curNumMins++;
             selectedObj = null;
         }
@@ -176,7 +204,7 @@ public class playerScript : agentScript {
      public void MovePlayer()
     {
         //use the raycast to select spot to move
-        ray.GetComponent<RayCasting>().SelectingObj(9, "Hex");
+        //ray.GetComponent<RayCasting>().SelectingObj(9, "Hex");
         //move to that spot
         if(selectedObj != null)
         {
@@ -194,7 +222,7 @@ public class playerScript : agentScript {
         mana = 10;
         canPunch = true;
         selectedObj = null;
-        for(int i = 0; i < maxEachMin; i++)
+        for(int i = 0; i < allMinions.Count && i < maxMin; i++)
         {
             if(allMinions[i] != null)
             {
@@ -234,30 +262,43 @@ public class playerScript : agentScript {
         }
     }
 
-    public void MinionInteract()
+    public void MinionInteract(string action)
     {
-        if (selectedMinion == null)
-        {
-            ray.GetComponent<RayCasting>().SelectingMinion(10);
-        }
-        else if(selectedObj == null)
-        {
-            selectedMinion.Selected = true;
-            ray.GetComponent<RayCasting>().SelectingObj(12, "Hex");
-            //ray.GetComponent<RayCasting>().SelectingObj(1, "Boi");
-        }
 
-        if(selectedObj != null && selectedObj.tag == "Hex")
+        ray.GetComponent<RayCasting>().BoiFind(10, action);
+        Debug.Log("Selecting new hex");
+        if (selectedMinion != null && selectedObj != null && selectedObj.tag == "Hex" && action == "Move" && Input.GetAxis("Right_Trigger") == 1)
+            {
+                Debug.Log("On a hex");
+                selectedMinion.Move(selectedObj.GetComponent<Hex>());
+                //Input.ResetInputAxes();
+                selectedMinion.Selected = false;
+                selectedMinion.CanMove = false;
+                selectedObj = null;
+                selectedMinion = null;
+                action = "";
+            gameObject.GetComponent<MotionControllers>().RemoveHighlight();
+            }
+        else if(selectedObj != null && selectedObj.tag == "Enemy" && action == "Boi Attack")
         {
-            selectedMinion.Move(selectedObj.GetComponent<Hex>());
-            //Input.ResetInputAxes();
-            selectedMinion.Selected = false;
-            selectedMinion.CanMove = false;
-            selectedObj = null;
-            selectedMinion = null;
-            ray.GetComponent<RayCasting>().text.text = "no boi";
+            //do later when there are actually baddies to attack
         }
     }
+
+    public void RemoveBoi(int pos)
+    {
+        Debug.Log("Removing boi");
+        //allMinions[pos].GetComponent<mobBase>().StandingHex.occupant = null;
+        Destroy(allMinions[pos]);
+        allMinions.RemoveAt(pos);
+        curNumMins--;
+        if (curNumMins < 0) curNumMins = 0;
+        for(int i = 0; i < curNumMins; i++)
+        {
+            allMinions[i].GetComponent<mobBase>().ArrayPos = i;
+        }
+    }
+
     //get setters
     /// <summary>
     /// Players mana pool
@@ -316,5 +357,9 @@ public class playerScript : agentScript {
     public bool CanMove
     {
         get { return canMove; }
+    }
+    public List<GameObject> AllMinions
+    {
+        get { return allMinions; }
     }
 }

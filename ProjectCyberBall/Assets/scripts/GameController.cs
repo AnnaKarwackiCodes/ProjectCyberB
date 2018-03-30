@@ -69,7 +69,7 @@ public class GameController : MonoBehaviour {
         {
             if (playersTurn)
             {
-                Debug.Log("Player turn");
+                //Debug.Log("Player turn");
             }
             else
             {
