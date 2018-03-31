@@ -73,12 +73,15 @@ public class GameController : MonoBehaviour {
             }
             else
             {
-                //call enemies to do their thing
-                Debug.Log("Baddie turn");
-                enemyControl.turn();
-                //when finished set it up for the player to be able to do their thing
-                theUser.GetComponent<playerScript>().newTurn();
-                playersTurn = true;
+                if (!enemyControl.TurnStart)
+                {
+                    //call enemies to do their thing
+                    Debug.Log("Baddie turn");
+                    enemyControl.turn();
+                    //when finished set it up for the player to be able to do their thing
+                    theUser.GetComponent<playerScript>().newTurn();
+                    playersTurn = true;
+                }
             }
         }
     }

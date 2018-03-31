@@ -32,6 +32,11 @@ public class enemyController : MonoBehaviour
     private Hex infoHex;
     public GameObject smolMinion;
     public GameObject bigMinion;
+    private bool turnStart = false;
+    public bool TurnStart
+    {
+        get { return turnStart; }
+    }
 
     // Use this for initialization
     void Start()
@@ -70,6 +75,7 @@ public class enemyController : MonoBehaviour
     /// </summary>
     private void newTurn()
     {
+        turnStart = true;
         enemyDiedLastTurn = false;
         int temptMana = manaMax;
         foreach (GameObject enemy in bigEnemies) //resets big bois
@@ -91,7 +97,7 @@ public class enemyController : MonoBehaviour
     /// </summary>
     private void endTurn() //doing this will end the player turn
     {
-
+        turnStart = false;
     }
 
     /// <summary>

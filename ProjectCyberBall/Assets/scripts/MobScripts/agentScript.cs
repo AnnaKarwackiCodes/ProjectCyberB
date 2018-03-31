@@ -273,27 +273,15 @@ public class agentScript : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogError("Hex: " + newHex + " does not exist");
+                    Debug.LogError("Hex: " + newHex + " is not within range of movement");
                     return;
                 }
-
-                Debug.LogError("game Controller not found");
             }
+            Debug.LogError("game Controller not found");
         }
     }
     public virtual void spawnIn(Hex newHex, GameController gCon)
     {
-/*<<<<<<< HEAD
-        if (newHex == null) Debug.Log("dfbdskjbkds");
-/*<<<<<<< HEAD
-        if (gameController == null) Debug.Log("but why");
-        if (gameController.theMap == null) Debug.Log("fuck me");
-        gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this;
-
-        if (gCon == null) Debug.Log("but why");
-        if (gCon.theMap == null) Debug.Log("fuck me");
-        //gCon.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this; //NULL REFERENCE ERROR
-=======*/
         if (newHex == null) Debug.LogError("newHex not found");
         if (gCon == null) Debug.LogError("game controller not found");
         gCon.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this; //NULL REFERENCE ERROR

@@ -32,6 +32,9 @@ public class Hex : MonoBehaviour
     [SerializeField] private Mesh FLOOR_FC;
     [SerializeField] private Material FLOOR_R;
 
+    [SerializeField] private Mesh GOAL_FC;
+    [SerializeField] private Material GOAL_R;
+
     [SerializeField] private Mesh WALL_FC;
     [SerializeField] private Material WALL_R;
 

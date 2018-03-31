@@ -127,10 +127,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 321bf00c08eee724daefb3eca79797f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  x: 0
+  y: 0
+  z: 0
   occupant: {fileID: 0}
   FLOOR_FC: {fileID: 4300000, guid: 269a124fba6bf634baacec8e4c89edaa, type: 3}
   FLOOR_R: {fileID: 2100000, guid: a235ecfb3735b98469c39d10ceed4bd4, type: 2}
-  WALL_FC: {fileID: 4300094, guid: 673cfe34f8fc68c4991f40c7f875534b, type: 3}
-  WALL_R: {fileID: 2100000, guid: 507373ce08e305c42aa5945c99e7b410, type: 2}
+  GOAL_FC: {fileID: 4300000, guid: 269a124fba6bf634baacec8e4c89edaa, type: 3}
+  GOAL_R: {fileID: 2100000, guid: 73b91ed64eb737d4c9799bfe3ec1c36c, type: 2}
+  WALL_FC: {fileID: 4300000, guid: 4e662330ad80f0a4884f8f93117680e7, type: 3}
+  WALL_R: {fileID: 2100000, guid: 9ad6e18aec039e648ae1687e337dcc98, type: 2}
   INFO_FC: {fileID: 4300000, guid: 317cc0415a0fb604e86143989b2c2255, type: 3}
-  INFO_R: {fileID: 2100000, guid: 4560f00443174dd42bdde821fdd5f940, type: 2}
+  INFO_R: {fileID: 2100000, guid: 31638e7e542889145b0695229554af12, type: 2}
