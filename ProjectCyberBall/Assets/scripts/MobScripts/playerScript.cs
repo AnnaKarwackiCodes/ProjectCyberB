@@ -113,6 +113,11 @@ public class playerScript : agentScript {
             endTurn();
         }
 
+        if(this.hasBall && standingHex.Type == Hex.TYPE.END && movementPath.Count <= 0) //Victory condition
+        {
+            gameController.gameWin = 1;
+        }
+
     }
 
     public void SummonBig()
@@ -147,14 +152,6 @@ public class playerScript : agentScript {
             mana -= smolSumCost; //place holder value
             action = "";
             allMinions.Add(Instantiate(smolMinion, (selectedObj.transform.position + new Vector3(0, .5f, 0)), new Quaternion(0, 0, 0, 0)));
-            //allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
-/*<<<<<<< HEAD
-/*<<<<<<< HEAD
-            //allMinions[curNumMins].GetComponent<agentScript>().MapLocal = GameObject.Find("Game Controller").GetComponent<Map>();
-            allMinions[curNumMins].GetComponent<agentScript>().spawnIn(selectedObj.GetComponent<Hex>());
-=======
-            allMinions[curNumMins].GetComponent<agentScript>().MapLocal = GameObject.Find("Game Controller").GetComponent<Map>();
-=======*/
             allMinions[curNumMins].GetComponent<agentScript>().mapLocal = GameObject.Find("Game Controller").GetComponent<Map>();
             allMinions[curNumMins].GetComponent<agentScript>().spawnIn(selectedObj.GetComponent<Hex>(), this.gameController);
             allMinions[curNumMins].GetComponent<mobBase>().Alligence = true;

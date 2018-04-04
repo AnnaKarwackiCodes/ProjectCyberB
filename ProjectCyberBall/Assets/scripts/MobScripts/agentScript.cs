@@ -71,7 +71,7 @@ public class agentScript : MonoBehaviour
     /// return true if mob has ball in hand
     /// return false if mob does not have ball in hand
     /// </summary>
-    private bool hasBall;
+    protected bool hasBall;
     public bool HasBall
     {
 
@@ -86,7 +86,7 @@ public class agentScript : MonoBehaviour
     /// true = player's side
     /// false = enemy's side
     /// </summary>
-    private bool alligence;
+    protected bool alligence;
     public bool Alligence
     {
         get { return alligence; }
@@ -96,7 +96,7 @@ public class agentScript : MonoBehaviour
     /// <summary>
     /// Stores mob health.
     /// </summary>
-    private int health;
+    protected int health;
     public int Health
     {
 
@@ -111,7 +111,7 @@ public class agentScript : MonoBehaviour
     /// Stores position of hex in array.
     /// Can use physical hex position to position the mob
     /// </summary>
-    private Hex standingHex;
+    protected Hex standingHex;
     public Hex StandingHex
     {
 
@@ -137,7 +137,7 @@ public class agentScript : MonoBehaviour
     /// <summary>
     /// Path that agent must go through to reach new tile
     /// </summary>
-    private List<Hex> movementPath = new List<Hex>();
+    protected List<Hex> movementPath = new List<Hex>();
     public List<Hex> MovementPath
     {
         get { return this.movementPath; }
@@ -147,13 +147,13 @@ public class agentScript : MonoBehaviour
     /// <summary>
     /// the current hex that the physical agent is currently heading towards
     /// </summary>
-    private Vector3 movementTarget;
+    protected Vector3 movementTarget;
     private bool skipATick = false; //skips the first update for physical movement because deltaTime is super high because of calculations
 
     /// <summary>
     /// How fast the agent moves to new tile
     /// </summary>
-    [SerializeField] private float movementSpeed = 1f;
+    [SerializeField] protected float movementSpeed = 1f;
 
     // Use this for initialization
     public virtual void Start()
@@ -264,11 +264,21 @@ public class agentScript : MonoBehaviour
                     gameController.theMap.getHex(x, y, z).occupant = null; //remove from start hex
                     gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this; //new hex know something is now on it
                     movementPath.AddRange(mapLocal.pathfinding(standingHex, newHex));//list hex that agent needs to visit while headin to new location
-                    //Debug.Log(movementPath.Count);
                     StandingHex = newHex;
                     setLocation(newHex.X, newHex.Y, newHex.Z); //agent knows where it is
-                    GameObject g = gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).gameObject;
+                    //GameObject g = gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).gameObject;
                     //this.gameObject.transform.position = new Vector3(g.transform.position.x, g.transform.position.y + yOffset, g.transform.position.z);  //agent's gameObjects move to proper location
+
+                    //info orb movement stuff
+                    if (hasBall) //holding the ball
+                    {
+                        gameController.theInfo.GetComponent<InfoBall>().Move(newHex);
+                    }
+                    else if (standingHex.Equals(gameController.theInfo.GetComponent<InfoBall>().standingHex)) //if not holding ball and on same hex as ball
+                    {
+                        pickUpBall();
+                    }
+
                     return;
                 }
                 else
@@ -280,6 +290,7 @@ public class agentScript : MonoBehaviour
             Debug.LogError("game Controller not found");
         }
     }
+
     public virtual void spawnIn(Hex newHex, GameController gCon)
     {
         if (newHex == null) Debug.LogError("newHex not found");
@@ -296,7 +307,16 @@ public class agentScript : MonoBehaviour
     public virtual void pickUpBall()
     {
 
+        InfoBall IB = gameController.theInfo.GetComponent<InfoBall>();
+        hasBall = true;
+        IB.Holder = this.gameObject;
+        IB.movementSpeed = this.movementSpeed;
 
+    }
 
+    public virtual void dropBall()
+    {
+        hasBall = false;
+        gameController.theInfo.GetComponent<InfoBall>().dropBall();
     }
 }

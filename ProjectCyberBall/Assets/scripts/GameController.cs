@@ -14,6 +14,14 @@ public class GameController : MonoBehaviour {
     [SerializeField]private bool playersTurn;
     private bool inGame;
 
+    /// <summary>
+    /// shows if either side has won the game
+    /// 0 = still playing
+    /// 1 = player wins
+    /// -1 = enemy wins
+    /// </summary>
+    public int gameWin = 0;
+
 	// Use this for initializations
 	void Awake () {
         theMap = gameObject.GetComponent<Map>();
@@ -67,6 +75,17 @@ public class GameController : MonoBehaviour {
         //game loop
         if (inGame)
         {
+            if(gameWin == 1)
+            {
+                Debug.Log("Player WINS!!!");
+                return;
+            }
+            else if(gameWin == -1)
+            {
+                Debug.Log("Baddies WINS!!!");
+                return;
+            }
+
             if (playersTurn)
             {
                 //Debug.Log("Player turn");

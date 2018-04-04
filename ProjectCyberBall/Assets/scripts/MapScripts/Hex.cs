@@ -95,12 +95,15 @@ public class Hex : MonoBehaviour
                 //break;
                 case TYPE.START:
                 //break;
-                case TYPE.END:
-                //break;
                 case TYPE.SPAWN:
                     gameObject.GetComponent<MeshFilter>().mesh = FLOOR_FC;
                     gameObject.GetComponent<MeshRenderer>().material = FLOOR_R;
                     gameObject.GetComponent<MeshCollider>().sharedMesh = FLOOR_FC;
+                    break;
+                case TYPE.END:
+                    gameObject.GetComponent<MeshFilter>().mesh = GOAL_FC;
+                    gameObject.GetComponent<MeshRenderer>().material = GOAL_R;
+                    gameObject.GetComponent<MeshCollider>().sharedMesh = GOAL_FC;
                     break;
                 case TYPE.INFO:
                     gameObject.GetComponent<MeshFilter>().mesh = INFO_FC;

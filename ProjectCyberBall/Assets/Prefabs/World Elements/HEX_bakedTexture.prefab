@@ -137,5 +137,5 @@ MonoBehaviour:
   GOAL_R: {fileID: 2100000, guid: 73b91ed64eb737d4c9799bfe3ec1c36c, type: 2}
   WALL_FC: {fileID: 4300000, guid: 4e662330ad80f0a4884f8f93117680e7, type: 3}
   WALL_R: {fileID: 2100000, guid: 9ad6e18aec039e648ae1687e337dcc98, type: 2}
-  INFO_FC: {fileID: 4300000, guid: 317cc0415a0fb604e86143989b2c2255, type: 3}
+  INFO_FC: {fileID: 4300000, guid: f14114271720de743bcc200a4c50b8c1, type: 3}
   INFO_R: {fileID: 2100000, guid: 31638e7e542889145b0695229554af12, type: 2}
