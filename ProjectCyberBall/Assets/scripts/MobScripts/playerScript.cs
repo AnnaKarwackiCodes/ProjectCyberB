@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class playerScript : agentScript {
@@ -38,6 +39,7 @@ public class playerScript : agentScript {
         base.Start();
         mana = 10; //amount of mana the player will have may change
         maxMin = 10; //to make changing this easier
+        Health = 10;
         canPunch = true;
         allMinions = new List<GameObject>();
 
@@ -67,6 +69,8 @@ public class playerScript : agentScript {
 	// Update is called once per frame
 	void Update () {
         base.Update();
+        transform.GetChild(2).GetChild(1).GetChild(0).GetComponent<Text>().text = "Health: " + Health;
+        transform.GetChild(2).GetChild(1).GetChild(1).GetComponent<Text>().text = "Mana: " + mana;
         if (gameController.PlayersTurn)
         {
             switch (action)
@@ -88,6 +92,9 @@ public class playerScript : agentScript {
                     break;
                 case "Pass Ball to":
                     break;
+                default:
+                    ray.GetComponent<RayCasting>().RemoveHighlight();
+                    break;
             }
 
             if (Input.GetAxis("Right_Grip_Button") == 1)
@@ -100,6 +107,7 @@ public class playerScript : agentScript {
                 ray.GetComponent<RayCasting>().Line = false;
                 gameObject.GetComponent<MotionControllers>().RemoveUI();
                 gameObject.GetComponent<MotionControllers>().RemoveHighlight();
+                ray.GetComponent<RayCasting>().RemoveHighlight();
                 action = "";
                 selectedMinion = null;
                 selectedObj = null;
@@ -107,7 +115,7 @@ public class playerScript : agentScript {
             
             for(int i = 0; i < curNumMins; i++)
             {
-                Debug.Log(allMinions[i].GetComponent<mobBase>().Type + " " + allMinions[i].GetComponent<mobBase>().ArrayPos + " " + allMinions[i].GetComponent<mobBase>().Health);
+               // Debug.Log(allMinions[i].GetComponent<mobBase>().Type + " " + allMinions[i].GetComponent<mobBase>().ArrayPos + " " + allMinions[i].GetComponent<mobBase>().Health);
             }
 
             endTurn();
@@ -273,8 +281,9 @@ public class playerScript : agentScript {
                 selectedMinion.CanMove = false;
                 selectedObj = null;
                 selectedMinion = null;
-                action = "";
-            gameObject.GetComponent<MotionControllers>().RemoveHighlight();
+                action = "NOTHING";
+                gameObject.GetComponent<MotionControllers>().RemoveHighlight();
+                ray.GetComponent<RayCasting>().RemoveHighlight();
             }
         else if(selectedObj != null && selectedObj.tag == "Enemy" && action == "Boi Attack")
         {

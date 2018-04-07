@@ -24,17 +24,25 @@ public class MotionControllers : MonoBehaviour
     private int curOption;
     private GameController gCon;
 
-    public GameObject highlight;
-    private bool createHigh;
-    private GameObject myHighlight;
+    public GameObject boiHL;
+    private bool createBoiHL;
+    private GameObject myBoiHL;
+
+    public GameObject hexHL;
+    private bool createHexHL;
+    private GameObject myHexHL;
+
+    private GameObject preHex;
 
     // Use this for initialization
     void Start()
     {
         leftUICreate = false;
-        createHigh = true;
+        createBoiHL = true;
+        createHexHL = true;
         curOption = -1; //this will select none of the menu options
         gCon = this.gameObject.GetComponent<playerScript>().gameController;
+        preHex = null;
     }
 
     // Update is called once per frame
@@ -83,13 +91,26 @@ public class MotionControllers : MonoBehaviour
 
     public void HexInteraction(GameObject curSel)
     {
+        if (preHex!= null && curSel.transform.position != preHex.transform.position)
+        {
+            if (!createHexHL)
+            {
+                Destroy(myHexHL);
+                createHexHL = true;
+            }
+        }
         if (leftUICreate == false)
         {
             lUI = Instantiate(LeftUIInteract, leftPosition, new Quaternion(0, 0, 0, 0), LeftUICan.transform);
             leftUICreate = true;
         }
-        lUI.transform.GetChild(0).GetComponent<Text>().text = "Summon Big";
-        lUI.transform.GetChild(1).GetComponent<Text>().text = "Summon Small";
+        if (createHexHL)
+        {
+            myHexHL = Instantiate(hexHL, (curSel.transform.position + new Vector3(0,1,0)), new Quaternion(0, 0, 0, 0));
+            createHexHL = false;
+        }
+        lUI.transform.GetChild(0).GetComponent<Text>().text = "Summon Browse";
+        lUI.transform.GetChild(1).GetComponent<Text>().text = "Summon Tab";
         lUI.transform.GetChild(3).GetComponent<Text>().text = "Move";
         if (Input.GetAxis("Left_Touchpad_X") == 1 && Input.GetAxis("Left_Touchpad_Y") == -1)
         {
@@ -127,6 +148,11 @@ public class MotionControllers : MonoBehaviour
                     {
                         gameObject.GetComponent<playerScript>().SelectedObj = curSel;
                         gameObject.GetComponent<playerScript>().Action = "Big";
+                        if (!createHexHL)
+                        {
+                            Destroy(myHexHL);
+                            createHexHL = true;
+                        }
                     }
                     break;
                 case 1:
@@ -134,6 +160,11 @@ public class MotionControllers : MonoBehaviour
                     {
                         gameObject.GetComponent<playerScript>().SelectedObj = curSel;
                         gameObject.GetComponent<playerScript>().Action = "Small";
+                        if (!createHexHL)
+                        {
+                            Destroy(myHexHL);
+                            createHexHL = true;
+                        }
                     }
                     break;
                 case 2:
@@ -141,6 +172,11 @@ public class MotionControllers : MonoBehaviour
                     {
                         gameObject.GetComponent<playerScript>().SelectedObj = curSel;
                         gameObject.GetComponent<playerScript>().Action = "Move";
+                        if (!createHexHL)
+                        {
+                            Destroy(myHexHL);
+                            createHexHL = true;
+                        }
                     }
                     break;
                 default:
@@ -152,8 +188,9 @@ public class MotionControllers : MonoBehaviour
             {
                 Destroy(lUI);
                 leftUICreate = false;
-            }
+            }   
         }
+        preHex = curSel;
     }
     public void BoiInteraction(GameObject curSel)
     {
@@ -162,9 +199,19 @@ public class MotionControllers : MonoBehaviour
             lUI = Instantiate(LeftUIInteract, leftPosition, new Quaternion(0, 0, 0, 0), LeftUICan.transform);
             leftUICreate = true;
         }
-        lUI.transform.GetChild(0).GetComponent<Text>().text = "Move Boi";
-        lUI.transform.GetChild(1).GetComponent<Text>().text = "Boi Attack";
-        lUI.transform.GetChild(3).GetComponent<Text>().text = "Pass Ball";
+        if (createBoiHL)
+        {
+            myBoiHL = Instantiate(boiHL, curSel.transform.position, new Quaternion(0, 0, 0, 0));
+            createBoiHL = false;
+            if (!createHexHL)
+            {
+                Destroy(myHexHL);
+                createHexHL = true;
+            }
+        }
+        lUI.transform.GetChild(0).GetComponent<Text>().text = "Move";
+        lUI.transform.GetChild(1).GetComponent<Text>().text = "Have Attack";
+        lUI.transform.GetChild(3).GetComponent<Text>().text = "Pass Ball To";
         if (Input.GetAxis("Left_Touchpad_X") == 1 && Input.GetAxis("Left_Touchpad_Y") == -1)
         {
             //summon minion
@@ -194,11 +241,6 @@ public class MotionControllers : MonoBehaviour
         }
         if (Input.GetButtonDown("Left_Touchpad_Pressed"))
         {
-            if (createHigh)
-            {
-                myHighlight = Instantiate(highlight, curSel.transform.position, new Quaternion(0, 0, 0, 0));
-                createHigh = false;
-            }
             switch (curOption)
             {
                 case 0:
@@ -232,7 +274,16 @@ public class MotionControllers : MonoBehaviour
     }
     public void RemoveHighlight()
     {
-        Destroy(myHighlight);
-        createHigh = true;
+        if (!createBoiHL)
+        {
+            Destroy(myBoiHL);
+            createBoiHL = true;
+        }
+
+        if (!createHexHL)
+        {
+            Destroy(myHexHL);
+            createHexHL = true;
+        }
     }
 }

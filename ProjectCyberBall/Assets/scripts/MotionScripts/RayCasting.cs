@@ -11,6 +11,12 @@ public class RayCasting : MonoBehaviour {
     private playerScript user;
     private MotionControllers myControls;
 
+    public GameObject hexHL;
+    private bool createHexHL;
+    private GameObject myHexHL;
+    private GameObject preHex;
+
+
     //public Text txt;
     // Use this for initialization
     void Start() {
@@ -18,6 +24,8 @@ public class RayCasting : MonoBehaviour {
         line.enabled = false;
         user = transform.parent.transform.parent.GetComponent<playerScript>();
         myControls = user.gameObject.GetComponent<MotionControllers>();
+        preHex = null;
+        createHexHL = true;
     }
 
     // Update is called once per frame
@@ -57,6 +65,8 @@ public class RayCasting : MonoBehaviour {
                     if (user.Action != "Move Boi")
                     {
                         myControls.HexInteraction(hit.collider.gameObject);
+                        RemoveHighlight();
+
                     }
                     user.SelectedObj = hit.collider.gameObject;
                     break;
@@ -115,7 +125,23 @@ public class RayCasting : MonoBehaviour {
                 case "Hex":
                     if (look == "Move")
                     {
+                        if (preHex != null && hit.collider.gameObject.transform.position != preHex.transform.position)
+                        {
+                            Debug.Log("different");
+                            if (!createHexHL)
+                            {
+                                Destroy(myHexHL);
+                                createHexHL = true;
+                            }
+                        }
                         user.SelectedObj = hit.collider.gameObject;
+                        if (createHexHL)
+                        {
+                            Debug.Log("here i am");
+                            myHexHL = Instantiate(hexHL, (hit.collider.gameObject.transform.position + new Vector3(0, 1, 0)), new Quaternion(0, 0, 0, 0));
+                            createHexHL = false;
+                            preHex = hit.collider.gameObject;
+                        }
                     }
                     break;
                 case "Boi":
@@ -124,6 +150,14 @@ public class RayCasting : MonoBehaviour {
                         user.SelectedObj = hit.collider.gameObject;
                     }
                     break;
+            }
+        }
+        else
+        {
+            if (!createHexHL)
+            {
+                Destroy(myHexHL);
+                createHexHL = true;
             }
         }
     }
@@ -161,5 +195,16 @@ public class RayCasting : MonoBehaviour {
     public bool Line
     {
         set { line.enabled = value; }
+    }
+
+    public void RemoveHighlight()
+    {
+        Debug.Log("Call me?");
+        if (!createHexHL)
+        {
+            Debug.Log("Please");
+            Destroy(myHexHL);
+            createHexHL = true;
+        }
     }
 }
