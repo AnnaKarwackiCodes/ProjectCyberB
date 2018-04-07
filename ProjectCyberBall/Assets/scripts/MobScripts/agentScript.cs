@@ -28,19 +28,19 @@ public class agentScript : MonoBehaviour
     public Map mapLocal;
 
     //cube coord
-    private int x;
+    protected int x;
     public int X
     {
         get { return this.x; }
     }
 
-    private int y;
+    protected int y;
     public int Y
     {
         get { return this.y; }
     }
 
-    private int z;
+    protected int z;
     public int Z
     {
         get { return this.z; }
@@ -124,7 +124,7 @@ public class agentScript : MonoBehaviour
     /// <summary>
     /// How far an agent can move in one turn
     /// </summary>
-    [SerializeField] private int moveDistance;
+    [SerializeField] protected int moveDistance;
     public int MoveDistance
     {
 
