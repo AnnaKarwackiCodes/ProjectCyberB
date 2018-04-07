@@ -68,9 +68,13 @@ public class playerScript : agentScript {
 
 	// Update is called once per frame
 	void Update () {
+<<<<<<< HEAD
         base.Update();
         transform.GetChild(2).GetChild(1).GetChild(0).GetComponent<Text>().text = "Health: " + Health;
         transform.GetChild(2).GetChild(1).GetChild(1).GetComponent<Text>().text = "Mana: " + mana;
+=======
+        //base.Update();
+>>>>>>> origin/developement
         if (gameController.PlayersTurn)
         {
             switch (action)
@@ -126,6 +130,50 @@ public class playerScript : agentScript {
             gameController.gameWin = 1;
         }
 
+    }
+
+    /// <summary>
+    /// Move agent to hex
+    /// </summary>
+    public virtual void Move(Hex newHex)
+    {
+        Debug.Log("(" + newHex.X + ", " + newHex.Y + ", " + newHex.Z + ") (" + newHex.Row + ", " + newHex.Col + ")");
+        int dist = mapLocal.distanceBetween(standingHex, newHex);
+
+        if (gameController != null) //agent is in a game
+        {
+            if (gameController.theMap.hexExists(newHex.X, newHex.Y, newHex.Z))//hex exist to move to
+            {
+                if (dist <= moveDistance && !newHex.isSolid()) //hex within distance and not solid
+                {
+                    gameController.theMap.getHex(x, y, z).occupant = null; //remove from start hex
+                    gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).occupant = this; //new hex know something is now on it
+                    //movementPath.AddRange(mapLocal.pathfinding(standingHex, newHex));//list hex that agent needs to visit while headin to new location
+                    standingHex = newHex;
+                    setLocation(newHex.X, newHex.Y, newHex.Z); //agent knows where it is
+                    GameObject g = gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).gameObject;
+                    this.gameObject.transform.position = new Vector3(g.transform.position.x, g.transform.position.y + yOffset, g.transform.position.z);  //agent's gameObjects move to proper location
+
+                    //info orb movement stuff
+                    if (hasBall) //holding the ball
+                    {
+                        gameController.theInfo.GetComponent<InfoBall>().Move(newHex);
+                    }
+                    else if (standingHex.Equals(gameController.theInfo.GetComponent<InfoBall>().StandingHex)) //if not holding ball and on same hex as ball
+                    {
+                        pickUpBall();
+                    }
+
+                    return;
+                }
+                else
+                {
+                    Debug.LogError("Hex: " + newHex + " is not within range of movement");
+                    return;
+                }
+            }
+            Debug.LogError("game Controller not found");
+        }
     }
 
     public void SummonBig()
