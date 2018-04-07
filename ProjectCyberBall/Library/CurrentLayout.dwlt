@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 6}
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_MinSize: {x: 681, y: 492}
   m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 9
+  controlID: 123
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,7 +144,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 980
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &7
 MonoBehaviour:
@@ -210,7 +210,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 10
+  controlID: 51
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -234,7 +234,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
-  controlID: 11
+  controlID: 52
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -283,10 +283,10 @@ MonoBehaviour:
   m_DepthBufferBits: 0
   m_Pos:
     serializedVersion: 2
-    x: 1227
-    y: 92
-    width: 309
-    height: 710
+    x: 1533
+    y: 101
+    width: 387
+    height: 909
   m_PersistentViewDataDictionary: {fileID: 0}
   m_InitialOpenURL: https://public-cdn.cloud.unity3d.com/editor/production/cloud/hub
   m_GlobalObjectTypeName: 
@@ -360,19 +360,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/materials/Materials
+    - Assets/Prefabs/the bois
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/materials/Materials
+  - Assets/Prefabs/the bois
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Noah Parker\Documents\College\Year 4\Spring\AR Production
     Studio\ProjectCyberB\ProjectCyberBall
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 46}
-    m_SelectedIDs: f6270000
-    m_LastClickedID: 10230
+    scrollPos: {x: 0, y: 106}
+    m_SelectedIDs: 802d0000
+    m_LastClickedID: 11648
     m_ExpandedIDs: 00000000a2270000e8270000f6270000042d0000122d0000162e000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -429,7 +429,7 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: 062d000012ee0000
+    m_ExpandedInstanceIDs: 062d000012ee0000d02d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -572,14 +572,14 @@ MonoBehaviour:
     height: 541
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
-  lastFramingTime: 0
+  lastFramingTime: 400.17562694847504
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 13.525309, y: 6.1602173, z: 14.926996}
+    m_Target: {x: 6.189101, y: 3.5048761, z: 12.086233}
     speed: 2
-    m_Value: {x: 13.525309, y: 6.1602173, z: 14.926996}
+    m_Value: {x: 6.189101, y: 3.5048761, z: 12.086233}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -603,13 +603,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.44867894, y: 0.008577146, z: -0.004306922, w: -0.893643}
+    m_Target: {x: -0.2244929, y: -0.16512087, z: 0.03862831, w: -0.9596087}
     speed: 2
-    m_Value: {x: -0.4486789, y: 0.008577146, z: -0.004306922, w: -0.89364296}
+    m_Value: {x: -0.22449256, y: -0.16512063, z: 0.038628254, w: -0.9596073}
   m_Size:
-    m_Target: 13.005643
+    m_Target: 5.1521335
     speed: 2
-    m_Value: 13.005643
+    m_Value: 5.1521335
   m_Ortho:
     m_Target: 0
     speed: 2
