@@ -14,8 +14,12 @@ public class RayCasting : MonoBehaviour {
     public GameObject hexHL;
     private bool createHexHL;
     private GameObject myHexHL;
-    private GameObject preHex;
 
+    private GameObject preSel;
+
+    public GameObject enemyHL;
+    private bool createEnemyHL;
+    private GameObject myEnemyHL;
 
     //public Text txt;
     // Use this for initialization
@@ -24,7 +28,7 @@ public class RayCasting : MonoBehaviour {
         line.enabled = false;
         user = transform.parent.transform.parent.GetComponent<playerScript>();
         myControls = user.gameObject.GetComponent<MotionControllers>();
-        preHex = null;
+        preSel = null;
         createHexHL = true;
     }
 
@@ -74,7 +78,8 @@ public class RayCasting : MonoBehaviour {
                     myControls.BoiInteraction(hit.collider.gameObject);
                     user.SelectedMinion = hit.collider.gameObject.GetComponent<mobBase>();
                     break;
-                case "Baddie":
+                case "Enemy":
+                    //player attack options
                     break;
                 case "Info":
                     user.UseBall();
@@ -125,7 +130,7 @@ public class RayCasting : MonoBehaviour {
                 case "Hex":
                     if (look == "Move")
                     {
-                        if (preHex != null && hit.collider.gameObject.transform.position != preHex.transform.position)
+                        if (preSel != null && preSel.gameObject.tag == "Hex" && hit.collider.gameObject.transform.position != preSel.transform.position)
                         {
                             Debug.Log("different");
                             if (!createHexHL)
@@ -135,19 +140,36 @@ public class RayCasting : MonoBehaviour {
                             }
                         }
                         user.SelectedObj = hit.collider.gameObject;
-                        if (createHexHL)
+                        if (createHexHL && hit.collider.gameObject.GetComponent<Hex>().occupant == null)
                         {
                             Debug.Log("here i am");
                             myHexHL = Instantiate(hexHL, (hit.collider.gameObject.transform.position + new Vector3(0, 1, 0)), new Quaternion(0, 0, 0, 0));
                             createHexHL = false;
-                            preHex = hit.collider.gameObject;
+                            preSel = hit.collider.gameObject;
                         }
                     }
                     break;
-                case "Boi":
+                case "Enemy":
                     if (look == "Attack")
                     {
+                        Debug.Log("inside attacking enemy");
+                        if (preSel != null && hit.collider.gameObject.transform.position != preSel.transform.position)
+                        {
+                            Debug.Log("boi");
+                            if (!createEnemyHL)
+                            {
+                                Destroy(myEnemyHL);
+                                createEnemyHL = true;
+                            }
+                        }
                         user.SelectedObj = hit.collider.gameObject;
+                        if (createEnemyHL)
+                        {
+                            Debug.Log("here i am boi");
+                            myEnemyHL = Instantiate(hexHL, hit.collider.gameObject.transform.position, new Quaternion(0, 0, 0, 0));
+                            createEnemyHL = false;
+                            preSel = hit.collider.gameObject;
+                        }
                     }
                     break;
             }
@@ -158,6 +180,7 @@ public class RayCasting : MonoBehaviour {
             {
                 Destroy(myHexHL);
                 createHexHL = true;
+                //preSel = null;
             }
         }
     }
@@ -199,12 +222,15 @@ public class RayCasting : MonoBehaviour {
 
     public void RemoveHighlight()
     {
-        Debug.Log("Call me?");
         if (!createHexHL)
         {
-            Debug.Log("Please");
             Destroy(myHexHL);
             createHexHL = true;
+        }
+        if (!createEnemyHL)
+        {
+            Destroy(myEnemyHL);
+            createEnemyHL = true;
         }
     }
 }

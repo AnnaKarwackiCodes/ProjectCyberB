@@ -514,6 +514,7 @@ MonoBehaviour:
   LeftUICan: {fileID: 1468524061334074}
   boiHL: {fileID: 1008542184615152, guid: 08778209c03d78f46b8f5128cd402022, type: 2}
   hexHL: {fileID: 1175762298579906, guid: ee1fa1bef7954c14c9370c78ef880451, type: 2}
+  enemyHL: {fileID: 1671028821762884, guid: 6612e7fb761f0514fab80f81d643be35, type: 2}
 --- !u!114 &114812908249231198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -560,6 +561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 114812908249231198}
   hexHL: {fileID: 1175762298579906, guid: ee1fa1bef7954c14c9370c78ef880451, type: 2}
+  enemyHL: {fileID: 1671028821762884, guid: 6612e7fb761f0514fab80f81d643be35, type: 2}
 --- !u!114 &114882955758589502
 MonoBehaviour:
   m_ObjectHideFlags: 1

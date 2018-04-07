@@ -144,6 +144,14 @@ public class agentScript : MonoBehaviour
         set { this.movementPath = value; }
     }
 
+    private bool canMove;
+    public bool CanMove
+    {
+        get { return this.canMove; }
+
+        set { this.canMove = value; }
+    }
+
     /// <summary>
     /// the current hex that the physical agent is currently heading towards
     /// </summary>
@@ -158,7 +166,7 @@ public class agentScript : MonoBehaviour
     // Use this for initialization
     public virtual void Start()
     {
-        Debug.Log("AGENT START");
+        //Debug.Log("AGENT START");
         gameController = GameObject.Find("Game Controller").GetComponent<GameController>();
         mapLocal = gameController.theMap;
         movementTarget = new Vector3();
@@ -252,7 +260,7 @@ public class agentScript : MonoBehaviour
     /// </summary>
     public virtual void Move(Hex newHex)
     {
-        Debug.Log("(" + newHex.X + ", " + newHex.Y + ", " + newHex.Z + ") (" + newHex.Row + ", " + newHex.Col + ")");
+        //Debug.Log("(" + newHex.X + ", " + newHex.Y + ", " + newHex.Z + ") (" + newHex.Row + ", " + newHex.Col + ")");
         int dist = mapLocal.distanceBetween(standingHex, newHex);
 
         if (gameController != null) //agent is in a game
@@ -278,7 +286,7 @@ public class agentScript : MonoBehaviour
                     {
                         pickUpBall();
                     }
-
+                    canMove = false;
                     return;
                 }
                 else

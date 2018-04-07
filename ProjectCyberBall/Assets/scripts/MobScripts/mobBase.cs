@@ -39,13 +39,6 @@ public class mobBase : agentScript {
         set { this.selected = value; }
 
     }
-    private bool canMove;
-    public bool CanMove
-    {
-        get { return this.canMove; }
-
-        set { this.canMove = value; }
-    }
 
     private string type;
     public string Type
@@ -66,7 +59,7 @@ public class mobBase : agentScript {
 	// Use this for initialization
 	public virtual new void Start () {
         base.Start();
-        canMove = true;
+        this.CanMove = true;
 	}
 	
 	// Update is called once per frame
@@ -79,7 +72,7 @@ public class mobBase : agentScript {
     /// </summary>
     public virtual void mobAttack(agentScript target) {
 
-
+        Debug.Log("ATTACKING " + target.gameObject.name);
 
     }
 

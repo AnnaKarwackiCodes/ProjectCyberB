@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 114644688980533226}
   m_Layer: 0
   m_Name: smallBoiBad
-  m_TagString: Boi
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

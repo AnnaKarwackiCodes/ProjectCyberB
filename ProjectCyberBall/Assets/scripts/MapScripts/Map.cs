@@ -92,7 +92,7 @@ public class Map : MonoBehaviour {
     /// <param name="newMap">the map that is being used</param>
     private void createMapFromArray(int[] newMap)
     {
-        Debug.Log("Test");
+        //Debug.Log("Test");
         createRectangleMap(width, height, offset); //reset everything
         for (int i = 0; i < width; i++)
         {
@@ -125,7 +125,7 @@ public class Map : MonoBehaviour {
             }
         }
 
-        Debug.Log(map);
+       // Debug.Log(map);
 
     }
 

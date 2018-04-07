@@ -32,6 +32,8 @@ public class MotionControllers : MonoBehaviour
     private bool createHexHL;
     private GameObject myHexHL;
 
+    
+
     private GameObject preHex;
 
     // Use this for initialization
@@ -88,7 +90,6 @@ public class MotionControllers : MonoBehaviour
             leftUICreate = false;
         }
     }
-
     public void HexInteraction(GameObject curSel)
     {
         if (preHex!= null && curSel.transform.position != preHex.transform.position)

@@ -68,13 +68,11 @@ public class playerScript : agentScript {
 
 	// Update is called once per frame
 	void Update () {
-<<<<<<< HEAD
-        base.Update();
+        
+        //base.Update();
         transform.GetChild(2).GetChild(1).GetChild(0).GetComponent<Text>().text = "Health: " + Health;
         transform.GetChild(2).GetChild(1).GetChild(1).GetComponent<Text>().text = "Mana: " + mana;
-=======
-        //base.Update();
->>>>>>> origin/developement
+
         if (gameController.PlayersTurn)
         {
             switch (action)
@@ -89,7 +87,7 @@ public class playerScript : agentScript {
                     MovePlayer();
                     break;
                 case "Move Boi":
-                    MinionInteract("Move");
+                    if (selectedMinion != null && selectedMinion.CanMove) { MinionInteract("Move"); }
                     break;
                 case "Boi Attack":
                     MinionInteract("Attack");
@@ -135,9 +133,9 @@ public class playerScript : agentScript {
     /// <summary>
     /// Move agent to hex
     /// </summary>
-    public virtual void Move(Hex newHex)
+    public override void Move(Hex newHex)
     {
-        Debug.Log("(" + newHex.X + ", " + newHex.Y + ", " + newHex.Z + ") (" + newHex.Row + ", " + newHex.Col + ")");
+        //Debug.Log("(" + newHex.X + ", " + newHex.Y + ", " + newHex.Z + ") (" + newHex.Row + ", " + newHex.Col + ")");
         int dist = mapLocal.distanceBetween(standingHex, newHex);
 
         if (gameController != null) //agent is in a game
@@ -163,7 +161,7 @@ public class playerScript : agentScript {
                     {
                         pickUpBall();
                     }
-
+                    canMove = false;
                     return;
                 }
                 else
@@ -265,7 +263,6 @@ public class playerScript : agentScript {
             //this.gameObject.transform.position = selectedObj.transform.position; //this was for testing
             Move(selectedObj.GetComponent<Hex>()); //this is for when in use
             selectedObj = null;//clear it out
-            canMove = false;
         }
     }
 
@@ -298,6 +295,7 @@ public class playerScript : agentScript {
             {
                 if (!endOfTurnButtonHold)
                 {
+                    Debug.Log("ending turn");
                     endOfTurnButtonHold = true;
                     gameController.changeTurn(false);
                     if (endPopCreate)
@@ -324,7 +322,6 @@ public class playerScript : agentScript {
     {
 
         ray.GetComponent<RayCasting>().BoiFind(10, action);
-        Debug.Log("Selecting new hex");
         if (selectedMinion != null && selectedObj != null && selectedObj.tag == "Hex" && action == "Move" && Input.GetAxis("Right_Trigger") == 1)
             {
                 Debug.Log("On a hex");
@@ -338,9 +335,16 @@ public class playerScript : agentScript {
                 gameObject.GetComponent<MotionControllers>().RemoveHighlight();
                 ray.GetComponent<RayCasting>().RemoveHighlight();
             }
-        else if(selectedObj != null && selectedObj.tag == "Enemy" && action == "Boi Attack")
+        else if(selectedMinion != null && selectedObj != null && selectedObj.tag == "Enemy" && action == "Boi Attack" && Input.GetAxis("Right_Trigger") == 1)
         {
             //do later when there are actually baddies to attack
+            Debug.Log("bad boi select");
+            selectedMinion.mobAttack(selectedObj.GetComponent<agentScript>());
+            selectedMinion.Selected = false;
+            selectedMinion.CanMove = false;
+            selectedObj = null;
+            selectedMinion = null;
+            action = "NOTHING";
         }
     }
 

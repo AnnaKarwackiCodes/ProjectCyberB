@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 114284535258006134}
   m_Layer: 0
   m_Name: largeBoiBad
-  m_TagString: Boi
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
