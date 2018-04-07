@@ -32,7 +32,7 @@ public class playerScript : agentScript {
     private GameObject etPop;
     private bool selectorOn;
 
-    private bool testBool;
+    private bool endOfTurnButtonHold;
 
     // Use this for initialization
     new void Start () {
@@ -56,7 +56,7 @@ public class playerScript : agentScript {
         endPopCreate = false;
         selectorOn = false;
 
-        testBool = false;
+        endOfTurnButtonHold = false;
     }
 
     void Awake() {
@@ -288,7 +288,7 @@ public class playerScript : agentScript {
     {
         if(Input.GetAxis("Left_Trigger") == 1 && Input.GetAxis("Right_Trigger") == 1)
         {
-            if (!endPopCreate)
+            if (!endPopCreate) //creates end of turn text
             {
                 etPop = Instantiate(endTurnPop, transform.GetChild(2).GetChild(1).transform.position, new Quaternion(0, 0, 0, 0),transform.GetChild(2).GetChild(1).transform);
                 endPopCreate = true;
@@ -296,13 +296,18 @@ public class playerScript : agentScript {
             //pop up an end turn? menu
             if(Input.GetAxis("Left_Grip_Button") == 1 && Input.GetAxis("Right_Grip_Button") == 1)
             {
-                gameController.PlayersTurn = false;
-                if (endPopCreate)
+                if (!endOfTurnButtonHold)
                 {
-                    Destroy(etPop);
-                    endPopCreate = false;
+                    endOfTurnButtonHold = true;
+                    gameController.changeTurn(false);
+                    if (endPopCreate)
+                    {
+                        Destroy(etPop);
+                        endPopCreate = false;
+                    }
                 }
             }
+            else { endOfTurnButtonHold = false; }
         }
         else
         {

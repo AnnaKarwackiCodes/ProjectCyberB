@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour {
     private bool userIsIn = false;
     [SerializeField]private bool playersTurn;
     private bool inGame;
+    public int turnNum; //number of turns that have happened
 
     /// <summary>
     /// shows if either side has won the game
@@ -36,7 +37,7 @@ public class GameController : MonoBehaviour {
         Debug.Log("start");
         playersTurn = true;
         inGame = true;
-
+        turnNum = 1;
     }
 	
 	// Update is called once per frame
@@ -86,28 +87,34 @@ public class GameController : MonoBehaviour {
                 return;
             }
 
-            if (playersTurn)
+            if (playersTurn) //it is the player's turn
             {
                 //Debug.Log("Player turn");
             }
-            else
+            else if (!playersTurn && !enemyControl.TurnStart) //it is the enemies turn and their turn has not started yet
             {
-                if (!enemyControl.TurnStart)
-                {
-                    //call enemies to do their thing
-                    Debug.Log("Baddie turn");
-                    enemyControl.turn();
-                    //when finished set it up for the player to be able to do their thing
-                    theUser.GetComponent<playerScript>().newTurn();
-                    playersTurn = true;
-                }
+                //call enemies to do their thing
+                Debug.Log("Baddie turn");
+                enemyControl.turn();
+                //when finished set it up for the player to be able to do their thing
+                theUser.GetComponent<playerScript>().newTurn();
+                changeTurn(true);
             }
         }
     }
 
     public bool PlayersTurn
     {
-        set { playersTurn = value; }
+    //    set { playersTurn = value; }
         get { return playersTurn; }
+    }
+
+    public void changeTurn(bool newTurn) //changes the turn and increases the turn number
+    {
+        if(playersTurn != newTurn)
+        {
+            turnNum++;
+        }
+        playersTurn = newTurn;
     }
 }
