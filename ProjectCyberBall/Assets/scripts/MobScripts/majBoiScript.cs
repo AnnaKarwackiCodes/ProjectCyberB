@@ -10,6 +10,7 @@ public class majBoiScript : mobBase {
         MoveDistance = 2;
         Type = "Big";
         Health = 3;
+        Attack = 3;
 	}
 	
 	// Update is called once per frame
@@ -19,7 +20,14 @@ public class majBoiScript : mobBase {
         if (Health <= 0)
         {
             Debug.Log("is dead");
-            GameObject.FindGameObjectWithTag("Player").GetComponent<playerScript>().RemoveBoi(ArrayPos);
+            if (Alligence)
+            {
+                GameObject.FindGameObjectWithTag("Player").GetComponent<playerScript>().RemoveBoi(ArrayPos);
+            }
+            else if (!Alligence)
+            {
+                GameObject.FindGameObjectWithTag("GameController").GetComponent<enemyController>().RemoveBoi(ArrayPos, 1);
+            }
         }
     }
 }

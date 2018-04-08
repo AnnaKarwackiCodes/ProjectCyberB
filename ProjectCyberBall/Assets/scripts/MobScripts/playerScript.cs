@@ -49,7 +49,7 @@ public class playerScript : agentScript {
         smolSumCost = 2;
         fireBallCost = 3;
         useBallCost = 1;
-        canMove = true;
+        CanMove = true;
         MoveDistance = 2;
         Alligence = true;
 
@@ -99,7 +99,7 @@ public class playerScript : agentScript {
                     break;
             }
 
-            if (Input.GetAxis("Right_Grip_Button") == 1)
+            if (Input.GetAxis("Right_Grip_Button") == 1 && (Input.GetAxis("Left_Trigger") != 1 && Input.GetAxis("Right_Trigger") != 1))
             {
                 //MinionInteract();
                 ray.GetComponent<RayCasting>().SelectingObj(5);
@@ -322,7 +322,7 @@ public class playerScript : agentScript {
     {
 
         ray.GetComponent<RayCasting>().BoiFind(10, action);
-        if (selectedMinion != null && selectedObj != null && selectedObj.tag == "Hex" && action == "Move" && Input.GetAxis("Right_Trigger") == 1)
+        if (action == "Move" && selectedMinion != null && selectedObj != null && selectedObj.tag == "Hex" && Input.GetAxis("Right_Trigger") == 1)
             {
                 Debug.Log("On a hex");
                 selectedMinion.Move(selectedObj.GetComponent<Hex>());
@@ -335,7 +335,7 @@ public class playerScript : agentScript {
                 gameObject.GetComponent<MotionControllers>().RemoveHighlight();
                 ray.GetComponent<RayCasting>().RemoveHighlight();
             }
-        else if(selectedMinion != null && selectedObj != null && selectedObj.tag == "Enemy" && action == "Boi Attack" && Input.GetAxis("Right_Trigger") == 1)
+        else if(action == "Attack" && selectedMinion != null && selectedObj != null && selectedObj.tag == "Enemy" &&  Input.GetAxis("Right_Trigger") == 1)
         {
             //do later when there are actually baddies to attack
             Debug.Log("bad boi select");
@@ -416,10 +416,6 @@ public class playerScript : agentScript {
     public int UseBallCost
     {
         get { return useBallCost; }
-    }
-    public bool CanMove
-    {
-        get { return canMove; }
     }
     public List<GameObject> AllMinions
     {

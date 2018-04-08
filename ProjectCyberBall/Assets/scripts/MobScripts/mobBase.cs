@@ -17,8 +17,8 @@ public class mobBase : agentScript {
     ///Can be used to modify when buffed/spawned under alternate circumstances.
     ///Can vary between mobs.
     /// </summary>
-    private bool attack;
-    private bool Attack
+    private int attack;
+    public int Attack
     {
 
         get { return this.attack; }
@@ -72,8 +72,8 @@ public class mobBase : agentScript {
     /// </summary>
     public virtual void mobAttack(agentScript target) {
 
-        Debug.Log("ATTACKING " + target.gameObject.name);
-
+        Debug.Log(gameObject.name + " ATTACKING " + target.gameObject.name);
+        target.Health -= Attack;
     }
 
 }

@@ -212,7 +212,7 @@ public class MotionControllers : MonoBehaviour
         }
         lUI.transform.GetChild(0).GetComponent<Text>().text = "Move";
         lUI.transform.GetChild(1).GetComponent<Text>().text = "Have Attack";
-        lUI.transform.GetChild(3).GetComponent<Text>().text = "Pass Ball To";
+        lUI.transform.GetChild(3).GetComponent<Text>().text = "Ball Pass";
         if (Input.GetAxis("Left_Touchpad_X") == 1 && Input.GetAxis("Left_Touchpad_Y") == -1)
         {
             //summon minion
@@ -260,6 +260,8 @@ public class MotionControllers : MonoBehaviour
                     break;
                 case 2:
                     gameObject.GetComponent<playerScript>().Action = "Pass Ball to";
+                    gameObject.GetComponent<playerScript>().HasBall = !gameObject.GetComponent<playerScript>().HasBall;
+                    curSel.GetComponent<mobBase>().HasBall = !curSel.GetComponent<mobBase>().HasBall;
                     break;
                 default:
                     Debug.Log("yeah no this wont work.");

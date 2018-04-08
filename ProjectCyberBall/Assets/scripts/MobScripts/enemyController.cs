@@ -213,6 +213,7 @@ public class enemyController : MonoBehaviour
                         boi.GetComponent<agentScript>().mapLocal = mapLocal;
                         boi.GetComponent<agentScript>().spawnIn(sh[i], this.gameController);
                         boi.GetComponent<agentScript>().Alligence = false;
+                        boi.GetComponent<mobBase>().ArrayPos = bigEnemies.Count;
                         bigEnemies.Add(boi);
                         mana -= MOD_BIG_BOI_COST;
                     }
@@ -226,6 +227,7 @@ public class enemyController : MonoBehaviour
                         boi.GetComponent<agentScript>().mapLocal = mapLocal;
                         boi.GetComponent<agentScript>().spawnIn(sh[i], this.gameController);
                         boi.GetComponent<agentScript>().Alligence = false;
+                        boi.GetComponent<mobBase>().ArrayPos = smallEnemies.Count;
                         smallEnemies.Add(boi);
                         mana -= MOD_SMALL_BOI_COST;
                     }
@@ -375,4 +377,25 @@ public class enemyController : MonoBehaviour
         return hexs.ToArray();
     }
 
+    public void RemoveBoi(int pos, int type)
+    {
+        if(type == 0) //small
+        {
+            Destroy(smallEnemies[pos]);
+            smallEnemies.RemoveAt(pos);
+            for (int i = 0; i < smallEnemies.Count; i++)
+            {
+                smallEnemies[i].GetComponent<mobBase>().ArrayPos = i;
+            }
+        }
+        else if(type == 1)//big
+        {
+            Destroy(bigEnemies[pos]);
+            bigEnemies.RemoveAt(pos);
+            for (int i = 0; i < bigEnemies.Count; i++)
+            {
+                bigEnemies[i].GetComponent<mobBase>().ArrayPos = i;
+            }
+        }
+    }
 }

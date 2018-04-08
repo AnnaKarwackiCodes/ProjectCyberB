@@ -166,7 +166,7 @@ public class RayCasting : MonoBehaviour {
                         if (createEnemyHL)
                         {
                             Debug.Log("here i am boi");
-                            myEnemyHL = Instantiate(hexHL, hit.collider.gameObject.transform.position, new Quaternion(0, 0, 0, 0));
+                            myEnemyHL = Instantiate(enemyHL, hit.collider.gameObject.transform.position, new Quaternion(0, 0, 0, 0));
                             createEnemyHL = false;
                             preSel = hit.collider.gameObject;
                         }
