@@ -1471,8 +1471,9 @@ MonoBehaviour:
   gameController: {fileID: 0}
   mapLocal: {fileID: 0}
   theInfo: {fileID: 0}
-  smolMinion: {fileID: 1653789012109782, guid: 538711e8d1b23284bbcc9671386261e0, type: 2}
-  bigMinion: {fileID: 1597847958509082, guid: ec275f6ea543d274c9a8fbbf35f3125e, type: 2}
+  smolMinion: {fileID: 1197720977508202, guid: 4d70127d3b7420049b152d00f1ce077b, type: 2}
+  bigMinion: {fileID: 1444297373615362, guid: d522bd5bc21dd964ca0951e79b042bcb, type: 2}
+  turnSubPhase: 0
 --- !u!1 &1688514901
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,7 +1533,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1688514901}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 7.46, z: -14.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

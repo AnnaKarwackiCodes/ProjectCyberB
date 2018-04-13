@@ -1,0 +1,252 @@
+fileFormatVersion: 2
+guid: c750907880c7a0249bc33627663ceb9c
+timeCreated: 1523647034
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: smallBoi_Master:ctrls
+    100004: smallBoi_Master:head_ctrl
+    100006: smallBoi_Master:head_ctrl_grp
+    100008: smallBoi_Master:head_jnt
+    100010: smallBoi_Master:headAim_jnt
+    100012: smallBoi_Master:L_arm_ctrl
+    100014: smallBoi_Master:L_arm_ctrl_grp
+    100016: smallBoi_Master:L_arm_jnt
+    100018: smallBoi_Master:low_body_ctrl
+    100020: smallBoi_Master:low_body_ctrl_grp
+    100022: smallBoi_Master:master_ctrl
+    100024: smallBoi_Master:placement
+    100026: smallBoi_Master:R_arm_ctrl
+    100028: smallBoi_Master:R_arm_ctrl_flip_grp
+    100030: smallBoi_Master:R_arm_ctrl_grp
+    100032: smallBoi_Master:R_arm_jnt
+    100034: smallBoi_Master:root_crtl
+    100036: smallBoi_Master:root_ctrl_grp
+    100038: smallBoi_Master:root_jnt
+    100040: smallBoi_Master:smallBoi_Master:smallBoi_geo
+    100042: smallBoi_Master:smallBoi_Master:smallBoi_geo 1
+    100044: smallBoi_Master:spike_low_ctrl
+    100046: smallBoi_Master:spike_low_ctrl_grp
+    100048: smallBoi_Master:spike_lower_jnt_01
+    100050: smallBoi_Master:spike_lower_jnt_02
+    100052: smallBoi_Master:spike_upper_ctrl_01
+    100054: smallBoi_Master:spike_upper_ctrl_01_grp
+    100056: smallBoi_Master:spike_upper_ctrl_02
+    100058: smallBoi_Master:spike_upper_ctrl_02_grp
+    100060: smallBoi_Master:spike_upper_jnt_01
+    100062: smallBoi_Master:spike_upper_jnt_02
+    100064: smallBoi_Master:spike_upper_jnt_03
+    100066: smallBoi_Master:spine_jnt_01
+    100068: smallBoi_Master:spine_jnt_02
+    100070: smallBoi_Master:tail_ctrl
+    100072: smallBoi_Master:tail_ctrl_grp
+    400000: //RootNode
+    400002: smallBoi_Master:ctrls
+    400004: smallBoi_Master:head_ctrl
+    400006: smallBoi_Master:head_ctrl_grp
+    400008: smallBoi_Master:head_jnt
+    400010: smallBoi_Master:headAim_jnt
+    400012: smallBoi_Master:L_arm_ctrl
+    400014: smallBoi_Master:L_arm_ctrl_grp
+    400016: smallBoi_Master:L_arm_jnt
+    400018: smallBoi_Master:low_body_ctrl
+    400020: smallBoi_Master:low_body_ctrl_grp
+    400022: smallBoi_Master:master_ctrl
+    400024: smallBoi_Master:placement
+    400026: smallBoi_Master:R_arm_ctrl
+    400028: smallBoi_Master:R_arm_ctrl_flip_grp
+    400030: smallBoi_Master:R_arm_ctrl_grp
+    400032: smallBoi_Master:R_arm_jnt
+    400034: smallBoi_Master:root_crtl
+    400036: smallBoi_Master:root_ctrl_grp
+    400038: smallBoi_Master:root_jnt
+    400040: smallBoi_Master:smallBoi_Master:smallBoi_geo
+    400042: smallBoi_Master:smallBoi_Master:smallBoi_geo 1
+    400044: smallBoi_Master:spike_low_ctrl
+    400046: smallBoi_Master:spike_low_ctrl_grp
+    400048: smallBoi_Master:spike_lower_jnt_01
+    400050: smallBoi_Master:spike_lower_jnt_02
+    400052: smallBoi_Master:spike_upper_ctrl_01
+    400054: smallBoi_Master:spike_upper_ctrl_01_grp
+    400056: smallBoi_Master:spike_upper_ctrl_02
+    400058: smallBoi_Master:spike_upper_ctrl_02_grp
+    400060: smallBoi_Master:spike_upper_jnt_01
+    400062: smallBoi_Master:spike_upper_jnt_02
+    400064: smallBoi_Master:spike_upper_jnt_03
+    400066: smallBoi_Master:spine_jnt_01
+    400068: smallBoi_Master:spine_jnt_02
+    400070: smallBoi_Master:tail_ctrl
+    400072: smallBoi_Master:tail_ctrl_grp
+    2100000: smallBoi_Master_smallBoi_Master_lambert2
+    4300000: smallBoi_Master:smallBoi_Master:smallBoi_geo
+    7400000: Idle
+    7400002: Attack
+    7400004: Hit
+    9500000: //RootNode
+    13700000: smallBoi_Master:smallBoi_Master:smallBoi_geo 1
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 47
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: Attack
+      takeName: Take 001
+      firstFrame: 47
+      lastFrame: 63
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: Hit
+      takeName: Take 001
+      firstFrame: 63
+      lastFrame: 90
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

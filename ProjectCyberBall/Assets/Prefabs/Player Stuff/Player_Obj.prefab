@@ -406,8 +406,8 @@ MonoBehaviour:
   moveDistance: 0
   movementSpeed: 1
   ray: {fileID: 1549890607151296}
-  smolMinion: {fileID: 1689849309989444, guid: af350a9ef14a8bd46b3a1a57ba9e3fbf, type: 2}
-  bigMinion: {fileID: 1777055416479592, guid: 29307c7ca0f2f9040b36f21b3bd37c9d, type: 2}
+  smolMinion: {fileID: 1197720977508202, guid: 4d70127d3b7420049b152d00f1ce077b, type: 2}
+  bigMinion: {fileID: 1444297373615362, guid: d522bd5bc21dd964ca0951e79b042bcb, type: 2}
   selectedMinion: {fileID: 0}
   endTurnPop: {fileID: 1575853409881646, guid: 254879692faaddb4088cc5906b46dfb4, type: 2}
 --- !u!114 &114123280675710304
@@ -514,7 +514,6 @@ MonoBehaviour:
   LeftUICan: {fileID: 1468524061334074}
   boiHL: {fileID: 1008542184615152, guid: 08778209c03d78f46b8f5128cd402022, type: 2}
   hexHL: {fileID: 1175762298579906, guid: ee1fa1bef7954c14c9370c78ef880451, type: 2}
-  enemyHL: {fileID: 1671028821762884, guid: 6612e7fb761f0514fab80f81d643be35, type: 2}
 --- !u!114 &114812908249231198
 MonoBehaviour:
   m_ObjectHideFlags: 1
