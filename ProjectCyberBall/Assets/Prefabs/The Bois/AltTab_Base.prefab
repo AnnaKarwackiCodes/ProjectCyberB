@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 136866768260087006}
   m_Layer: 0
   m_Name: AltTab_Base
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

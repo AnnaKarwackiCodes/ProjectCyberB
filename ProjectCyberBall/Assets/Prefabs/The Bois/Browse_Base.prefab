@@ -556,7 +556,7 @@ GameObject:
   - component: {fileID: 136944057433568994}
   m_Layer: 0
   m_Name: Browse_Base
-  m_TagString: Untagged
+  m_TagString: Boi
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
