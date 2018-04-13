@@ -24,16 +24,17 @@ public class InfoBall : agentScript {
 	
 	// Update is called once per frame
 	void Update () {
-        base.Update();
 	}
 
     public virtual void Move(Hex newHex)
     {
         //Debug.Log("(" + newHex.X + ", " + newHex.Y + ", " + newHex.Z + ") (" + newHex.Row + ", " + newHex.Col + ")");
 
-        movementPath.AddRange(mapLocal.pathfinding(standingHex, newHex));//list hex that agent needs to visit while headin to new location
         StandingHex = newHex;
         setLocation(newHex.X, newHex.Y, newHex.Z); //agent knows where it is
+        GameObject g = gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).gameObject;
+        this.gameObject.transform.position = new Vector3(g.transform.position.x, g.transform.position.y + yOffset, g.transform.position.z);  //agent's gameObjects move to proper location
+
 
         return;
     }
