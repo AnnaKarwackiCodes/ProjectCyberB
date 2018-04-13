@@ -21,7 +21,7 @@ public class Hex : MonoBehaviour
     /// <summary>
     /// What Type of hex the hex is
     /// </summary>
-    private TYPE type;
+    protected TYPE type;
 
     /// <summary>
     /// The different types of hexs that a hex can be

@@ -109,7 +109,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 108
+  controlID: 121
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -368,23 +368,23 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
+    m_SelectedIDs: 482d0000
     m_LastClickedID: 0
-    m_ExpandedIDs: 98fbffff00000000
+    m_ExpandedIDs: 4006fbff5c2dfbff0465fbff001ffeff523bfeff824dfeff286efeff302effff363bffff783effff2273ffff709fffff64abffffd4baffffbecdffffa8cfffff0aebffff52ecffff98fbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Player_Obj(Clone)
+      m_OriginalName: Player_Obj(Clone)
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: -304660
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 8}
     m_SearchString: 
@@ -421,14 +421,14 @@ MonoBehaviour:
     height: 541
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
-  lastFramingTime: 3792.0117191203703
+  lastFramingTime: 5752.73697026346
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 14.271031, y: 3.4486856, z: 12.719217}
+    m_Target: {x: 14.677662, y: 1.0387219, z: 6.7442813}
     speed: 2
-    m_Value: {x: 14.271031, y: 3.4486856, z: 12.719217}
+    m_Value: {x: 14.677662, y: 1.0387219, z: 6.7442813}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -452,13 +452,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.48975533, y: 0.0047220085, z: -0.0026429284, w: -0.8718607}
+    m_Target: {x: -0.5144005, y: -0.005651904, z: 0.0033856318, w: -0.8575479}
     speed: 2
-    m_Value: {x: -0.48975533, y: 0.0047220085, z: -0.0026429284, w: -0.8718607}
+    m_Value: {x: -0.5143903, y: -0.005651792, z: 0.0033855648, w: -0.8575309}
   m_Size:
-    m_Target: 26.20775
+    m_Target: 22.082678
     speed: 2
-    m_Value: 26.20775
+    m_Value: 22.082678
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -536,20 +536,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/scripts/MobScripts
+    - Assets/scene
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/scripts/MobScripts
+  - Assets/scene
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Noah Parker\Documents\College\Year 4\Spring\AR Production
     Studio\ProjectCyberB\ProjectCyberBall
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 95}
-    m_SelectedIDs: aa2d0000
-    m_LastClickedID: 11690
-    m_ExpandedIDs: 00000000a2270000e8270000f6270000022d00002a2d0000562d0000582e000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 120}
+    m_SelectedIDs: 1c280000
+    m_LastClickedID: 10268
+    m_ExpandedIDs: 00000000a2270000e8270000f6270000022d0000562d0000582e000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -605,7 +605,7 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: 062d000012ee0000cc2f0000442f0000942f000000000000ba2d0000
+    m_ExpandedInstanceIDs: 062d000012ee0000cc2f0000442f0000942f000000000000ba2d00004a2e0000c4270000362d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
