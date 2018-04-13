@@ -91,14 +91,22 @@ public class GameController : MonoBehaviour {
             {
                 //Debug.Log("Player turn");
             }
-            else if (!playersTurn && !enemyControl.TurnStart) //it is the enemies turn and their turn has not started yet
+            else //it is the enemies turn
             {
-                //call enemies to do their thing
-                Debug.Log("Baddie turn");
-                enemyControl.turn();
+                if (enemyControl.turnSubPhase == 0)
+                {
+                    //call enemies to do their thing
+                    Debug.Log("Baddie turn");
+                    //enemyControl.turn();
+                    enemyControl.newTurn();
+                }
                 //when finished set it up for the player to be able to do their thing
-                theUser.GetComponent<playerScript>().newTurn();
-                changeTurn(true);
+                if (enemyControl.turnSubPhase == enemyController.SUB_END_EXC)
+                {
+                    enemyControl.turnSubPhase = 0;
+                    theUser.GetComponent<playerScript>().newTurn();
+                    changeTurn(true);
+                }
             }
         }
     }

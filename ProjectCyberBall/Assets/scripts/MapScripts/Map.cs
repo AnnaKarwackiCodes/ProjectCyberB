@@ -20,6 +20,7 @@ public class Map : MonoBehaviour {
           { -1, 1, 0 }, { -1, 0, 1 }, { 0, -1, 1 } };
 
     static int[] testMap = new int[]
+
         { 0, 0, 0, 0,-1,-1, 0, 2, 0,-1,-1, 0, 0, 0, 0,
           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
           1, 1, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 1, 1,
@@ -103,7 +104,7 @@ public class Map : MonoBehaviour {
         }
     }
 
-    private void createRectangleMap(int w, int h, float off) //creates a 'rectangular' map
+    protected void createRectangleMap(int w, int h, float off) //creates a 'rectangular' map
     {
         if (w % 2 == 1) { w--; }
         if (h % 2 == 1) { h--; }
@@ -338,30 +339,19 @@ public class Map : MonoBehaviour {
         return false;
     }
 
-    private void printMap()
+    protected void printMap()
     {
-        string s = "";
-        for (int i = 0; i < width; i++)
+        string s = "{ ";
+        for (int j = 0; j < height; j++)
         {
-            for (int j = 0; j < height; j++)
+            for (int i = 0; i < width; i++)
             {
-
-                //int[] a = offsetToCube(i, j);
-                //if (hexExists(a[0], a[1], a[2]))
-                //{
-                //    s += "o ";
-                //}
-                if (i == 0 && j == 0)
-                {
-                    s += "o ";
-                }
-                else
-                {
-                    s +=  i + " ";
-                }
+                if (i == width - 1 && j == height - 1) { s += (int)map[i, j].Type; }
+                else { s += (int)map[i, j].Type + ", "; }
             }
             s += "\n";
         }
+        s += " }";
         Debug.Log(s);
     }
 
