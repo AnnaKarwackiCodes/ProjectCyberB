@@ -73,6 +73,7 @@ public class mobBase : agentScript {
     public virtual void mobAttack(agentScript target) {
 
         Debug.Log(gameObject.name + " ATTACKING " + target.gameObject.name);
+        this.gameObject.transform.rotation = Quaternion.LookRotation((target.gameObject.transform.position - gameObject.transform.position).normalized); //rotates so agent is looking forward when moving
         target.Health -= Attack;
     }
 
