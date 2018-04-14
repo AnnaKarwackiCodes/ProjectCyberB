@@ -327,4 +327,9 @@ public class agentScript : MonoBehaviour
         hasBall = false;
         gameController.theInfo.GetComponent<InfoBall>().dropBall();
     }
+
+    public virtual void takeDamage(int damageTaken)
+    {
+        health -= damageTaken;
+    }
 }

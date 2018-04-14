@@ -56,9 +56,12 @@ public class mobBase : agentScript {
         set { this.arrayPos = value; }
     }
 
+    protected Animator anim;
+
 	// Use this for initialization
 	public virtual new void Start () {
         base.Start();
+        anim = GetComponent<Animator>();
         this.CanMove = true;
 	}
 	
@@ -73,8 +76,15 @@ public class mobBase : agentScript {
     public virtual void mobAttack(agentScript target) {
 
         Debug.Log(gameObject.name + " ATTACKING " + target.gameObject.name);
-        this.gameObject.transform.rotation = Quaternion.LookRotation((target.gameObject.transform.position - gameObject.transform.position).normalized); //rotates so agent is looking forward when moving
-        target.Health -= Attack;
+        this.gameObject.transform.rotation = Quaternion.LookRotation(((new Vector3(target.gameObject.transform.position.x, gameObject.transform.position.y, target.gameObject.transform.position.z)) - gameObject.transform.position).normalized); //rotates so agent is looking forward when moving
+        anim.Play("Attack");
+        target.takeDamage(Attack);
+    }
+
+    public override void takeDamage(int damageTaken)
+    {
+        base.takeDamage(damageTaken);
+        anim.Play("Hit");
     }
 
 }

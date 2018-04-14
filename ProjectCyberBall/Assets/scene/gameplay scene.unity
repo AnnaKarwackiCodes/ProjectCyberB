@@ -1471,8 +1471,8 @@ MonoBehaviour:
   gameController: {fileID: 0}
   mapLocal: {fileID: 0}
   theInfo: {fileID: 0}
-  smolMinion: {fileID: 1197720977508202, guid: 4d70127d3b7420049b152d00f1ce077b, type: 2}
-  bigMinion: {fileID: 1444297373615362, guid: d522bd5bc21dd964ca0951e79b042bcb, type: 2}
+  smolMinion: {fileID: 1303233649943174, guid: 631e4617ca4ede340aa63510b4361288, type: 2}
+  bigMinion: {fileID: 1058961496591992, guid: 8b8c08621fec04e419c31f9ddd21d492, type: 2}
   turnSubPhase: 0
 --- !u!1 &1688514901
 GameObject:

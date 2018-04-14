@@ -33,7 +33,7 @@ public class enemyController : MonoBehaviour
     public GameObject smolMinion;
     public GameObject bigMinion;
 
-    //enemy turn arrays //TEST
+    //enemy turn arrays
     public int turnSubPhase = 0;
 
     public const int SUB_SPAWN_FUN = 1;
@@ -47,9 +47,7 @@ public class enemyController : MonoBehaviour
     List<char> leftToSpawnBoi;
     List<Hex> leftToSpawnHex;
     List<mobBase> leftToMoveBoi;
-    //List<Hex> leftToMoveHex;
     List<mobBase> leftToAttackBoi;
-    //List<Hex> leftToAtackHex;
 
     // Use this for initialization
     void Start()
@@ -65,9 +63,7 @@ public class enemyController : MonoBehaviour
         leftToSpawnBoi = new List<char>();
         leftToSpawnHex = new List<Hex>();
         leftToMoveBoi = new List<mobBase>();
-        //leftToMoveHex = new List<Hex>();
         leftToAttackBoi = new List<mobBase>();
-        //leftToAtackHex = new List<Hex>();
     }
 
     // Update is called once per frame
@@ -133,7 +129,7 @@ public class enemyController : MonoBehaviour
                 foreach (GameObject go in smallEnemies) { leftToAttackBoi.Add(go.GetComponent<mobBase>()); }
                 turnSubPhase = SUB_ATTACK_EXC;
             }
-            else if(turnSubPhase == SUB_ATTACK_EXC)
+            else if (turnSubPhase == SUB_ATTACK_EXC)
             {
                 attackwithEnemy(leftToAttackBoi[0]);
                 leftToAttackBoi.RemoveAt(0);
@@ -141,7 +137,7 @@ public class enemyController : MonoBehaviour
             }
             //end
             else if (turnSubPhase == SUB_END_EXC) { endTurn(); }
-            
+
         }
     }
 
@@ -162,12 +158,12 @@ public class enemyController : MonoBehaviour
             enemy.GetComponent<mobBase>().CanMove = true; //resets movement
             temptMana -= MOD_SMALL_BOI_COST;
         }
-        if(mana < temptMana) { enemyDiedLastTurn = true; }
+        if (mana < temptMana) { enemyDiedLastTurn = true; }
         mana = temptMana;
 
-        leftToSpawnBoi.Clear();//TEST
-        leftToSpawnHex.Clear();//TEST
-        determineGoal();//TEST
+        leftToSpawnBoi.Clear(); //no left over bois from previous turn
+        leftToSpawnHex.Clear(); //no left over hexs from previous turn
+        determineGoal();
         turnSubPhase = SUB_SPAWN_FUN;
     }
 
@@ -186,9 +182,9 @@ public class enemyController : MonoBehaviour
     private void determineGoal()
     {
         //Debug.Log("Determine Goal Start");
-        if(theInfo.X != infoHex.X || theInfo.Y != infoHex.Y || theInfo.Z != infoHex.Z) //if the info is not on starting spot
+        if (theInfo.X != infoHex.X || theInfo.Y != infoHex.Y || theInfo.Z != infoHex.Z) //if the info is not on starting spot
         {
-            if(!infoBallTaken) { infoBallTaken = true; }
+            if (!infoBallTaken) { infoBallTaken = true; }
             //attack target
             ///player/minion has info --> attack player/minion
             if (theInfo.Holder != null && theInfo.Holder.GetComponent<agentScript>().Alligence == true)
@@ -207,9 +203,9 @@ public class enemyController : MonoBehaviour
         }
 
         Hex[] tilesPM = getTilesWithPM();
-        foreach(Hex h in tilesPM)
+        foreach (Hex h in tilesPM)
         {
-            if(mapLocal.pathfinding(infoHex, h).Length - 1 <= MOD_DEFEND_INFO_RANGE)//if player/min is within the defend info range of the info
+            if (mapLocal.pathfinding(infoHex, h).Length - 1 <= MOD_DEFEND_INFO_RANGE)//if player/min is within the defend info range of the info
             {
                 //attack general
                 ///player/minion are close to ball --> attack closest target
@@ -233,29 +229,25 @@ public class enemyController : MonoBehaviour
     {
         //Debug.Log("Spawn Enemies Start");
         if (mana < MOD_SMALL_BOI_COST) { Debug.Log("enemy not enough Mana: " + mana); return; } //nothing can be spawned because not enough points
-        
-        ///setup what enemies might be spawned in
-        char[] es = { };
-        if (infoBallTaken) { es = new char[MOD_SPAWN_AFTER_INFO_TAKEN]; }
-        else { es = new char[MOD_SPAWN_BEFORE_INFO_TAKEN]; }
 
-        for(int i = 0; i < es.Length; i++)
+        ///setup what enemies might be spawned in
+        int es = 0;
+        if (infoBallTaken) { es = MOD_SPAWN_AFTER_INFO_TAKEN; }
+        else { es = MOD_SPAWN_BEFORE_INFO_TAKEN; }
+
+        for (int i = 0; i < es; i++)
         {
             switch (i % 3)
             {
                 case 0:
-                    es[i] = 's';
-                    leftToSpawnBoi.Add('s'); //TEST
+                    leftToSpawnBoi.Add('s');
                     break;
                 case 1:
-                    if (enemyDiedLastTurn) { es[i] = 'b'; leftToSpawnBoi.Add('b'); //TEST
-                    }
-                    else { es[i] = 's'; leftToSpawnBoi.Add('s'); //TEST
-                    }
+                    if (enemyDiedLastTurn) { leftToSpawnBoi.Add('b'); }
+                    else { leftToSpawnBoi.Add('s'); }
                     break;
                 case 2:
-                    es[i] = 'b';
-                    leftToSpawnBoi.Add('b'); //TEST
+                    leftToSpawnBoi.Add('b');
                     break;
                 default:
                     break;
@@ -265,60 +257,22 @@ public class enemyController : MonoBehaviour
         //Debug.Log("Enemy Spawn Array Comp: " + es[0]);
 
         ///gets list of hexs where enemies can be placed
-        List<Hex> sh = new List<Hex>(); //list of spawn hexs
-        sh.AddRange(spawnHexs);
-        sh.Sort(delegate (Hex a, Hex b)
+        leftToSpawnHex.AddRange(spawnHexs);
+        leftToSpawnHex.Sort(delegate (Hex a, Hex b)
         {
             return mapLocal.pathfinding(a, goalTarget).Length <= mapLocal.pathfinding(b, goalTarget).Length ? -1 : 1;
         });
-        for(int i = 0; i < sh.Count;) //remove any tiles that have things on them already
+        for (int i = 0; i < leftToSpawnHex.Count;) //remove any tiles that have things on them already
         {
-            if (sh[i].occupant != null)
+            if (leftToSpawnHex[i].occupant != null)
             {
-                sh.RemoveAt(i);
+                leftToSpawnHex.RemoveAt(i);
                 continue;
             }
             i++;
         }
-        if(sh.Count <= 0) { Debug.Log("No Spawn"); return; } //no place to put enemies
-        leftToSpawnHex.AddRange(sh);//TEST
-        //Debug.Log("Enemy Spawn Array Comp: " + sh[0]);
+        if (leftToSpawnHex.Count <= 0) { Debug.Log("No Spawn"); return; } //no place to put enemies
 
-        //spawn enemy time
-        for (int i = 0; false && i < es.Length && i < sh.Count; i++)//TEST remove false later
-        {
-            //Debug.Log("Spawn Enemy " + i + " " + es[i] + " : " + mana);
-            switch (es[i])
-            {
-                case 'b':
-                    if(mana - MOD_BIG_BOI_COST >= 0)
-                    {
-                        GameObject boi = Instantiate(bigMinion, (sh[i].gameObject.transform.position + new Vector3(0, .5f, 0)), new Quaternion(0, 0, 0, 0));
-                        boi.GetComponent<agentScript>().mapLocal = mapLocal;
-                        boi.GetComponent<agentScript>().spawnIn(sh[i], this.gameController);
-                        boi.GetComponent<agentScript>().Alligence = false;
-                        boi.GetComponent<mobBase>().ArrayPos = bigEnemies.Count;
-                        bigEnemies.Add(boi);
-                        mana -= MOD_BIG_BOI_COST;
-                    }
-                    break;
-                case 's':
-                default:
-                    if (mana - MOD_SMALL_BOI_COST >= 0)
-                    {
-                        //Debug.Log("Spawn smol");
-                        GameObject boi = Instantiate(smolMinion, (sh[i].gameObject.transform.position + new Vector3(0, .5f, 0)), new Quaternion(0, 0, 0, 0));
-                        boi.GetComponent<agentScript>().mapLocal = mapLocal;
-                        boi.GetComponent<agentScript>().spawnIn(sh[i], this.gameController);
-                        boi.GetComponent<agentScript>().Alligence = false;
-                        boi.GetComponent<mobBase>().ArrayPos = smallEnemies.Count;
-                        smallEnemies.Add(boi);
-                        mana -= MOD_SMALL_BOI_COST;
-                    }
-                    break;
-            }
-        }
-        //Debug.Log("Spawn Enemies End");
     }
 
     private void moveEnemy(mobBase boi)
@@ -327,46 +281,39 @@ public class enemyController : MonoBehaviour
         {
             case GOAL_RETURN_BALL: //minion with info move towards info hex, other mobs move towards minion with info
                 Hex holdersHex = null;
-
                 List<Hex> moveToHexs = new List<Hex>();
                 if (boi.HasBall)
                 {
-                        
                     orderToClosest(boi, goalTarget, out moveToHexs);
                     if (!boi.StandingHex.Equals(moveToHexs[0])) { boi.Move(moveToHexs[0]); } //if not already on the tile
                     holdersHex = moveToHexs[0];
                     break;
                 }
-
                 moveToHexs = new List<Hex>();
                 orderToClosest(boi, holdersHex, out moveToHexs);
                 if (!boi.StandingHex.Equals(moveToHexs[0])) { boi.Move(moveToHexs[0]); }//if not already on the tile
-               
                 break;
             case GOAL_ATTACK_GENERAL: //enemies move towards closest allied force, to hopefully attack
-
-                    List<Hex> closestPM = new List<Hex>();
-                    closestPM.AddRange(getTilesWithPM());
-                    closestPM.Sort(delegate (Hex a, Hex b) //orders Allied in order of closest to boi 
-                    {
-                        return mapLocal.pathfinding(a, boi.StandingHex).Length < mapLocal.pathfinding(b, boi.StandingHex).Length ? -1 : 1;
-                    });
-                    moveToHexs = new List<Hex>();
-                    orderToClosest(boi, closestPM[0], out moveToHexs); //gets closest movement to the closest Allied
-                    if (!boi.StandingHex.Equals(moveToHexs[0])) { boi.Move(moveToHexs[0]); }//if not already on the tile
-                
+                List<Hex> closestPM = new List<Hex>();
+                closestPM.AddRange(getTilesWithPM());
+                closestPM.Sort(delegate (Hex a, Hex b) //orders Allied in order of closest to boi 
+                {
+                    return mapLocal.pathfinding(a, boi.StandingHex).Length < mapLocal.pathfinding(b, boi.StandingHex).Length ? -1 : 1;
+                });
+                moveToHexs = new List<Hex>();
+                orderToClosest(boi, closestPM[0], out moveToHexs); //gets closest movement to the closest Allied
+                if (!boi.StandingHex.Equals(moveToHexs[0])) { boi.Move(moveToHexs[0]); }//if not already on the tile
                 break;
             case GOAL_DEFEND_TARGET:
             case GOAL_ATTACK_TARGET:
             default: //everyone move towards the target
                 //Debug.Log("move towards a target");
                 if (goalTarget == null) { Debug.LogError("No goal target found"); break; }
+                moveToHexs = new List<Hex>();
+                orderToClosest(boi, goalTarget, out moveToHexs);
+                //Debug.Log("Enemy move, " + boi.StandingHex.ToString() + " closest " + moveToHexs[0].ToString());
+                if (!boi.StandingHex.Equals(moveToHexs[0])) { boi.Move(moveToHexs[0]); }//if not already on the tile
 
-                    moveToHexs = new List<Hex>();
-                    orderToClosest(boi, goalTarget, out moveToHexs);
-                    //Debug.Log("Enemy move, " + boi.StandingHex.ToString() + " closest " + moveToHexs[0].ToString());
-                    if (!boi.StandingHex.Equals(moveToHexs[0])) { boi.Move(moveToHexs[0]); }//if not already on the tile
-                
                 break;
         }
     }
@@ -393,39 +340,38 @@ public class enemyController : MonoBehaviour
     /// </summary>
     private void attackwithEnemy(mobBase boi)
     {
-
-            List<Hex> neigbors = new List<Hex>();
-            for (int i = 0; i < 6; i++)
+        List<Hex> neigbors = new List<Hex>();
+        for (int i = 0; i < 6; i++)
+        {
+            Hex neigbor = mapLocal.getNeigbor(boi.StandingHex, i);
+            if (neigbor != null && neigbor.occupant != null && neigbor.occupant.Alligence != boi.Alligence)
             {
-                Hex neigbor = mapLocal.getNeigbor(boi.StandingHex, i);
-                if (neigbor != null && neigbor.occupant != null && neigbor.occupant.Alligence != boi.Alligence)
-                {
-                    neigbors.Add(neigbor); //neigbor tile had player/minion on it
-                }
+                neigbors.Add(neigbor); //neigbor tile had player/minion on it
             }
-            if (neigbors.Count == 0) { return; } //nothing to attack
-            else if (neigbors.Count == 1) { boi.mobAttack(neigbors[0].occupant); return; }//only one thing to attack
-            else
+        }
+        if (neigbors.Count == 0) { return; } //nothing to attack
+        else if (neigbors.Count == 1) { boi.mobAttack(neigbors[0].occupant); return; }//only one thing to attack
+        else
+        {
+            if (goal == GOAL_ATTACK_TARGET && neigbors.Contains(goalTarget))
             {
-                if (goal == GOAL_ATTACK_TARGET && neigbors.Contains(goalTarget))
-                {
-                    boi.mobAttack(goalTarget.occupant);
-                    return;
-                }
-                //sorts to attack target with lowest health
-                neigbors.Sort(delegate (Hex a, Hex b)
-                {
-                    if (a.occupant.Health < b.occupant.Health) { return -1; }
-                    else if (a.occupant.Health > b.occupant.Health) { return 1; }
-                    else //health are the same, pick closest to the info
+                boi.mobAttack(goalTarget.occupant);
+                return;
+            }
+            //sorts to attack target with lowest health
+            neigbors.Sort(delegate (Hex a, Hex b)
+            {
+                if (a.occupant.Health < b.occupant.Health) { return -1; }
+                else if (a.occupant.Health > b.occupant.Health) { return 1; }
+                else //health are the same, pick closest to the info
                     {
-                        if (mapLocal.distanceBetween(a, theInfo.StandingHex) == mapLocal.distanceBetween(b, theInfo.StandingHex)) { return 0; } //same distance to info orb
+                    if (mapLocal.distanceBetween(a, theInfo.StandingHex) == mapLocal.distanceBetween(b, theInfo.StandingHex)) { return 0; } //same distance to info orb
                         return mapLocal.distanceBetween(a, theInfo.StandingHex) == mapLocal.distanceBetween(b, theInfo.StandingHex) ? -1 : 1; //closer player/minion to info orb gets attacked
                     }
-                });
-                boi.mobAttack(neigbors[0].occupant);
-            }
-        
+            });
+            boi.mobAttack(neigbors[0].occupant);
+        }
+
     }
 
     private Hex[] getTilesWithPM()//gets all tiles with players/minions on it
@@ -433,14 +379,14 @@ public class enemyController : MonoBehaviour
         List<Hex> hexs = new List<Hex>();
         foreach (Hex h in mapLocal.map)
         {
-            if (!h.isSolid() && h.occupant!=null && h.occupant.Alligence == true) { hexs.Add(h); }
+            if (!h.isSolid() && h.occupant != null && h.occupant.Alligence == true) { hexs.Add(h); }
         }
         return hexs.ToArray();
     }
 
     public void RemoveBoi(int pos, int type)
     {
-        if(type == 0) //small
+        if (type == 0) //small
         {
             Destroy(smallEnemies[pos]);
             smallEnemies.RemoveAt(pos);
@@ -449,7 +395,7 @@ public class enemyController : MonoBehaviour
                 smallEnemies[i].GetComponent<mobBase>().ArrayPos = i;
             }
         }
-        else if(type == 1)//big
+        else if (type == 1)//big
         {
             Destroy(bigEnemies[pos]);
             bigEnemies.RemoveAt(pos);
