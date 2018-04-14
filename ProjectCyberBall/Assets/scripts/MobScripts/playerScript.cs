@@ -49,7 +49,7 @@ public class playerScript : agentScript {
         smolSumCost = 2;
         fireBallCost = 3;
         useBallCost = 1;
-        CanMove = true;
+        canMove = true;
         MoveDistance = 2;
         Alligence = true;
 
@@ -140,7 +140,7 @@ public class playerScript : agentScript {
 
         if (gameController != null) //agent is in a game
         {
-            if (gameController.theMap.hexExists(newHex.X, newHex.Y, newHex.Z))//hex exist to move to
+            if (canMove && gameController.theMap.hexExists(newHex.X, newHex.Y, newHex.Z))//hex exist to move to
             {
                 if (dist <= moveDistance && !newHex.isSolid()) //hex within distance and not solid
                 {
@@ -170,8 +170,9 @@ public class playerScript : agentScript {
                     return;
                 }
             }
-            Debug.LogError("game Controller not found");
+            return;
         }
+        Debug.LogError("game Controller not found");
     }
 
     public void SummonBig()
