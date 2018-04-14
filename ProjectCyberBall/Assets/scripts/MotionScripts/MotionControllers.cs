@@ -105,10 +105,15 @@ public class MotionControllers : MonoBehaviour
             lUI = Instantiate(LeftUIInteract, leftPosition, new Quaternion(0, 0, 0, 0), LeftUICan.transform);
             leftUICreate = true;
         }
-        if (createHexHL)
+        if (createHexHL && !curSel.GetComponent<Hex>().occupant)
         {
             myHexHL = Instantiate(hexHL, (curSel.transform.position + new Vector3(0,1,0)), new Quaternion(0, 0, 0, 0));
             createHexHL = false;
+            if (!createBoiHL)
+            {
+                Destroy(myBoiHL);
+                createBoiHL = true;
+            }
         }
         lUI.transform.GetChild(0).GetComponent<Text>().text = "Summon Browse";
         lUI.transform.GetChild(1).GetComponent<Text>().text = "Summon Tab";

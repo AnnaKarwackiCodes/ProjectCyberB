@@ -180,7 +180,6 @@ public class playerScript : agentScript {
         //use up certain amount of mana
         
         Debug.Log("Summon Big");
-        //ray.GetComponent<RayCasting>().SelectingObj(9, "Hex");
         if(selectedObj != null)
         {
             if (selectedObj.GetComponent<Hex>().occupant == null)
@@ -188,7 +187,6 @@ public class playerScript : agentScript {
                 mana -= bigSumCost; //place holder value
                 action = "";
                 allMinions.Add(Instantiate(bigMinion, (selectedObj.transform.position + new Vector3(0, 1.2f, 0)), new Quaternion(0, 0, 0, 0)));
-                //allMinions[curNumMins].GetComponent<agentScript>().Move(selectedObj.GetComponent<Hex>());
                 allMinions[curNumMins].GetComponent<agentScript>().mapLocal = GameObject.Find("Game Controller").GetComponent<GameController>().theMap;
                 allMinions[curNumMins].GetComponent<agentScript>().spawnIn(selectedObj.GetComponent<Hex>(), this.gameController);
                 allMinions[curNumMins].GetComponent<mobBase>().Alligence = true;
@@ -204,7 +202,6 @@ public class playerScript : agentScript {
         //use up certain amount of mana
         
         Debug.Log("Summon Small");
-        //ray.GetComponent<RayCasting>().SelectingObj(9, "Hex");
         if (selectedObj != null)
         {
             if (selectedObj.GetComponent<Hex>().occupant == null) {
@@ -261,7 +258,6 @@ public class playerScript : agentScript {
      public void MovePlayer()
     {
         //use the raycast to select spot to move
-        //ray.GetComponent<RayCasting>().SelectingObj(9, "Hex");
         //move to that spot
         if(selectedObj != null)
         {

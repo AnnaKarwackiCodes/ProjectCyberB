@@ -50,27 +50,13 @@ public class RayCasting : MonoBehaviour {
 
         if (Physics.Raycast(ray, out hit, distance))
         {
-            /*
-            if (hit.collider.gameObject.tag == wantedTag && Input.GetAxis("Right_Trigger") == 1.0f)
-            {
-                if (wantedTag == "Hex" && hit.collider.gameObject.GetComponent<Hex>().occupant != null) { return; }
-                else
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<playerScript>().SelectedObj = hit.collider.gameObject;
-                    line.enabled = false;
-                    //Input.ResetInputAxes();
-                }
-                
-            }
-            */
             switch (hit.collider.gameObject.tag)
             {
                 case "Hex":
-                    if (user.Action != "Move Boi")
+                    if (user.Action != "Move Boi" && !hit.collider.gameObject.GetComponent<Hex>().occupant)
                     {
                         myControls.HexInteraction(hit.collider.gameObject);
                         RemoveHighlight();
-
                     }
                     user.SelectedObj = hit.collider.gameObject;
                     break;
@@ -86,13 +72,17 @@ public class RayCasting : MonoBehaviour {
                     break;
                 default:
                     Debug.LogError("What you are currently selecting is not an object with a recognizeable tag");
+                    RemoveHighlight();
                     break;
             }
         }
         else
         {
             //if a menu is open and doesnt need to be, close it
+            Debug.Log("touching nothing");
             myControls.RemoveUI();
+            RemoveHighlight();
+            myControls.RemoveHighlight();
         }
 
     }
@@ -138,6 +128,11 @@ public class RayCasting : MonoBehaviour {
                                 Destroy(myHexHL);
                                 createHexHL = true;
                             }
+                            if (!createEnemyHL)
+                            {
+                                Destroy(myEnemyHL);
+                                createEnemyHL = true;
+                            }
                         }
                         user.SelectedObj = hit.collider.gameObject;
                         if (createHexHL && hit.collider.gameObject.GetComponent<Hex>().occupant == null)
@@ -161,6 +156,11 @@ public class RayCasting : MonoBehaviour {
                                 Destroy(myEnemyHL);
                                 createEnemyHL = true;
                             }
+                            if (!createHexHL)
+                            {
+                                Destroy(myHexHL);
+                                createHexHL = true;
+                            }
                         }
                         user.SelectedObj = hit.collider.gameObject;
                         if (createEnemyHL)
@@ -172,16 +172,17 @@ public class RayCasting : MonoBehaviour {
                         }
                     }
                     break;
+                default:
+                    RemoveHighlight();
+                    myControls.RemoveHighlight();
+                    preSel = null;
+                    break;
             }
         }
         else
         {
-            if (!createHexHL)
-            {
-                Destroy(myHexHL);
-                createHexHL = true;
-                //preSel = null;
-            }
+            RemoveHighlight();
+            myControls.RemoveHighlight();
         }
     }
 

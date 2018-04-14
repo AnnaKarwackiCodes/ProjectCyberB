@@ -402,7 +402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameController: {fileID: 0}
   mapLocal: {fileID: 0}
-  yOffset: 2
+  yOffset: 1
   moveDistance: 0
   movementSpeed: 1
   ray: {fileID: 1549890607151296}
