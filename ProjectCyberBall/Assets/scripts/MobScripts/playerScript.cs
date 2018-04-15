@@ -20,6 +20,7 @@ public class playerScript : agentScript {
     private int smolSumCost;
     private int fireBallCost;
     private int useBallCost;
+    private int fireBallDam;
 
     public GameObject ray;
     public GameObject smolMinion;
@@ -35,6 +36,7 @@ public class playerScript : agentScript {
 
     public GameObject FireBall;
     private GameObject myFB;
+    private bool createFireball;
 
     // Use this for initialization
     new void Start () {
@@ -44,6 +46,7 @@ public class playerScript : agentScript {
         Health = 10;
         canPunch = true;
         allMinions = new List<GameObject>();
+        createFireball = false;
 
         //StandingHex = mapReference.map[1, 1];
 
@@ -51,6 +54,7 @@ public class playerScript : agentScript {
         smolSumCost = 2;
         fireBallCost = 3;
         useBallCost = 1;
+        fireBallDam = 3;
         CanMove = true;
         MoveDistance = 2;
         Alligence = true;
@@ -118,10 +122,13 @@ public class playerScript : agentScript {
                 selectedMinion = null;
                 selectedObj = null;
             }
-            
-            for(int i = 0; i < curNumMins; i++)
+
+            if (createFireball && myFB.GetComponent<FireBall>().HitTarget)
             {
-               // Debug.Log(allMinions[i].GetComponent<mobBase>().Type + " " + allMinions[i].GetComponent<mobBase>().ArrayPos + " " + allMinions[i].GetComponent<mobBase>().Health);
+                Destroy(myFB);
+                createFireball = false;
+                action = "";
+                selectedMinion = null;
             }
 
             endTurn();
@@ -357,11 +364,15 @@ public class playerScript : agentScript {
     }
     public void UseFireball()
     {
-        mana -= fireBallCost; 
-        if(myFB != null)
+        Debug.Log("using fireball");
+        if(!createFireball)
         {
-            myFB = Instantiate(FireBall, gameObject.transform.GetChild(2).transform.position, new Quaternion(0, 0, 0, 0), gameObject.transform.GetChild(2));
+            Debug.Log("creating fireball");
+            mana -= fireBallCost;
+            myFB = Instantiate(FireBall, gameObject.transform.GetChild(2).transform.position, new Quaternion(0, 0, 0, 0));
             myFB.GetComponent<FireBall>().Target = selectedMinion.gameObject;
+            createFireball = true;
+            
         }
     }
     public void RemoveBoi(int pos)
@@ -429,6 +440,10 @@ public class playerScript : agentScript {
     public int FireBallCost
     {
         get { return fireBallCost; }
+    }
+    public int FireBallDam
+    {
+        get { return fireBallDam; }
     }
     public int UseBallCost
     {
