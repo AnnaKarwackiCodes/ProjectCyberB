@@ -291,7 +291,7 @@ public class MotionControllers : MonoBehaviour
         }
         if (createEnemyHL)
         {
-            myBoiHL = Instantiate(enemyHL, curSel.transform.position, new Quaternion(0, 0, 0, 0));
+            myEnemyHL = Instantiate(enemyHL, curSel.transform.position, new Quaternion(0, 0, 0, 0));
             createEnemyHL = false;
             if (!createHexHL)
             {
@@ -308,23 +308,14 @@ public class MotionControllers : MonoBehaviour
             curOption = 0;
             lUI.transform.GetChild(0).GetComponent<Text>().color = Color.blue;
             lUI.transform.GetChild(1).GetComponent<Text>().color = Color.white;
-            lUI.transform.GetChild(2).GetComponent<Text>().color = Color.white;
             lUI.transform.GetChild(3).GetComponent<Text>().color = Color.white;
         }
         if (Input.GetButtonDown("Left_Touchpad_Pressed"))
         {
-            switch (curOption)
+            if (gameObject.GetComponent<playerScript>().Mana - gameObject.GetComponent<playerScript>().FireBallCost >= 0)
             {
-                case 0:
-                    if (gameObject.GetComponent<playerScript>().Mana - gameObject.GetComponent<playerScript>().FireBallCost >= 0)
-                    {
-                        gameObject.GetComponent<playerScript>().SelectedMinion = curSel.GetComponent<mobBase>();
-                        gameObject.GetComponent<playerScript>().Action = "Fireball";
-                    }
-                    break;
-                default:
-                    Debug.Log("yeah no this wont work.");
-                    break;
+                gameObject.GetComponent<playerScript>().SelectedMinion = curSel.GetComponent<mobBase>();
+                gameObject.GetComponent<playerScript>().Action = "Fireball";
             }
             curOption = -1;
             if (leftUICreate)
@@ -346,6 +337,12 @@ public class MotionControllers : MonoBehaviour
         {
             Destroy(myHexHL);
             createHexHL = true;
+        }
+
+        if (!createEnemyHL)
+        {
+            Destroy(myEnemyHL);
+            createEnemyHL = true;
         }
     }
 }

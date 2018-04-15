@@ -74,7 +74,7 @@ public class RayCasting : MonoBehaviour {
                     user.UseBall();
                     break;
                 default:
-                    Debug.LogError("What you are currently selecting is not an object with a recognizeable tag");
+                    Debug.LogError("What you are currently selecting is not an object with a recognizeable tag " + hit.collider.gameObject.tag);
                     RemoveHighlight();
                     break;
             }

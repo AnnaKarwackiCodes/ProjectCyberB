@@ -370,7 +370,7 @@ public class playerScript : agentScript {
             Debug.Log("creating fireball");
             mana -= fireBallCost;
             myFB = Instantiate(FireBall, gameObject.transform.GetChild(2).transform.position, new Quaternion(0, 0, 0, 0));
-            myFB.GetComponent<FireBall>().Target = selectedMinion.gameObject;
+            myFB.GetComponent<FireBall>().Target = selectedMinion.gameObject; 
             createFireball = true;
             
         }
