@@ -554,6 +554,7 @@ GameObject:
   - component: {fileID: 95283919718565972}
   - component: {fileID: 114355813346024128}
   - component: {fileID: 136944057433568994}
+  - component: {fileID: 65948142234200390}
   m_Layer: 0
   m_Name: Browse_Base
   m_TagString: Boi
@@ -1946,8 +1947,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1444297373615362}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.238841, y: 6.11, z: 12.315344}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 2.0588446, y: 1.5040088, z: 2.7553494}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 4166533721872128}
   - {fileID: 4563399028172474}
@@ -2738,6 +2739,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1057060551738946}
   m_Mesh: {fileID: 4300000, guid: 786c67d67320eac4a8c8d5de0ac8260d, type: 3}
+--- !u!65 &65948142234200390
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1444297373615362}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.27, y: 1, z: 0.69}
+  m_Center: {x: 0, y: 0.72, z: 0}
 --- !u!95 &95283919718565972
 Animator:
   serializedVersion: 3
@@ -2779,7 +2792,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1444297373615362}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.84
   m_Height: 1.69
   m_Direction: 1

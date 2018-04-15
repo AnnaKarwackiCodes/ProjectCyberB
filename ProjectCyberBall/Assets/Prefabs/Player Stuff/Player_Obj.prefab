@@ -410,6 +410,7 @@ MonoBehaviour:
   bigMinion: {fileID: 1444297373615362, guid: d522bd5bc21dd964ca0951e79b042bcb, type: 2}
   selectedMinion: {fileID: 0}
   endTurnPop: {fileID: 1575853409881646, guid: 254879692faaddb4088cc5906b46dfb4, type: 2}
+  FireBall: {fileID: 1699913698677454, guid: 9ad0f6cf4754f704ea3c2bb129b70c07, type: 2}
 --- !u!114 &114123280675710304
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -514,6 +515,7 @@ MonoBehaviour:
   LeftUICan: {fileID: 1468524061334074}
   boiHL: {fileID: 1008542184615152, guid: 08778209c03d78f46b8f5128cd402022, type: 2}
   hexHL: {fileID: 1175762298579906, guid: ee1fa1bef7954c14c9370c78ef880451, type: 2}
+  enemyHL: {fileID: 1671028821762884, guid: 6612e7fb761f0514fab80f81d643be35, type: 2}
 --- !u!114 &114812908249231198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -596,7 +598,7 @@ LineRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 25441f5650dbb384bab6bc18983c2c63, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

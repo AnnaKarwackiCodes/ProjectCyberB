@@ -53,7 +53,7 @@ public class RayCasting : MonoBehaviour {
             switch (hit.collider.gameObject.tag)
             {
                 case "Hex":
-                    if (user.Action != "Move Boi" && !hit.collider.gameObject.GetComponent<Hex>().occupant)
+                    if (user.Action != "Move Boi" && hit.collider.gameObject.GetComponent<Hex>().occupant == null)
                     {
                         myControls.HexInteraction(hit.collider.gameObject);
                         RemoveHighlight();
@@ -66,6 +66,9 @@ public class RayCasting : MonoBehaviour {
                     break;
                 case "Enemy":
                     //player attack options
+                    Debug.Log("found baddie");
+                    myControls.EnemyInteraction(hit.collider.gameObject);
+                    user.SelectedMinion = hit.collider.gameObject.GetComponent<mobBase>();
                     break;
                 case "Info":
                     user.UseBall();
@@ -79,7 +82,6 @@ public class RayCasting : MonoBehaviour {
         else
         {
             //if a menu is open and doesnt need to be, close it
-            Debug.Log("touching nothing");
             myControls.RemoveUI();
             RemoveHighlight();
             myControls.RemoveHighlight();

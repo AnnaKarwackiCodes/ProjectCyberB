@@ -84,6 +84,7 @@ GameObject:
   - component: {fileID: 95585533774484934}
   - component: {fileID: 114217581720046770}
   - component: {fileID: 136765287915509824}
+  - component: {fileID: 65565020839238354}
   m_Layer: 0
   m_Name: Browser_Base
   m_TagString: Enemy
@@ -2434,8 +2435,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1058961496591992}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.879227, y: 7.448854, z: 6.3053794}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 1.71, y: 1.46, z: 0.98171663}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 4999274730458104}
   - {fileID: 4878778250592480}
@@ -2738,6 +2739,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1867533174051156}
   m_Mesh: {fileID: 4300000, guid: 786c67d67320eac4a8c8d5de0ac8260d, type: 3}
+--- !u!65 &65565020839238354
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1058961496591992}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.27, y: 1, z: 0.69}
+  m_Center: {x: 0, y: 0.72, z: 0}
 --- !u!95 &95585533774484934
 Animator:
   serializedVersion: 3
@@ -2779,9 +2792,9 @@ CapsuleCollider:
   m_GameObject: {fileID: 1058961496591992}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.84
-  m_Height: 1.69
+  m_Enabled: 0
+  m_Radius: 0.69
+  m_Height: 0.41
   m_Direction: 1
   m_Center: {x: 0, y: 0.85, z: 0}
 --- !u!137 &137185077826769796

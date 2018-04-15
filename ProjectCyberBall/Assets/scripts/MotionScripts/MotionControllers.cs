@@ -32,7 +32,9 @@ public class MotionControllers : MonoBehaviour
     private bool createHexHL;
     private GameObject myHexHL;
 
-    
+    public GameObject enemyHL;
+    private bool createEnemyHL;
+    private GameObject myEnemyHL;
 
     private GameObject preHex;
 
@@ -220,7 +222,7 @@ public class MotionControllers : MonoBehaviour
         lUI.transform.GetChild(3).GetComponent<Text>().text = "Ball Pass";
         if (Input.GetAxis("Left_Touchpad_X") == 1 && Input.GetAxis("Left_Touchpad_Y") == -1)
         {
-            //summon minion
+            //move minion
             curOption = 0;
             lUI.transform.GetChild(0).GetComponent<Text>().color = Color.blue;
             lUI.transform.GetChild(1).GetComponent<Text>().color = Color.white;
@@ -250,14 +252,14 @@ public class MotionControllers : MonoBehaviour
             switch (curOption)
             {
                 case 0:
-                    if (gameObject.GetComponent<playerScript>().Mana - gameObject.GetComponent<playerScript>().BigSumCost >= 0)
+                    if (gameObject.GetComponent<playerScript>().SelectedMinion.CanMove)
                     {
                         gameObject.GetComponent<playerScript>().SelectedMinion = curSel.GetComponent<mobBase>();
                         gameObject.GetComponent<playerScript>().Action = "Move Boi";
                     }
                     break;
                 case 1:
-                    if (gameObject.GetComponent<playerScript>().Mana - gameObject.GetComponent<playerScript>().SmolSumCost >= 0)
+                    if (gameObject.GetComponent<playerScript>().SelectedMinion.CanAttack)
                     {
                         gameObject.GetComponent<playerScript>().SelectedMinion = curSel.GetComponent<mobBase>();
                         gameObject.GetComponent<playerScript>().Action = "Boi Attack";
@@ -279,6 +281,58 @@ public class MotionControllers : MonoBehaviour
                 leftUICreate = false;
             }
         }     
+    }
+    public void EnemyInteraction(GameObject curSel)
+    {
+        if (leftUICreate == false)
+        {
+            lUI = Instantiate(LeftUIInteract, leftPosition, new Quaternion(0, 0, 0, 0), LeftUICan.transform);
+            leftUICreate = true;
+        }
+        if (createEnemyHL)
+        {
+            myBoiHL = Instantiate(enemyHL, curSel.transform.position, new Quaternion(0, 0, 0, 0));
+            createEnemyHL = false;
+            if (!createHexHL)
+            {
+                Destroy(myHexHL);
+                createHexHL = true;
+            }
+        }
+        lUI.transform.GetChild(0).GetComponent<Text>().text = "Fireball";
+        lUI.transform.GetChild(1).GetComponent<Text>().text = "";
+        lUI.transform.GetChild(3).GetComponent<Text>().text = "";
+        if (Input.GetAxis("Left_Touchpad_X") == 1 && Input.GetAxis("Left_Touchpad_Y") == -1)
+        {
+            //fireball that minion
+            curOption = 0;
+            lUI.transform.GetChild(0).GetComponent<Text>().color = Color.blue;
+            lUI.transform.GetChild(1).GetComponent<Text>().color = Color.white;
+            lUI.transform.GetChild(2).GetComponent<Text>().color = Color.white;
+            lUI.transform.GetChild(3).GetComponent<Text>().color = Color.white;
+        }
+        if (Input.GetButtonDown("Left_Touchpad_Pressed"))
+        {
+            switch (curOption)
+            {
+                case 0:
+                    if (gameObject.GetComponent<playerScript>().Mana - gameObject.GetComponent<playerScript>().FireBallCost >= 0)
+                    {
+                        gameObject.GetComponent<playerScript>().SelectedMinion = curSel.GetComponent<mobBase>();
+                        gameObject.GetComponent<playerScript>().Action = "Fireball";
+                    }
+                    break;
+                default:
+                    Debug.Log("yeah no this wont work.");
+                    break;
+            }
+            curOption = -1;
+            if (leftUICreate)
+            {
+                Destroy(lUI);
+                leftUICreate = false;
+            }
+        }
     }
     public void RemoveHighlight()
     {

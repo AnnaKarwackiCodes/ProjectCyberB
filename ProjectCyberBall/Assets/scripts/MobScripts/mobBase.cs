@@ -40,6 +40,16 @@ public class mobBase : agentScript {
 
     }
 
+    private bool canAttack;
+    public bool CanAttack
+    {
+
+        get { return this.canAttack; }
+
+        set { this.selected = value; }
+
+    }
+
     private string type;
     public string Type
     {

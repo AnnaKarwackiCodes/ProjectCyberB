@@ -11,6 +11,7 @@ public class minBoiScript : mobBase {
         Type = "Small";
         Health = 3;
         Attack = 1;
+        CanAttack = true;
 	}
 	
 	// Update is called once per frame
