@@ -1120,6 +1120,7 @@ MonoBehaviour:
   yOffset: 0.5
   moveDistance: 3
   movementSpeed: 5
+  mobName: Tab
 --- !u!136 &136576078617914144
 CapsuleCollider:
   m_ObjectHideFlags: 1

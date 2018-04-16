@@ -116,13 +116,18 @@ public class MotionControllers : MonoBehaviour
                 Destroy(myBoiHL);
                 createBoiHL = true;
             }
+            if (!createEnemyHL)
+            {
+                Destroy(myEnemyHL);
+                createEnemyHL = true;
+            }
         }
         lUI.transform.GetChild(0).GetComponent<Text>().text = "Summon Browse";
         lUI.transform.GetChild(1).GetComponent<Text>().text = "Summon Tab";
         lUI.transform.GetChild(3).GetComponent<Text>().text = "Move";
         if (Input.GetAxis("Left_Touchpad_X") == 1 && Input.GetAxis("Left_Touchpad_Y") == -1)
         {
-            //summon minion
+            //summon browser
             curOption = 0;
             lUI.transform.GetChild(0).GetComponent<Text>().color = Color.blue;
             lUI.transform.GetChild(1).GetComponent<Text>().color = Color.white;
@@ -131,7 +136,7 @@ public class MotionControllers : MonoBehaviour
         }
         if (Input.GetAxis("Left_Touchpad_X") == -1 && Input.GetAxis("Left_Touchpad_Y") == 1)
         {
-            //attack
+            //summon tab
             curOption = 1;
             lUI.transform.GetChild(1).GetComponent<Text>().color = Color.blue;
             lUI.transform.GetChild(0).GetComponent<Text>().color = Color.white;
@@ -140,7 +145,7 @@ public class MotionControllers : MonoBehaviour
         }
         if (Input.GetAxis("Left_Touchpad_X") == 1 && Input.GetAxis("Left_Touchpad_Y") == 1)
         {
-            //pass ball
+            //Move
             curOption = 2;
             lUI.transform.GetChild(3).GetComponent<Text>().color = Color.blue;
             lUI.transform.GetChild(1).GetComponent<Text>().color = Color.white;
@@ -154,6 +159,7 @@ public class MotionControllers : MonoBehaviour
                 case 0:
                     if (gameObject.GetComponent<playerScript>().Mana - gameObject.GetComponent<playerScript>().BigSumCost >= 0)
                     {
+                        lUI.transform.GetChild(0).GetComponent<Text>().color = Color.cyan;
                         gameObject.GetComponent<playerScript>().SelectedObj = curSel;
                         gameObject.GetComponent<playerScript>().Action = "Big";
                         if (!createHexHL)
@@ -166,6 +172,7 @@ public class MotionControllers : MonoBehaviour
                 case 1:
                     if (gameObject.GetComponent<playerScript>().Mana - gameObject.GetComponent<playerScript>().SmolSumCost >= 0)
                     {
+                        lUI.transform.GetChild(1).GetComponent<Text>().color = Color.cyan;
                         gameObject.GetComponent<playerScript>().SelectedObj = curSel;
                         gameObject.GetComponent<playerScript>().Action = "Small";
                         if (!createHexHL)
@@ -178,6 +185,7 @@ public class MotionControllers : MonoBehaviour
                 case 2:
                     if (gameObject.GetComponent<playerScript>().CanMove)
                     {
+                        lUI.transform.GetChild(3).GetComponent<Text>().color = Color.cyan;
                         gameObject.GetComponent<playerScript>().SelectedObj = curSel;
                         gameObject.GetComponent<playerScript>().Action = "Move";
                         if (!createHexHL)
@@ -188,7 +196,6 @@ public class MotionControllers : MonoBehaviour
                     }
                     break;
                 default:
-                    Debug.Log("yeah no this wont work.");
                     break;
             }
             curOption = -1;
@@ -202,6 +209,14 @@ public class MotionControllers : MonoBehaviour
     }
     public void BoiInteraction(GameObject curSel)
     {
+        if (preHex != null && curSel.transform.position != preHex.transform.position)
+        {
+            if (!createBoiHL)
+            {
+                Destroy(myBoiHL);
+                createBoiHL = true;
+            }
+        }
         if (leftUICreate == false)
         {
             lUI = Instantiate(LeftUIInteract, leftPosition, new Quaternion(0, 0, 0, 0), LeftUICan.transform);
@@ -209,6 +224,7 @@ public class MotionControllers : MonoBehaviour
         }
         if (createBoiHL)
         {
+            Debug.Log("creating");
             myBoiHL = Instantiate(boiHL, curSel.transform.position, new Quaternion(0, 0, 0, 0));
             createBoiHL = false;
             if (!createHexHL)
@@ -216,13 +232,20 @@ public class MotionControllers : MonoBehaviour
                 Destroy(myHexHL);
                 createHexHL = true;
             }
+            if (!createEnemyHL)
+            {
+                Destroy(myEnemyHL);
+                createEnemyHL = true;
+            }
         }
         lUI.transform.GetChild(0).GetComponent<Text>().text = "Move";
         lUI.transform.GetChild(1).GetComponent<Text>().text = "Have Attack";
         lUI.transform.GetChild(3).GetComponent<Text>().text = "Ball Pass";
+        lUI.transform.GetChild(4).GetComponent<Text>().text = curSel.GetComponent<mobBase>().mobName;
+        lUI.transform.GetChild(5).GetComponent<Text>().text = "Health: " + curSel.GetComponent<mobBase>().Health;
         if (Input.GetAxis("Left_Touchpad_X") == 1 && Input.GetAxis("Left_Touchpad_Y") == -1)
         {
-            //move minion
+            //move
             curOption = 0;
             lUI.transform.GetChild(0).GetComponent<Text>().color = Color.blue;
             lUI.transform.GetChild(1).GetComponent<Text>().color = Color.white;
@@ -249,29 +272,34 @@ public class MotionControllers : MonoBehaviour
         }
         if (Input.GetButtonDown("Left_Touchpad_Pressed"))
         {
+            Debug.Log("cur " + curOption);
             switch (curOption)
             {
                 case 0:
                     if (gameObject.GetComponent<playerScript>().SelectedMinion.CanMove)
                     {
+                        lUI.transform.GetChild(0).GetComponent<Text>().color = Color.cyan;
                         gameObject.GetComponent<playerScript>().SelectedMinion = curSel.GetComponent<mobBase>();
                         gameObject.GetComponent<playerScript>().Action = "Move Boi";
                     }
                     break;
                 case 1:
-                    if (gameObject.GetComponent<playerScript>().SelectedMinion.CanAttack)
+                    Debug.Log("can attack? " + curSel.GetComponent<mobBase>().CanAttack);
+                    if (curSel.GetComponent<mobBase>().CanAttack)
                     {
+                        Debug.Log("Boi attacki");
+                        lUI.transform.GetChild(1).GetComponent<Text>().color = Color.cyan;
                         gameObject.GetComponent<playerScript>().SelectedMinion = curSel.GetComponent<mobBase>();
                         gameObject.GetComponent<playerScript>().Action = "Boi Attack";
                     }
                     break;
                 case 2:
+                    lUI.transform.GetChild(3).GetComponent<Text>().color = Color.cyan;
                     gameObject.GetComponent<playerScript>().Action = "Pass Ball to";
                     gameObject.GetComponent<playerScript>().HasBall = !gameObject.GetComponent<playerScript>().HasBall;
                     curSel.GetComponent<mobBase>().HasBall = !curSel.GetComponent<mobBase>().HasBall;
                     break;
                 default:
-                    Debug.Log("yeah no this wont work.");
                     break;
             }
             curOption = -1;
@@ -280,7 +308,8 @@ public class MotionControllers : MonoBehaviour
                 Destroy(lUI);
                 leftUICreate = false;
             }
-        }     
+        }
+        preHex = curSel;
     }
     public void EnemyInteraction(GameObject curSel)
     {
@@ -299,21 +328,24 @@ public class MotionControllers : MonoBehaviour
                 createHexHL = true;
             }
         }
-        lUI.transform.GetChild(0).GetComponent<Text>().text = "Fireball";
+        lUI.transform.GetChild(3).GetComponent<Text>().text = "Fireball";
         lUI.transform.GetChild(1).GetComponent<Text>().text = "";
-        lUI.transform.GetChild(3).GetComponent<Text>().text = "";
-        if (Input.GetAxis("Left_Touchpad_X") == 1 && Input.GetAxis("Left_Touchpad_Y") == -1)
+        lUI.transform.GetChild(0).GetComponent<Text>().text = "";
+        lUI.transform.GetChild(4).GetComponent<Text>().text = curSel.GetComponent<mobBase>().mobName;
+        lUI.transform.GetChild(5).GetComponent<Text>().text = "Health: " + curSel.GetComponent<mobBase>().Health;
+        if (Input.GetAxis("Left_Touchpad_X") == 1 && Input.GetAxis("Left_Touchpad_Y") == 1)
         {
             //fireball that minion
             curOption = 0;
-            lUI.transform.GetChild(0).GetComponent<Text>().color = Color.blue;
+            lUI.transform.GetChild(3).GetComponent<Text>().color = Color.blue;
             lUI.transform.GetChild(1).GetComponent<Text>().color = Color.white;
-            lUI.transform.GetChild(3).GetComponent<Text>().color = Color.white;
+            lUI.transform.GetChild(0).GetComponent<Text>().color = Color.white;
         }
         if (Input.GetButtonDown("Left_Touchpad_Pressed"))
         {
             if (gameObject.GetComponent<playerScript>().Mana - gameObject.GetComponent<playerScript>().FireBallCost >= 0)
             {
+                lUI.transform.GetChild(3).GetComponent<Text>().color = Color.cyan;
                 gameObject.GetComponent<playerScript>().SelectedMinion = curSel.GetComponent<mobBase>();
                 gameObject.GetComponent<playerScript>().Action = "Fireball";
             }
@@ -324,6 +356,7 @@ public class MotionControllers : MonoBehaviour
                 leftUICreate = false;
             }
         }
+        preHex = curSel;
     }
     public void RemoveHighlight()
     {

@@ -56,7 +56,7 @@ public class RayCasting : MonoBehaviour {
                     if (user.Action != "Move Boi" && hit.collider.gameObject.GetComponent<Hex>().occupant == null)
                     {
                         myControls.HexInteraction(hit.collider.gameObject);
-                        RemoveHighlight();
+                        //RemoveHighlight();
                     }
                     user.SelectedObj = hit.collider.gameObject;
                     break;
@@ -66,7 +66,6 @@ public class RayCasting : MonoBehaviour {
                     break;
                 case "Enemy":
                     //player attack options
-                    Debug.Log("found baddie");
                     myControls.EnemyInteraction(hit.collider.gameObject);
                     user.SelectedMinion = hit.collider.gameObject.GetComponent<mobBase>();
                     break;
@@ -74,7 +73,7 @@ public class RayCasting : MonoBehaviour {
                     user.UseBall();
                     break;
                 default:
-                    Debug.LogError("What you are currently selecting is not an object with a recognizeable tag " + hit.collider.gameObject.tag);
+                    Debug.LogError("What you are currently selecting is not an object with a recognizeable tag " + hit.collider.gameObject.name);
                     RemoveHighlight();
                     break;
             }
@@ -83,7 +82,7 @@ public class RayCasting : MonoBehaviour {
         {
             //if a menu is open and doesnt need to be, close it
             myControls.RemoveUI();
-            RemoveHighlight();
+            //RemoveHighlight();
             myControls.RemoveHighlight();
         }
 
@@ -108,7 +107,6 @@ public class RayCasting : MonoBehaviour {
 
     public void BoiFind(float distance, string look)
     {
-        Debug.Log(look);
         line.enabled = true;
         Ray ray = new Ray(transform.position, transform.forward);
 
@@ -125,6 +123,7 @@ public class RayCasting : MonoBehaviour {
                         if (preSel != null && preSel.gameObject.tag == "Hex" && hit.collider.gameObject.transform.position != preSel.transform.position)
                         {
                             Debug.Log("different");
+                            
                             if (!createHexHL)
                             {
                                 Destroy(myHexHL);
@@ -135,24 +134,25 @@ public class RayCasting : MonoBehaviour {
                                 Destroy(myEnemyHL);
                                 createEnemyHL = true;
                             }
+                            
                         }
                         user.SelectedObj = hit.collider.gameObject;
+                        
                         if (createHexHL && hit.collider.gameObject.GetComponent<Hex>().occupant == null)
-                        {
-                            Debug.Log("here i am");
+                        { 
                             myHexHL = Instantiate(hexHL, (hit.collider.gameObject.transform.position + new Vector3(0, 1, 0)), new Quaternion(0, 0, 0, 0));
                             createHexHL = false;
                             preSel = hit.collider.gameObject;
                         }
+                        
                     }
                     break;
                 case "Enemy":
                     if (look == "Attack")
                     {
-                        Debug.Log("inside attacking enemy");
                         if (preSel != null && hit.collider.gameObject.transform.position != preSel.transform.position)
                         {
-                            Debug.Log("boi");
+                            
                             if (!createEnemyHL)
                             {
                                 Destroy(myEnemyHL);
@@ -163,20 +163,21 @@ public class RayCasting : MonoBehaviour {
                                 Destroy(myHexHL);
                                 createHexHL = true;
                             }
+                            
                         }
                         user.SelectedObj = hit.collider.gameObject;
+                        
                         if (createEnemyHL)
                         {
-                            Debug.Log("here i am boi");
                             myEnemyHL = Instantiate(enemyHL, hit.collider.gameObject.transform.position, new Quaternion(0, 0, 0, 0));
                             createEnemyHL = false;
                             preSel = hit.collider.gameObject;
                         }
+                        
                     }
                     break;
                 default:
-                    RemoveHighlight();
-                    myControls.RemoveHighlight();
+                    //RemoveHighlight();
                     preSel = null;
                     break;
             }

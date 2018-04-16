@@ -9,9 +9,8 @@ public class minBoiScript : mobBase {
         base.Start();
         MoveDistance = 3;
         Type = "Small";
-        Health = 3;
+        Health = 2;
         Attack = 1;
-        CanAttack = true;
 	}
 	
 	// Update is called once per frame

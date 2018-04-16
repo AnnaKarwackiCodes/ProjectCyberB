@@ -66,6 +66,8 @@ public class mobBase : agentScript {
         set { this.arrayPos = value; }
     }
 
+    public string mobName;
+
     protected Animator anim;
 
 	// Use this for initialization
@@ -73,6 +75,7 @@ public class mobBase : agentScript {
         base.Start();
         anim = GetComponent<Animator>();
         this.CanMove = true;
+        this.canAttack = true;
 	}
 	
 	// Update is called once per frame
@@ -89,6 +92,7 @@ public class mobBase : agentScript {
         this.gameObject.transform.rotation = Quaternion.LookRotation(((new Vector3(target.gameObject.transform.position.x, gameObject.transform.position.y, target.gameObject.transform.position.z)) - gameObject.transform.position).normalized); //rotates so agent is looking forward when moving
         anim.Play("Attack");
         target.takeDamage(Attack);
+        this.canAttack = false;
     }
 
     public override void takeDamage(int damageTaken)

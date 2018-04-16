@@ -14,7 +14,6 @@ public class FireBall : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log("lets go");
         if (!hitTarget)
         {
             transform.position = Vector3.MoveTowards(transform.position, target.transform.position + new Vector3(0, .5f, 0), .5F);

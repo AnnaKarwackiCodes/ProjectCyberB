@@ -11,7 +11,6 @@ public class majBoiScript : mobBase {
         Type = "Big";
         Health = 3;
         Attack = 3;
-        CanAttack = true;
 	}
 	
 	// Update is called once per frame

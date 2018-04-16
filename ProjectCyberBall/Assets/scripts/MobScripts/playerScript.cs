@@ -202,6 +202,7 @@ public class playerScript : agentScript {
                 allMinions[curNumMins].GetComponent<agentScript>().spawnIn(selectedObj.GetComponent<Hex>(), this.gameController);
                 allMinions[curNumMins].GetComponent<mobBase>().Alligence = true;
                 allMinions[curNumMins].GetComponent<mobBase>().ArrayPos = curNumMins;
+                allMinions[curNumMins].GetComponent<mobBase>().CanAttack = true;
                 curNumMins++;
                 selectedObj = null;
             }
@@ -223,6 +224,8 @@ public class playerScript : agentScript {
                 allMinions[curNumMins].GetComponent<agentScript>().spawnIn(selectedObj.GetComponent<Hex>(), this.gameController);
                 allMinions[curNumMins].GetComponent<mobBase>().Alligence = true;
                 allMinions[curNumMins].GetComponent<mobBase>().ArrayPos = curNumMins;
+                allMinions[curNumMins].GetComponent<mobBase>().CanAttack = true;
+               Debug.Log("this minion can attack? " + allMinions[curNumMins].GetComponent<mobBase>().CanAttack);
                 curNumMins++;
                 selectedObj = null;
             }
@@ -335,11 +338,9 @@ public class playerScript : agentScript {
 
     public void MinionInteract(string action)
     {
-
         ray.GetComponent<RayCasting>().BoiFind(10, action);
         if (action == "Move" && selectedMinion != null && selectedObj != null && selectedObj.tag == "Hex" && Input.GetAxis("Right_Trigger") == 1)
             {
-                Debug.Log("On a hex");
                 selectedMinion.Move(selectedObj.GetComponent<Hex>());
                 //Input.ResetInputAxes();
                 selectedMinion.Selected = false;
@@ -353,7 +354,6 @@ public class playerScript : agentScript {
         else if(action == "Attack" && selectedMinion != null && selectedObj != null && selectedObj.tag == "Enemy" &&  Input.GetAxis("Right_Trigger") == 1)
         {
             //do later when there are actually baddies to attack
-            Debug.Log("bad boi select");
             selectedMinion.mobAttack(selectedObj.GetComponent<agentScript>());
             selectedMinion.Selected = false;
             selectedMinion.CanMove = false;
@@ -364,10 +364,8 @@ public class playerScript : agentScript {
     }
     public void UseFireball()
     {
-        Debug.Log("using fireball");
         if(!createFireball)
         {
-            Debug.Log("creating fireball");
             mana -= fireBallCost;
             myFB = Instantiate(FireBall, gameObject.transform.GetChild(2).transform.position, new Quaternion(0, 0, 0, 0));
             myFB.GetComponent<FireBall>().Target = selectedMinion.gameObject; 
@@ -377,8 +375,6 @@ public class playerScript : agentScript {
     }
     public void RemoveBoi(int pos)
     {
-        Debug.Log("Removing boi");
-        //allMinions[pos].GetComponent<mobBase>().StandingHex.occupant = null;
         Destroy(allMinions[pos]);
         allMinions.RemoveAt(pos);
         curNumMins--;
