@@ -193,7 +193,14 @@ public class Map : MonoBehaviour {
             //sort fringe
             fringe.Sort(delegate(Hex a, Hex b)
             {
-                return distanceBetween(a, end) + gScore[a] < distanceBetween(b, end) + gScore[b] ? -1 : 1;
+                float i = (distanceBetween(a, end) + gScore[a]) - (distanceBetween(b, end) + gScore[b]);
+                if(i == 0)
+                {
+                    if (a.Type == Hex.TYPE.INFO) { return 1; }
+                    if (b.Type == Hex.TYPE.INFO) { return -1; }
+                    return 0;
+                }
+                return i < 0 ? -1 : 1;
             });
         }
 

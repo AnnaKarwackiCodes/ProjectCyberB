@@ -80,7 +80,12 @@ public class playerScript : agentScript {
 
         if (gameController.PlayersTurn)
         {
-            switch (action)
+
+            if (Input.GetKeyDown("q")) { selectedObj = mapLocal.getHex(4, -9, 5).gameObject; SummonBig(); }//noah testing
+            //if (Input.GetKeyDown("w")) { selectedObj = mapLocal.getHex(4, -9, 5).gameObject; SummonSmall(); }//noah testing
+            if (Input.GetKeyDown("e")) { gameController.changeTurn(false); } //noah testing
+
+                switch (action)
             {
                 case "Big":
                     SummonBig();
