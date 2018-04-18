@@ -360,6 +360,7 @@ public class playerScript : agentScript {
         {
             //do later when there are actually baddies to attack
             selectedMinion.mobAttack(selectedObj.GetComponent<agentScript>());
+            Debug.Log(selectedMinion.name + " : " + selectedObj.name);
             selectedMinion.Selected = false;
             selectedMinion.CanMove = false;
             selectedObj = null;
@@ -414,6 +415,7 @@ public class playerScript : agentScript {
     public GameObject SelectedObj
     {
         set { selectedObj = value; }
+        get { return selectedObj; }
     }
     /// <summary>
     /// ?

@@ -289,6 +289,7 @@ public class MotionControllers : MonoBehaviour
                     {
                         Debug.Log("Boi attacki");
                         lUI.transform.GetChild(1).GetComponent<Text>().color = Color.cyan;
+                        Debug.Log(curSel.GetComponent<mobBase>().name);
                         gameObject.GetComponent<playerScript>().SelectedMinion = curSel.GetComponent<mobBase>();
                         gameObject.GetComponent<playerScript>().Action = "Boi Attack";
                     }

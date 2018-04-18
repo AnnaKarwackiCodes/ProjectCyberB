@@ -67,7 +67,7 @@ public class RayCasting : MonoBehaviour {
                 case "Enemy":
                     //player attack options
                     myControls.EnemyInteraction(hit.collider.gameObject);
-                    user.SelectedMinion = hit.collider.gameObject.GetComponent<mobBase>();
+                    user.SelectedObj = hit.collider.gameObject;
                     break;
                 case "Info":
                     user.UseBall();
@@ -165,8 +165,9 @@ public class RayCasting : MonoBehaviour {
                             }
                             
                         }
-                        user.SelectedObj = hit.collider.gameObject;
                         
+                        user.SelectedObj = hit.collider.gameObject;
+                        Debug.Log("Selected enemy minion: " + user.SelectedObj.name + " " + user.SelectedMinion.name);
                         if (createEnemyHL)
                         {
                             myEnemyHL = Instantiate(enemyHL, hit.collider.gameObject.transform.position, new Quaternion(0, 0, 0, 0));
