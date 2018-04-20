@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1404,6 +1404,7 @@ GameObject:
   - component: {fileID: 935295906}
   - component: {fileID: 935295907}
   - component: {fileID: 935295908}
+  - component: {fileID: 935295909}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: GameController
@@ -1457,6 +1458,7 @@ MonoBehaviour:
   offset: 1
   width: 15
   height: 17
+  curMap: 
 --- !u!114 &935295908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1473,6 +1475,18 @@ MonoBehaviour:
   theInfo: {fileID: 0}
   smolMinion: {fileID: 1653789012109782, guid: 538711e8d1b23284bbcc9671386261e0, type: 2}
   bigMinion: {fileID: 1597847958509082, guid: ec275f6ea543d274c9a8fbbf35f3125e, type: 2}
+  turnSubPhase: 0
+--- !u!114 &935295909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 935295904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86cd0533e3f31e14ba869c1cfb787cae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1688514901
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class minBoiScript : mobBase {
 
+    //public UnityScript deathEffect;
+
     // Use this for initialization
     public virtual new void Start () {
         base.Start();

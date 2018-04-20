@@ -76,4 +76,11 @@ public class mobBase : agentScript {
 
     }
 
+    void onDeath()
+    {
+
+
+
+    }
+
 }
