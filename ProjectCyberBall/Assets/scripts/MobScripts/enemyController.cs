@@ -118,9 +118,12 @@ public class enemyController : MonoBehaviour
             }
             else if (turnSubPhase == SUB_MOVE_EXC)
             {
-                if (leftToMoveBoi[0].CanMove == true) { moveEnemy(leftToMoveBoi[0]); } //calculate movement
-                if (leftToMoveBoi[0].MovementPath.Count <= 0) { leftToMoveBoi.RemoveAt(0); } //finished moving
-                if (leftToMoveBoi.Count <= 0) { turnSubPhase = SUB_ATTACK_FUN; }
+                if (leftToMoveBoi[0].grown)
+                {
+                    if (leftToMoveBoi[0].CanMove) { moveEnemy(leftToMoveBoi[0]); } //calculate movement
+                    if (leftToMoveBoi[0].MovementPath.Count <= 0) { leftToMoveBoi.RemoveAt(0); } //finished moving
+                    if (leftToMoveBoi.Count <= 0) { turnSubPhase = SUB_ATTACK_FUN; }
+                }
             }
             //attack
             else if (turnSubPhase == SUB_ATTACK_FUN)
