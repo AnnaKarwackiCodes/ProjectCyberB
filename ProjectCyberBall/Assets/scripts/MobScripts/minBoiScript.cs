@@ -15,6 +15,19 @@ public class minBoiScript : mobBase {
 	
 	// Update is called once per frame
 	void Update () {
+        //spawning
+        if (!grown)
+        {
+            if (transform.localScale.magnitude >= 1 - (sizePerSec * Time.deltaTime))
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+                grown = true;
+            }
+            else
+            {
+                transform.localScale += new Vector3((sizePerSec * Time.deltaTime), (sizePerSec * Time.deltaTime), (sizePerSec * Time.deltaTime));
+            }
+        }
         base.Update();
         //Debug.Log("Minion update this minions health: " + Health);
         if (Health <= 0)

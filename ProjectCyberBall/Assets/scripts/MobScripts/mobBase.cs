@@ -70,6 +70,9 @@ public class mobBase : agentScript {
 
     protected Animator anim;
 
+    protected float sizePerSec = .75f;
+    public bool grown = true;
+
 	// Use this for initialization
 	public virtual new void Start () {
         base.Start();
@@ -80,7 +83,16 @@ public class mobBase : agentScript {
 	
 	// Update is called once per frame
 	void Update () {
+        
+
         base.Update();
+    }
+
+    public override void spawnIn(Hex newHex, GameController gCon)
+    {
+        base.spawnIn(newHex, gCon);
+        transform.localScale = new Vector3(0, 0, 0);
+        grown = false;
     }
 
     /// <summary>

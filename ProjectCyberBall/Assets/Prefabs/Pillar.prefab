@@ -22,9 +22,10 @@ GameObject:
   - component: {fileID: 33921697232529132}
   - component: {fileID: 23293053924303846}
   - component: {fileID: 95728089320311610}
+  - component: {fileID: 114739960842626194}
   m_Layer: 0
   m_Name: Pillar
-  m_TagString: Untagged
+  m_TagString: Pillar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,8 +37,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1058948651368844}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.925838, y: -3.7339716, z: 16.860516}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 14.870416, y: 0.28633, z: 10.285582}
+  m_LocalScale: {x: 1.33, y: 1, z: 1.33}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -100,3 +101,15 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114739960842626194
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1058948651368844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9b9552194189b24680c03edbbf2d21c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnSpeed: 25
