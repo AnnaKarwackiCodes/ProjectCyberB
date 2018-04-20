@@ -1437,7 +1437,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   theMap: {fileID: 0}
   userPrefab: {fileID: 1861096741457680, guid: 48e76e7be73397940b0c916a17ce0aa4, type: 2}
-  infoPrefab: {fileID: 1321136283286750, guid: c39eb1c43a21f25458cc4072c350fa1b, type: 2}
+  infoPrefab: {fileID: 1130169741591908, guid: 2c12bf1ec2f8c714b8593ddb20eaccd7, type: 2}
   theInfo: {fileID: 0}
   playersTurn: 0
   turnNum: 0

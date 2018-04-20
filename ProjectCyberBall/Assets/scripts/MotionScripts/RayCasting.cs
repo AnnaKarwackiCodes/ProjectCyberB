@@ -70,7 +70,11 @@ public class RayCasting : MonoBehaviour {
                     user.SelectedObj = hit.collider.gameObject;
                     break;
                 case "Info":
-                    user.UseBall();
+                    if (!user.HasBall)
+                    {
+                        myControls.InfoInteraction(hit.collider.gameObject);
+                        user.SelectedObj = hit.collider.gameObject;
+                    }
                     break;
                 default:
                     Debug.LogError("What you are currently selecting is not an object with a recognizeable tag " + hit.collider.gameObject.name);
