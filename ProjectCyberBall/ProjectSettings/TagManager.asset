@@ -13,6 +13,7 @@ TagManager:
   - Minion
   - Boi
   - Info
+  - Pillar
   layers:
   - Default
   - TransparentFX

@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour {
     private enemyController enemyControl;
     public GameObject userPrefab;
     public GameObject infoPrefab;
+    public GameObject pillarPrefab;
     private GameObject theUser;
     public GameObject theInfo;
     private bool userIsIn = false;
@@ -63,14 +64,7 @@ public class GameController : MonoBehaviour {
             else { theInfo.GetComponent<InfoBall>().spawnIn(theMap.map[0, 0], this); }
 
             userIsIn = true;
-            //Hex[] path = theMap.pathfinding(theMap.getHex(0, -7, 7), theMap.getHex(13, -14, 1));
-            //string s = "";
-            //for(int i = 0; i < path.Length; i++) //path finding testing
-            //{
-            //    s += path[i].ToString() + " -> ";
-            //    path[i].gameObject.GetComponent<MeshRenderer>().material = path[i].INFO_R;
-            //}
-            //Debug.Log(s);
+            updateObjective();
         }
 
         //game loop
@@ -124,5 +118,25 @@ public class GameController : MonoBehaviour {
             turnNum++;
         }
         playersTurn = newTurn;
+    }
+
+    public void updateObjective()
+    {
+        foreach (GameObject go in GameObject.FindGameObjectsWithTag("Pillar")) { DestroyImmediate(go); }
+        if (theUser.GetComponent<playerScript>().HasBall)
+        {
+            foreach(Hex h in theMap.getHexsWithType(Hex.TYPE.END))
+            {
+                GameObject go = Instantiate(pillarPrefab, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
+                go.transform.position = new Vector3(h.gameObject.transform.localPosition.x, -4, h.gameObject.transform.localPosition.z);
+            }
+        }
+        else
+        {
+            GameObject go = Instantiate(pillarPrefab, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
+            Vector3 v = theInfo.GetComponent<InfoBall>().StandingHex.gameObject.transform.localPosition;
+            go.transform.position = new Vector3(v.x, -4, v.z);
+            //go.transform.position = theInfo.GetComponent<InfoBall>().StandingHex.gameObject.transform.localPosition;
+        }
     }
 }

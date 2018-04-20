@@ -402,14 +402,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameController: {fileID: 0}
   mapLocal: {fileID: 0}
-  yOffset: 2
-  moveDistance: 0
-  movementSpeed: 1
+  yOffset: 1
+  moveDistance: 2
+  movementSpeed: 2
   ray: {fileID: 1549890607151296}
-  smolMinion: {fileID: 1689849309989444, guid: af350a9ef14a8bd46b3a1a57ba9e3fbf, type: 2}
-  bigMinion: {fileID: 1777055416479592, guid: 29307c7ca0f2f9040b36f21b3bd37c9d, type: 2}
+  smolMinion: {fileID: 1197720977508202, guid: 4d70127d3b7420049b152d00f1ce077b, type: 2}
+  bigMinion: {fileID: 1444297373615362, guid: d522bd5bc21dd964ca0951e79b042bcb, type: 2}
   selectedMinion: {fileID: 0}
   endTurnPop: {fileID: 1575853409881646, guid: 254879692faaddb4088cc5906b46dfb4, type: 2}
+  FireBall: {fileID: 1350318058150734, guid: 9ad0f6cf4754f704ea3c2bb129b70c07, type: 2}
 --- !u!114 &114123280675710304
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -597,7 +598,7 @@ LineRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 25441f5650dbb384bab6bc18983c2c63, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -737,7 +738,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1999695393992832}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224776285665399676}
@@ -745,7 +746,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -50.2, y: 80.1}
+  m_AnchoredPosition: {x: 0, y: 16.96}
   m_SizeDelta: {x: 97.74, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224713393220821806
@@ -801,6 +802,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 48.4, y: 80.5}
+  m_AnchoredPosition: {x: 0, y: -17.9}
   m_SizeDelta: {x: 97.74, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}

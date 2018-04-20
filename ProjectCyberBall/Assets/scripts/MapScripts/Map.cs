@@ -24,6 +24,7 @@ public class Map : MonoBehaviour {
     public int[][] maps = new int[5][];
 
     static int[] testMap = new int[]
+
         { 0, 0, 0, 0,-1,-1, 0, 2, 0,-1,-1, 0, 0, 0, 0,
           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
           1, 1, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 1, 1,
@@ -42,6 +43,7 @@ public class Map : MonoBehaviour {
           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
           0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0 };
 
+<<<<<<< HEAD
     static int[] startScreen = new int[]
         { 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0,
           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -60,6 +62,45 @@ public class Map : MonoBehaviour {
           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+=======
+    static int[] map1 = new int[]
+          { 5, 0, 0, 0, 5, 0, 0, 2, 0, 0, 5, 0, 0, 0, 5,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 5, 5, 0, 0,-1,-1,-1, 0, 0, 5, 5, 0, 0,
+            0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0,
+            0, 0, 0, 5, 0,-1, 0,-1, 0,-1, 0, 5, 0, 0, 0,
+            0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0,
+            5, 0, 0, 1, 1, 5, 0,-1, 0, 5, 1, 1, 0, 0, 5,
+            5, 0, 0, 5, 5, 0, 0, 0, 0, 5, 5, 0, 0, 5, 5,
+            0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0,
+            0,-1,-1, 0, 1, 1, 0, 0, 1, 1, 0,-1,-1, 0, 0,
+            5, 0, 0, 0, 5, 1, 1, 0, 1, 1, 5, 0, 0, 0, 5,
+            5, 0, 0, 0, 5, 5, 0, 0, 5, 5, 0, 0, 0, 5, 5,
+            0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0,
+            1, 1, 5, 0, 0, 5, 5, 5, 5, 0, 0, 5, 1, 1, 0,
+            5, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 5,
+            5, 1, 5,-1,-1,-1, 0, 0,-1,-1,-1, 5, 1, 5, 5,
+           -1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,-1 };
+
+    static int[] map2 = new int[]
+      { 1, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 1,
+        1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
+        1, 1, 0, 0, 0, 5,-1, 0, 0,-1, 5, 5, 5, 5, 5,
+        5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
+       -1,-1, 5, 5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
+        1, 0, 0,-1, 0, 0,-1, 5, 5, 5, 5, 5, 5, 5, 5,
+        1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+        1,-1, 5,-1, 0, 0, 0, 0,-1, 0, 0, 0, 0, 1, 1,
+        5, 5, 5, 5, 5,-1, 0, 3, 0, 5, 5, 5, 5, 5, 5,
+        1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,-1,
+        1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,-1,
+        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,-1, 0, 0, 0,
+        5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0,-1, 0, 0, 0,
+        5, 1, 0, 0,-1, 5, 5, 5, 5, 0, 0, 0, 0, 0, 5,
+        5, 1, 1, 0,-1, 0, 0, 0, 0,-1, 0, 0, 0, 1, 5,
+        5, 1, 0, 0, 0, 0, 0, 0,-1, 5, 0, 0, 1, 1, 5,
+        5, 5, 5, 5, 5, 5, 4, 4, 4, 5, 5, 5, 5, 5, 5 };
+>>>>>>> 29130418c377a16a4e50fcd5996fa2d39cf318ca
 
     // Use this for initialization
     void Start() {
@@ -68,9 +109,19 @@ public class Map : MonoBehaviour {
         maps[1] = testMap;
 
         //createRectangleMap(width, height, offset);
+<<<<<<< HEAD
         curMap = maps[0];
         //createMapFromArray(testMap);
         createMapFromArray(curMap);
+=======
+        float ran = Random.Range(0, 3);
+        if(ran < 1) { createMapFromArray(map1); }
+        else if(ran < 2) { createMapFromArray(map2); }
+        else
+        {
+            createMapFromArray(testMap);
+        }
+>>>>>>> 29130418c377a16a4e50fcd5996fa2d39cf318ca
         //player = GameObject.Find("Player_obj");
 
         //player.GetComponent<playerScript>().mapReference = this.GetComponent<Map>();
@@ -138,7 +189,7 @@ public class Map : MonoBehaviour {
         }
     }
 
-    private void createRectangleMap(int w, int h, float off) //creates a 'rectangular' map
+    protected void createRectangleMap(int w, int h, float off) //creates a 'rectangular' map
     {
         if (w % 2 == 1) { w--; }
         if (h % 2 == 1) { h--; }
@@ -227,7 +278,14 @@ public class Map : MonoBehaviour {
             //sort fringe
             fringe.Sort(delegate(Hex a, Hex b)
             {
-                return distanceBetween(a, end) + gScore[a] < distanceBetween(b, end) + gScore[b] ? -1 : 1;
+                float i = (distanceBetween(a, end) + gScore[a]) - (distanceBetween(b, end) + gScore[b]);
+                if(i == 0)
+                {
+                    if (a.Type == Hex.TYPE.INFO) { return 1; }
+                    if (b.Type == Hex.TYPE.INFO) { return -1; }
+                    return 0;
+                }
+                return i < 0 ? -1 : 1;
             });
         }
 
@@ -373,30 +431,19 @@ public class Map : MonoBehaviour {
         return false;
     }
 
-    private void printMap()
+    protected void printMap()
     {
-        string s = "";
-        for (int i = 0; i < width; i++)
+        string s = "{ ";
+        for (int j = 0; j < height; j++)
         {
-            for (int j = 0; j < height; j++)
+            for (int i = 0; i < width; i++)
             {
-
-                //int[] a = offsetToCube(i, j);
-                //if (hexExists(a[0], a[1], a[2]))
-                //{
-                //    s += "o ";
-                //}
-                if (i == 0 && j == 0)
-                {
-                    s += "o ";
-                }
-                else
-                {
-                    s +=  i + " ";
-                }
+                if (i == width - 1 && j == height - 1) { s += (int)map[i, j].Type; }
+                else { s += (int)map[i, j].Type + ", "; }
             }
             s += "\n";
         }
+        s += " }";
         Debug.Log(s);
     }
 

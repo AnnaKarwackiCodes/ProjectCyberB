@@ -1,0 +1,366 @@
+fileFormatVersion: 2
+guid: 786c67d67320eac4a8c8d5de0ac8260d
+timeCreated: 1523647034
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: largeBoi_Master:ctrls
+    100004: largeBoi_Master:float_ctrl_01
+    100006: largeBoi_Master:float_ctrl_02
+    100008: largeBoi_Master:float_ctrl_grp_01
+    100010: largeBoi_Master:float_ctrl_grp_02
+    100012: largeBoi_Master:float_jnt_01
+    100014: largeBoi_Master:float_jnt_02
+    100016: largeBoi_Master:geo
+    100018: largeBoi_Master:group1
+    100020: largeBoi_Master:group1 1
+    100022: largeBoi_Master:head_ctrl
+    100024: largeBoi_Master:head_ctrl_grp
+    100026: largeBoi_Master:head_jnt
+    100028: largeBoi_Master:headAim_jnt
+    100030: largeBoi_Master:headBase_jnt
+    100032: largeBoi_Master:jaw_ctrl
+    100034: largeBoi_Master:jaw_ctrl_grp
+    100036: largeBoi_Master:jaw_jnt
+    100038: largeBoi_Master:jawAim_jnt
+    100040: largeBoi_Master:L_arm_mstr_grp
+    100042: largeBoi_Master:L_clav_ctrl
+    100044: largeBoi_Master:L_clav_ctrl 1
+    100046: largeBoi_Master:L_clav_ctrl_grp
+    100048: largeBoi_Master:L_clav_ctrl_grp 1
+    100050: largeBoi_Master:L_clav_jnt
+    100052: largeBoi_Master:L_elbow_ctrl
+    100054: largeBoi_Master:L_elbow_ctrl 1
+    100056: largeBoi_Master:L_elbow_ctrl_grp
+    100058: largeBoi_Master:L_elbow_ctrl_grp 1
+    100060: largeBoi_Master:L_elbow_jnt
+    100062: largeBoi_Master:L_hand_ctrl_01
+    100064: largeBoi_Master:L_hand_ctrl_01 1
+    100066: largeBoi_Master:L_hand_ctrl_01_grp
+    100068: largeBoi_Master:L_hand_ctrl_01_grp 1
+    100070: largeBoi_Master:L_hand_ctrl_02
+    100072: largeBoi_Master:L_hand_ctrl_02 1
+    100074: largeBoi_Master:L_hand_ctrl_02_grp
+    100076: largeBoi_Master:L_hand_ctrl_02_grp 1
+    100078: largeBoi_Master:L_hand_jnt_01
+    100080: largeBoi_Master:L_hand_jnt_02
+    100082: largeBoi_Master:L_shoulder_ctrl
+    100084: largeBoi_Master:L_shoulder_ctrl 1
+    100086: largeBoi_Master:L_shoulder_ctrl_grp
+    100088: largeBoi_Master:L_shoulder_ctrl_grp 1
+    100090: largeBoi_Master:L_shoulder_jnt
+    100092: largeBoi_Master:L_thumb_ctrl_01
+    100094: largeBoi_Master:L_thumb_ctrl_01 1
+    100096: largeBoi_Master:L_thumb_ctrl_01_grp
+    100098: largeBoi_Master:L_thumb_ctrl_01_grp 1
+    100100: largeBoi_Master:L_thumb_ctrl_02
+    100102: largeBoi_Master:L_thumb_ctrl_02 1
+    100104: largeBoi_Master:L_thumb_ctrl_02_grp
+    100106: largeBoi_Master:L_thumb_ctrl_02_grp 1
+    100108: largeBoi_Master:L_thumb_ctrl_03
+    100110: largeBoi_Master:L_thumb_ctrl_03 1
+    100112: largeBoi_Master:L_thumb_ctrl_03_grp
+    100114: largeBoi_Master:L_thumb_ctrl_03_grp 1
+    100116: largeBoi_Master:L_thumb_jnt_01
+    100118: largeBoi_Master:L_thumb_jnt_02
+    100120: largeBoi_Master:L_thumb_jnt_03
+    100122: largeBoi_Master:L_wrist_ctrl
+    100124: largeBoi_Master:L_wrist_ctrl 1
+    100126: largeBoi_Master:L_wrist_ctrl_grp
+    100128: largeBoi_Master:L_wrist_ctrl_grp 1
+    100130: largeBoi_Master:L_wrist_jnt
+    100132: largeBoi_Master:largeBoi_Master:body
+    100134: largeBoi_Master:largeBoi_Master:geo
+    100136: largeBoi_Master:largeBoi_Master:L_brow
+    100138: largeBoi_Master:largeBoi_Master:L_eye
+    100140: largeBoi_Master:largeBoi_Master:R_brow
+    100142: largeBoi_Master:largeBoi_Master:R_eye
+    100144: largeBoi_Master:master_ctrl
+    100146: largeBoi_Master:master_ctrl 1
+    100148: largeBoi_Master:neck_jnt
+    100150: largeBoi_Master:R_arm_mstr_grp
+    100152: largeBoi_Master:R_clav_jnt
+    100154: largeBoi_Master:R_elbow_jnt
+    100156: largeBoi_Master:R_hand_jnt_01
+    100158: largeBoi_Master:R_hand_jnt_02
+    100160: largeBoi_Master:R_shoulder_jnt
+    100162: largeBoi_Master:R_thumb_jnt_01
+    100164: largeBoi_Master:R_thumb_jnt_02
+    100166: largeBoi_Master:R_thumb_jnt_03
+    100168: largeBoi_Master:R_wrist_jnt
+    100170: largeBoi_Master:root_ctrl
+    100172: largeBoi_Master:root_ctrl_grp
+    100174: largeBoi_Master:root_jnt
+    400000: //RootNode
+    400002: largeBoi_Master:ctrls
+    400004: largeBoi_Master:float_ctrl_01
+    400006: largeBoi_Master:float_ctrl_02
+    400008: largeBoi_Master:float_ctrl_grp_01
+    400010: largeBoi_Master:float_ctrl_grp_02
+    400012: largeBoi_Master:float_jnt_01
+    400014: largeBoi_Master:float_jnt_02
+    400016: largeBoi_Master:geo
+    400018: largeBoi_Master:group1
+    400020: largeBoi_Master:group1 1
+    400022: largeBoi_Master:head_ctrl
+    400024: largeBoi_Master:head_ctrl_grp
+    400026: largeBoi_Master:head_jnt
+    400028: largeBoi_Master:headAim_jnt
+    400030: largeBoi_Master:headBase_jnt
+    400032: largeBoi_Master:jaw_ctrl
+    400034: largeBoi_Master:jaw_ctrl_grp
+    400036: largeBoi_Master:jaw_jnt
+    400038: largeBoi_Master:jawAim_jnt
+    400040: largeBoi_Master:L_arm_mstr_grp
+    400042: largeBoi_Master:L_clav_ctrl
+    400044: largeBoi_Master:L_clav_ctrl 1
+    400046: largeBoi_Master:L_clav_ctrl_grp
+    400048: largeBoi_Master:L_clav_ctrl_grp 1
+    400050: largeBoi_Master:L_clav_jnt
+    400052: largeBoi_Master:L_elbow_ctrl
+    400054: largeBoi_Master:L_elbow_ctrl 1
+    400056: largeBoi_Master:L_elbow_ctrl_grp
+    400058: largeBoi_Master:L_elbow_ctrl_grp 1
+    400060: largeBoi_Master:L_elbow_jnt
+    400062: largeBoi_Master:L_hand_ctrl_01
+    400064: largeBoi_Master:L_hand_ctrl_01 1
+    400066: largeBoi_Master:L_hand_ctrl_01_grp
+    400068: largeBoi_Master:L_hand_ctrl_01_grp 1
+    400070: largeBoi_Master:L_hand_ctrl_02
+    400072: largeBoi_Master:L_hand_ctrl_02 1
+    400074: largeBoi_Master:L_hand_ctrl_02_grp
+    400076: largeBoi_Master:L_hand_ctrl_02_grp 1
+    400078: largeBoi_Master:L_hand_jnt_01
+    400080: largeBoi_Master:L_hand_jnt_02
+    400082: largeBoi_Master:L_shoulder_ctrl
+    400084: largeBoi_Master:L_shoulder_ctrl 1
+    400086: largeBoi_Master:L_shoulder_ctrl_grp
+    400088: largeBoi_Master:L_shoulder_ctrl_grp 1
+    400090: largeBoi_Master:L_shoulder_jnt
+    400092: largeBoi_Master:L_thumb_ctrl_01
+    400094: largeBoi_Master:L_thumb_ctrl_01 1
+    400096: largeBoi_Master:L_thumb_ctrl_01_grp
+    400098: largeBoi_Master:L_thumb_ctrl_01_grp 1
+    400100: largeBoi_Master:L_thumb_ctrl_02
+    400102: largeBoi_Master:L_thumb_ctrl_02 1
+    400104: largeBoi_Master:L_thumb_ctrl_02_grp
+    400106: largeBoi_Master:L_thumb_ctrl_02_grp 1
+    400108: largeBoi_Master:L_thumb_ctrl_03
+    400110: largeBoi_Master:L_thumb_ctrl_03 1
+    400112: largeBoi_Master:L_thumb_ctrl_03_grp
+    400114: largeBoi_Master:L_thumb_ctrl_03_grp 1
+    400116: largeBoi_Master:L_thumb_jnt_01
+    400118: largeBoi_Master:L_thumb_jnt_02
+    400120: largeBoi_Master:L_thumb_jnt_03
+    400122: largeBoi_Master:L_wrist_ctrl
+    400124: largeBoi_Master:L_wrist_ctrl 1
+    400126: largeBoi_Master:L_wrist_ctrl_grp
+    400128: largeBoi_Master:L_wrist_ctrl_grp 1
+    400130: largeBoi_Master:L_wrist_jnt
+    400132: largeBoi_Master:largeBoi_Master:body
+    400134: largeBoi_Master:largeBoi_Master:geo
+    400136: largeBoi_Master:largeBoi_Master:L_brow
+    400138: largeBoi_Master:largeBoi_Master:L_eye
+    400140: largeBoi_Master:largeBoi_Master:R_brow
+    400142: largeBoi_Master:largeBoi_Master:R_eye
+    400144: largeBoi_Master:master_ctrl
+    400146: largeBoi_Master:master_ctrl 1
+    400148: largeBoi_Master:neck_jnt
+    400150: largeBoi_Master:R_arm_mstr_grp
+    400152: largeBoi_Master:R_clav_jnt
+    400154: largeBoi_Master:R_elbow_jnt
+    400156: largeBoi_Master:R_hand_jnt_01
+    400158: largeBoi_Master:R_hand_jnt_02
+    400160: largeBoi_Master:R_shoulder_jnt
+    400162: largeBoi_Master:R_thumb_jnt_01
+    400164: largeBoi_Master:R_thumb_jnt_02
+    400166: largeBoi_Master:R_thumb_jnt_03
+    400168: largeBoi_Master:R_wrist_jnt
+    400170: largeBoi_Master:root_ctrl
+    400172: largeBoi_Master:root_ctrl_grp
+    400174: largeBoi_Master:root_jnt
+    2100000: lambert1
+    2300000: largeBoi_Master:largeBoi_Master:L_brow
+    2300002: largeBoi_Master:largeBoi_Master:L_eye
+    2300004: largeBoi_Master:largeBoi_Master:R_brow
+    2300006: largeBoi_Master:largeBoi_Master:R_eye
+    3300000: largeBoi_Master:largeBoi_Master:L_brow
+    3300002: largeBoi_Master:largeBoi_Master:L_eye
+    3300004: largeBoi_Master:largeBoi_Master:R_brow
+    3300006: largeBoi_Master:largeBoi_Master:R_eye
+    4300000: largeBoi_Master:largeBoi_Master:R_eye
+    4300002: largeBoi_Master:largeBoi_Master:L_eye
+    4300004: largeBoi_Master:largeBoi_Master:L_brow
+    4300006: largeBoi_Master:largeBoi_Master:R_brow
+    4300008: largeBoi_Master:largeBoi_Master:body
+    7400000: Idle
+    7400002: Attack
+    7400004: Hit
+    9500000: //RootNode
+    13700000: largeBoi_Master:largeBoi_Master:body
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 46
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Attack
+      takeName: Take 001
+      firstFrame: 47
+      lastFrame: 85
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Hit
+      takeName: Take 001
+      firstFrame: 86
+      lastFrame: 150
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
