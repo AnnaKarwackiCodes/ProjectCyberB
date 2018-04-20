@@ -1438,7 +1438,9 @@ MonoBehaviour:
   theMap: {fileID: 0}
   userPrefab: {fileID: 1861096741457680, guid: 48e76e7be73397940b0c916a17ce0aa4, type: 2}
   infoPrefab: {fileID: 1130169741591908, guid: 2c12bf1ec2f8c714b8593ddb20eaccd7, type: 2}
-  theInfo: {fileID: 0}
+  pillarPrefab: {fileID: 1058948651368844, guid: 0e06eb264a40be14691e6fd50cc362fb,
+    type: 2}
+  theInfo: {fileID: 1130169741591908, guid: 2c12bf1ec2f8c714b8593ddb20eaccd7, type: 2}
   playersTurn: 0
   turnNum: 0
   gameWin: 0

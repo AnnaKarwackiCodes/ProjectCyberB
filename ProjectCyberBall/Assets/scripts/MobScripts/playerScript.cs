@@ -155,6 +155,10 @@ public class playerScript : agentScript {
         {
             gameController.gameWin = 1;
         }
+        if(Health <= 0)
+        {
+            gameController.gameWin = -1;
+        }
 
     }
     /// <summary>

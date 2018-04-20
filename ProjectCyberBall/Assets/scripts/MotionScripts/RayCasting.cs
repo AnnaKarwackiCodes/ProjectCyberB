@@ -76,6 +76,8 @@ public class RayCasting : MonoBehaviour {
                         user.SelectedObj = hit.collider.gameObject;
                     }
                     break;
+                case "Fireball":
+                    break;
                 default:
                     Debug.LogError("What you are currently selecting is not an object with a recognizeable tag " + hit.collider.gameObject.name);
                     RemoveHighlight();

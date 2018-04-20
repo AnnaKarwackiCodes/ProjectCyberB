@@ -389,22 +389,30 @@ public class enemyController : MonoBehaviour
 
     public void RemoveBoi(int pos, int type)
     {
+        Debug.Log("removing");
         if (type == 0) //small
         {
-            Destroy(smallEnemies[pos]);
-            smallEnemies.RemoveAt(pos);
-            for (int i = 0; i < smallEnemies.Count; i++)
+            if (smallEnemies[pos].GetComponent<mobBase>().Health <=0)
             {
-                smallEnemies[i].GetComponent<mobBase>().ArrayPos = i;
+                Debug.Log("Remove small");
+                Destroy(smallEnemies[pos]);
+                smallEnemies.RemoveAt(pos);
+                for (int i = 0; i < smallEnemies.Count; i++)
+                {
+                    smallEnemies[i].GetComponent<mobBase>().ArrayPos = i;
+                }
             }
         }
         else if (type == 1)//big
         {
-            Destroy(bigEnemies[pos]);
-            bigEnemies.RemoveAt(pos);
-            for (int i = 0; i < bigEnemies.Count; i++)
+            if (bigEnemies[pos].GetComponent<mobBase>().Health <= 0)
             {
-                bigEnemies[i].GetComponent<mobBase>().ArrayPos = i;
+                Destroy(bigEnemies[pos]);
+                bigEnemies.RemoveAt(pos);
+                for (int i = 0; i < bigEnemies.Count; i++)
+                {
+                    bigEnemies[i].GetComponent<mobBase>().ArrayPos = i;
+                }
             }
         }
     }
