@@ -319,13 +319,14 @@ public class agentScript : MonoBehaviour
         hasBall = true;
         IB.Holder = this.gameObject;
         IB.movementSpeed = this.movementSpeed;
-
+        gameController.updateObjective();
     }
 
     public virtual void dropBall()
     {
         hasBall = false;
         gameController.theInfo.GetComponent<InfoBall>().dropBall();
+        gameController.updateObjective();
     }
 
     public virtual void takeDamage(int damageTaken)

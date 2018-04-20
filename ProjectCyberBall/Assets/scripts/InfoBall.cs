@@ -35,7 +35,7 @@ public class InfoBall : agentScript {
         GameObject g = gameController.theMap.getHex(newHex.X, newHex.Y, newHex.Z).gameObject;
         this.gameObject.transform.position = new Vector3(g.transform.position.x, g.transform.position.y + yOffset, g.transform.position.z);  //agent's gameObjects move to proper location
 
-
+        gameController.updateObjective();
         return;
     }
 
