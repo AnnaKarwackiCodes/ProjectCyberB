@@ -39,6 +39,8 @@ public class playerScript : agentScript {
     private GameObject myFB;
     private bool createFireball;
 
+    private bool endMenuUp;
+
     // Use this for initialization
     new void Start () {
         base.Start();
@@ -65,6 +67,7 @@ public class playerScript : agentScript {
         selectorOn = false;
 
         endOfTurnButtonHold = false;
+        endMenuUp = false;
     }
 
     void Awake() {
@@ -77,8 +80,11 @@ public class playerScript : agentScript {
 	// Update is called once per frame
 	void Update () {
         //base.Update();
-        transform.GetChild(2).GetChild(1).GetChild(0).GetComponent<Text>().text = "Health: " + Health;
-        transform.GetChild(2).GetChild(1).GetChild(1).GetComponent<Text>().text = "Mana: " + mana;
+        if (!endMenuUp)
+        {
+            transform.GetChild(2).GetChild(1).GetChild(0).GetComponent<Text>().text = "Health: " + Health;
+            transform.GetChild(2).GetChild(1).GetChild(1).GetComponent<Text>().text = "Mana: " + mana;
+        }
 
         if (gameController.PlayersTurn)
         {
@@ -326,10 +332,13 @@ public class playerScript : agentScript {
     {
         if(Input.GetAxis("Left_Trigger") == 1 && Input.GetAxis("Right_Trigger") == 1)
         {
+            endMenuUp = true;
             if (!endPopCreate) //creates end of turn text
             {
                 etPop = Instantiate(endTurnPop, transform.GetChild(2).GetChild(1).transform.position, new Quaternion(0, 0, 0, 0),transform.GetChild(2).GetChild(1).transform);
                 endPopCreate = true;
+                transform.GetChild(2).GetChild(1).GetChild(0).GetComponent<Text>().text = "";
+                transform.GetChild(2).GetChild(1).GetChild(1).GetComponent<Text>().text = "";
             }
             //pop up an end turn? menu
             if(Input.GetAxis("Left_Grip_Button") == 1 && Input.GetAxis("Right_Grip_Button") == 1)
@@ -344,13 +353,14 @@ public class playerScript : agentScript {
                         Destroy(etPop);
                         endPopCreate = false;
                     }
+                    endMenuUp = false;
                 }
             }
             else { endOfTurnButtonHold = false; }
         }
         else
         {
-
+            endMenuUp = false;
             if (endPopCreate)
             {
                 Destroy(etPop);
