@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
@@ -15,7 +16,9 @@ public class GameController : MonoBehaviour {
     [SerializeField]private bool playersTurn;
     private bool inGame;
     public int turnNum; //number of turns that have happened
-
+    public GameObject menu;
+    private GameObject myMenu;
+    private bool beforeGame;
     /// <summary>
     /// shows if either side has won the game
     /// 0 = still playing
@@ -37,7 +40,9 @@ public class GameController : MonoBehaviour {
     {
         Debug.Log("start");
         playersTurn = true;
-        inGame = true;
+        //inGame = true;
+        inGame = false;
+        beforeGame = true;
         turnNum = 1;
     }
 	
@@ -73,11 +78,15 @@ public class GameController : MonoBehaviour {
             if(gameWin == 1)
             {
                 Debug.Log("Player WINS!!!");
+                inGame = false;
+                theUser.GetComponent<MotionControllers>().RemoveUI();
                 return;
             }
             else if(gameWin == -1)
             {
                 Debug.Log("Baddies WINS!!!");
+                inGame = false;
+                theUser.GetComponent<MotionControllers>().RemoveUI();
                 return;
             }
 
@@ -103,12 +112,63 @@ public class GameController : MonoBehaviour {
                 }
             }
         }
+        if (!inGame)
+        {
+            //menustuff
+            if (beforeGame)
+            {
+                if (myMenu == null)
+                {
+                    myMenu = Instantiate(menu, new Vector3(theUser.transform.position.x, 4, 5), new Quaternion(0, 0, 0, 0));
+                    myMenu.transform.GetChild(0).GetComponent<Text>().text = "Project Cyber B";
+                }
+                if (theUser.GetComponent<playerScript>().Action == "Lets go")
+                {
+                    inGame = true;
+                    beforeGame = false;
+                    Destroy(myMenu);
+                }
+            }
+            else
+            {
+                if (myMenu == null)
+                {
+                    Hex[] startHex = theMap.getHexsWithType(Hex.TYPE.START);
+                    theUser.GetComponent<playerScript>().spawnIn(startHex[0], this);
+                    myMenu = Instantiate(menu, new Vector3(theUser.transform.position.x, 4, 5), new Quaternion(0, 0, 0, 0));
+                    if (gameWin == 1)
+                    {
+                        myMenu.transform.GetChild(0).GetComponent<Text>().text = "YOU WIN";
+                    }
+                    else
+                    {
+                        myMenu.transform.GetChild(0).GetComponent<Text>().text = "YOU LOSE";
+                    }
+                    
+                }
+                if(theUser.GetComponent<playerScript>().Action == "Reset")
+                {
+                    theMap = gameObject.GetComponent<Map>();
+                    enemyControl = gameObject.GetComponent<enemyController>();
+                    userIsIn = false;
+
+                }
+            }
+        }
     }
 
     public bool PlayersTurn
     {
     //    set { playersTurn = value; }
         get { return playersTurn; }
+    }
+    public bool InGame
+    {
+        get { return inGame; }
+    }
+    public bool BeforeGame
+    {
+        get { return beforeGame; }
     }
 
     public void changeTurn(bool newTurn) //changes the turn and increases the turn number

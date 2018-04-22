@@ -1508,7 +1508,12 @@ ModelImporter:
     4300580: dome
     4300582: domeArch
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: domeArch_lam
+    second: {fileID: 2100000, guid: 6c5de3d5734eb954cbb62afd90f3e977, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

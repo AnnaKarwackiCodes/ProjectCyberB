@@ -15,6 +15,7 @@ TagManager:
   - Info
   - Pillar
   - Fireball
+  - Button
   layers:
   - Default
   - TransparentFX

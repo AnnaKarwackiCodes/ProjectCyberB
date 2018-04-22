@@ -84,6 +84,50 @@ public class MotionControllers : MonoBehaviour
         righty.transform.localPosition = rightPosition;
         righty.transform.localRotation = rightRotation;
     }
+    public void StartUI(bool before)
+    {
+        Debug.Log(before);
+        if (leftUICreate == false)
+        {
+            Debug.Log("create");
+            lUI = Instantiate(LeftUIInteract, leftPosition, new Quaternion(0, 0, 0, 0), LeftUICan.transform);
+            leftUICreate = true;
+        }
+        lUI.transform.GetChild(0).GetComponent<Text>().text = "";
+        lUI.transform.GetChild(1).GetComponent<Text>().text = "";
+        if (before)
+        {
+            lUI.transform.GetChild(3).GetComponent<Text>().text = "Start";
+        }
+        else
+        {
+            lUI.transform.GetChild(3).GetComponent<Text>().text = "Play Again";
+        }
+        lUI.transform.GetChild(4).GetComponent<Text>().text = "";
+        lUI.transform.GetChild(5).GetComponent<Text>().text = "";
+        if (Input.GetAxis("Left_Touchpad_X") == 1 && Input.GetAxis("Left_Touchpad_Y") == 1)
+        {
+            curOption = 1;
+            lUI.transform.GetChild(3).GetComponent<Text>().color = Color.blue;
+            lUI.transform.GetChild(1).GetComponent<Text>().color = Color.white;
+            lUI.transform.GetChild(0).GetComponent<Text>().color = Color.white;
+            lUI.transform.GetChild(2).GetComponent<Text>().color = Color.white;
+        }
+        else { curOption = 0; }
+
+        if (Input.GetButtonDown("Left_Touchpad_Pressed"))
+        {
+            if (before)
+            {
+                gameObject.GetComponent<playerScript>().Action = "Lets go";
+            }
+            else
+            {
+                Debug.Log("reset");
+                gameObject.GetComponent<playerScript>().Action = "Reset";
+            }
+        }
+    }
     public void RemoveUI()
     {
         if (leftUICreate)

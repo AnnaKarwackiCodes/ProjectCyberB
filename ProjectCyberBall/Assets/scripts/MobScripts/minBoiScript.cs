@@ -28,7 +28,7 @@ public class minBoiScript : mobBase {
                 transform.localScale += new Vector3((sizePerSec * Time.deltaTime), (sizePerSec * Time.deltaTime), (sizePerSec * Time.deltaTime));
             }
         }
-        base.Update();
+        //base.Update();
         //Debug.Log("Minion update this minions health: " + Health);
         if (Health <= 0)
         {
@@ -42,5 +42,6 @@ public class minBoiScript : mobBase {
                 GameObject.FindGameObjectWithTag("GameController").GetComponent<enemyController>().RemoveBoi(ArrayPos, 0);
             }
         }
+        base.Update();
     }
 }

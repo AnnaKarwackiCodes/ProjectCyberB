@@ -80,15 +80,13 @@ public class playerScript : agentScript {
 	// Update is called once per frame
 	void Update () {
         //base.Update();
-        if (!endMenuUp)
+        if (!endMenuUp && gameController.InGame)
         {
             transform.GetChild(2).GetChild(1).GetChild(0).GetComponent<Text>().text = "Health: " + Health;
             transform.GetChild(2).GetChild(1).GetChild(1).GetComponent<Text>().text = "Mana: " + mana;
         }
-
-        if (gameController.PlayersTurn)
+        if (gameController.PlayersTurn && gameController.InGame)
         {
-
             if (Input.GetKeyDown("q")) { selectedObj = mapLocal.getHex(4, -9, 5).gameObject; SummonBig(); }//noah testing
             //if (Input.GetKeyDown("w")) { selectedObj = mapLocal.getHex(4, -9, 5).gameObject; SummonSmall(); }//noah testing
             if (Input.GetKeyDown("e")) { gameController.changeTurn(false); } //noah testing
@@ -149,6 +147,12 @@ public class playerScript : agentScript {
             }
 
             endTurn();
+        }
+        Debug.Log(gameController.BeforeGame + " " + "ahh");
+        if(!gameController.InGame)
+        {
+            Debug.Log("inside");
+            gameObject.GetComponent<MotionControllers>().StartUI(gameController.BeforeGame);
         }
 
         if(this.hasBall && standingHex.Type == Hex.TYPE.END && movementPath.Count <= 0) //Victory condition

@@ -98,12 +98,15 @@ public class RayCasting : MonoBehaviour {
 
         Ray ray = new Ray(transform.position, transform.forward);
 
+        line.SetPosition(0, ray.origin);
+        line.SetPosition(1, ray.GetPoint(distance));
+
         if (Physics.Raycast(ray, out hit, distance))
         {
 
             if (hit.collider.gameObject.tag == "button" && Input.GetAxis("Right_Trigger") == 1.0f) {
 
-                Debug.Log("Menu option selected: " + hit.collider.gameObject.GetComponent<vrMenu>().buttonId);
+                
 
             }
 

@@ -108,7 +108,7 @@ public class mobBase : agentScript {
         }
         anim.Play("Attack");
         target.takeDamage(Attack);
-        this.canAttack = false;
+        this.CanAttack = false;
     }
 
     public override void takeDamage(int damageTaken)
