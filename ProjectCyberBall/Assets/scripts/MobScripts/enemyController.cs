@@ -86,6 +86,7 @@ public class enemyController : MonoBehaviour
                                 boi.GetComponent<agentScript>().mapLocal = mapLocal;
                                 boi.GetComponent<agentScript>().spawnIn(leftToSpawnHex[0], this.gameController);
                                 boi.GetComponent<agentScript>().Alligence = false;
+                                boi.GetComponent<mobBase>().ArrayPos = bigEnemies.Count;
                                 bigEnemies.Add(boi);
                                 mana -= MOD_BIG_BOI_COST;
                             }
@@ -99,6 +100,7 @@ public class enemyController : MonoBehaviour
                                 boi.GetComponent<agentScript>().mapLocal = mapLocal;
                                 boi.GetComponent<agentScript>().spawnIn(leftToSpawnHex[0], this.gameController);
                                 boi.GetComponent<agentScript>().Alligence = false;
+                                boi.GetComponent<mobBase>().ArrayPos = smallEnemies.Count;
                                 smallEnemies.Add(boi);
                                 mana -= MOD_SMALL_BOI_COST;
                             }
