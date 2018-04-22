@@ -21,6 +21,7 @@ public class playerScript : agentScript {
     private int fireBallCost;
     private int useBallCost;
     private int fireBallDam;
+    private int ballPassCost;
 
     public GameObject ray;
     public GameObject smolMinion;
@@ -37,6 +38,8 @@ public class playerScript : agentScript {
     public GameObject FireBall;
     private GameObject myFB;
     private bool createFireball;
+
+    private bool endMenuUp;
 
     // Use this for initialization
     new void Start () {
@@ -55,6 +58,7 @@ public class playerScript : agentScript {
         fireBallCost = 3;
         useBallCost = 1;
         fireBallDam = 3;
+        ballPassCost = 2;
         CanMove = true;
         MoveDistance = 2;
         Alligence = true;
@@ -63,6 +67,7 @@ public class playerScript : agentScript {
         selectorOn = false;
 
         endOfTurnButtonHold = false;
+        endMenuUp = false;
     }
 
     void Awake() {
@@ -75,12 +80,13 @@ public class playerScript : agentScript {
 	// Update is called once per frame
 	void Update () {
         //base.Update();
-        transform.GetChild(2).GetChild(1).GetChild(0).GetComponent<Text>().text = "Health: " + Health;
-        transform.GetChild(2).GetChild(1).GetChild(1).GetComponent<Text>().text = "Mana: " + mana;
-
-        if (gameController.PlayersTurn)
+        if (!endMenuUp && gameController.InGame)
         {
-
+            transform.GetChild(2).GetChild(1).GetChild(0).GetComponent<Text>().text = "Health: " + Health;
+            transform.GetChild(2).GetChild(1).GetChild(1).GetComponent<Text>().text = "Mana: " + mana;
+        }
+        if (gameController.PlayersTurn && gameController.InGame)
+        {
             if (Input.GetKeyDown("q")) { selectedObj = mapLocal.getHex(4, -9, 5).gameObject; SummonBig(); }//noah testing
             //if (Input.GetKeyDown("w")) { selectedObj = mapLocal.getHex(4, -9, 5).gameObject; SummonSmall(); }//noah testing
             if (Input.GetKeyDown("e")) { gameController.changeTurn(false); } //noah testing
@@ -103,6 +109,10 @@ public class playerScript : agentScript {
                     MinionInteract("Attack");
                     break;
                 case "Pass Ball to":
+                    if(selectedMinion != null)
+                    {
+                        UseBall();
+                    }
                     break;
                 case "Fireball":
                     UseFireball();
@@ -138,14 +148,23 @@ public class playerScript : agentScript {
 
             endTurn();
         }
+        Debug.Log(gameController.BeforeGame + " " + "ahh");
+        if(!gameController.InGame)
+        {
+            Debug.Log("inside");
+            gameObject.GetComponent<MotionControllers>().StartUI(gameController.BeforeGame);
+        }
 
         if(this.hasBall && standingHex.Type == Hex.TYPE.END && movementPath.Count <= 0) //Victory condition
         {
             gameController.gameWin = 1;
         }
+        if(Health <= 0)
+        {
+            gameController.gameWin = -1;
+        }
 
     }
-
     /// <summary>
     /// Move agent to hex
     /// </summary>
@@ -190,15 +209,14 @@ public class playerScript : agentScript {
         }
         Debug.LogError("game Controller not found");
     }
-
     public void SummonBig()
     {
         //use up certain amount of mana
-        
-        Debug.Log("Summon Big");
+        //Debug.Log("Summon Big");
         if(selectedObj != null)
         {
-            if (selectedObj.GetComponent<Hex>().occupant == null)
+            int range = mapLocal.distanceBetween(StandingHex, selectedObj.GetComponent<Hex>());
+            if (selectedObj.GetComponent<Hex>().occupant == null && range <= 2)
             {
                 mana -= bigSumCost; //place holder value
                 action = "";
@@ -211,17 +229,20 @@ public class playerScript : agentScript {
                 curNumMins++;
                 selectedObj = null;
             }
+            else
+            {
+                Input.ResetInputAxes();
+            }
         }
     }
-
     public void SummonSmall()
     {
         //use up certain amount of mana
-        
-        Debug.Log("Summon Small");
+        //Debug.Log("Summon Small");
         if (selectedObj != null)
         {
-            if (selectedObj.GetComponent<Hex>().occupant == null) {
+            int range = mapLocal.distanceBetween(StandingHex, selectedObj.GetComponent<Hex>());
+            if (selectedObj.GetComponent<Hex>().occupant == null && range <= 2) {
                 mana -= smolSumCost; //place holder value
                 action = "";
                 allMinions.Add(Instantiate(smolMinion, (selectedObj.transform.position + new Vector3(0, .5f, 0)), new Quaternion(0, 0, 0, 0)));
@@ -230,51 +251,64 @@ public class playerScript : agentScript {
                 allMinions[curNumMins].GetComponent<mobBase>().Alligence = true;
                 allMinions[curNumMins].GetComponent<mobBase>().ArrayPos = curNumMins;
                 allMinions[curNumMins].GetComponent<mobBase>().CanAttack = true;
-               Debug.Log("this minion can attack? " + allMinions[curNumMins].GetComponent<mobBase>().CanAttack);
                 curNumMins++;
                 selectedObj = null;
             }
+            else
+            {
+                Input.ResetInputAxes();
+            }
         }
     }
-
-    public void CastFireball()
-    {
-        //use up certain amount of mana
-        mana -= fireBallCost; //place holder value
-    }
-
     public void PunchMinion()
     {
         //this can only be used once per turn/ change total amount of times used
         canPunch = false;
     }
-
     //this is for both passing the ball and picking up the ball
     //if the player has the ball then you are passing the ball
     //if the player doesnt have the ball then you are picking up the ball
     public void UseBall()
     {
-
+        Debug.Log("print");
         int range = mapLocal.distanceBetween(StandingHex, selectedMinion.StandingHex);
 
-        if (range <= 3 && selectedMinion.HasBall == false)//temperary value of range
+        if (range <= 1 && HasBall && !selectedMinion.HasBall)//temperary value of range
         {
             //passing the ball to someone
-
+            Debug.Log("passing ball to minion");
             this.selectedMinion.HasBall = true;
-
+            this.selectedMinion.pickUpBall();
+            dropBall();
+            GameObject.FindGameObjectWithTag("Info").GetComponent<InfoBall>().Move(this.selectedMinion.StandingHex);
             //you will need to have a minion in range to pass the ball
             //once you select the minion then the ball gets passed to them
             HasBall = false;
+            mana -= useBallCost; // this is a temp value
+            selectedObj = null;
+            selectedMinion = null;
+            action = "NOTHING";
         }
-        else if (!HasBall)
+        else if (range <= 1 && !HasBall && this.selectedMinion.HasBall)
         {
+            Debug.Log("passing ball back");
             //aquire the ball
             HasBall = true;
+            pickUpBall();
+            this.selectedMinion.dropBall();
+            GameObject.FindGameObjectWithTag("Info").GetComponent<InfoBall>().Move(this.StandingHex);
+            this.selectedMinion.HasBall = false;
+            mana -= useBallCost;
+            selectedObj = null;
+            selectedMinion = null;
+            action = "NOTHING";
         }
-        mana += useBallCost; // this is a temp value
+        else
+        {
+            Debug.Log("issue");
+        }
     }
-     public void MovePlayer()
+    public void MovePlayer()
     {
         //use the raycast to select spot to move
         //move to that spot
@@ -286,7 +320,6 @@ public class playerScript : agentScript {
             selectedObj = null;//clear it out
         }
     }
-
     public void newTurn()
     {
         CanMove = true;
@@ -303,15 +336,17 @@ public class playerScript : agentScript {
             }
         }
     }
-
     public void endTurn() //doing this will end the player turn
     {
         if(Input.GetAxis("Left_Trigger") == 1 && Input.GetAxis("Right_Trigger") == 1)
         {
+            endMenuUp = true;
             if (!endPopCreate) //creates end of turn text
             {
                 etPop = Instantiate(endTurnPop, transform.GetChild(2).GetChild(1).transform.position, new Quaternion(0, 0, 0, 0),transform.GetChild(2).GetChild(1).transform);
                 endPopCreate = true;
+                transform.GetChild(2).GetChild(1).GetChild(0).GetComponent<Text>().text = "";
+                transform.GetChild(2).GetChild(1).GetChild(1).GetComponent<Text>().text = "";
             }
             //pop up an end turn? menu
             if(Input.GetAxis("Left_Grip_Button") == 1 && Input.GetAxis("Right_Grip_Button") == 1)
@@ -326,13 +361,14 @@ public class playerScript : agentScript {
                         Destroy(etPop);
                         endPopCreate = false;
                     }
+                    endMenuUp = false;
                 }
             }
             else { endOfTurnButtonHold = false; }
         }
         else
         {
-
+            endMenuUp = false;
             if (endPopCreate)
             {
                 Destroy(etPop);
@@ -340,11 +376,11 @@ public class playerScript : agentScript {
             }
         }
     }
-
     public void MinionInteract(string action)
     {
         ray.GetComponent<RayCasting>().BoiFind(10, action);
-        if (action == "Move" && selectedMinion != null && selectedObj != null && selectedObj.tag == "Hex" && Input.GetAxis("Right_Trigger") == 1)
+        int range = mapLocal.distanceBetween(StandingHex, selectedMinion.StandingHex);
+        if (range <= 2 && action == "Move" && selectedMinion != null && selectedObj != null && selectedObj.tag == "Hex" && Input.GetAxis("Right_Trigger") == 1)
             {
                 selectedMinion.Move(selectedObj.GetComponent<Hex>());
                 //Input.ResetInputAxes();
@@ -356,7 +392,7 @@ public class playerScript : agentScript {
                 gameObject.GetComponent<MotionControllers>().RemoveHighlight();
                 ray.GetComponent<RayCasting>().RemoveHighlight();
             }
-        else if(action == "Attack" && selectedMinion != null && selectedObj != null && selectedObj.tag == "Enemy" &&  Input.GetAxis("Right_Trigger") == 1)
+        else if(range <= 2 && action == "Attack" && selectedMinion != null && selectedObj != null && selectedObj.tag == "Enemy" &&  Input.GetAxis("Right_Trigger") == 1)
         {
             //do later when there are actually baddies to attack
             selectedMinion.mobAttack(selectedObj.GetComponent<agentScript>());
