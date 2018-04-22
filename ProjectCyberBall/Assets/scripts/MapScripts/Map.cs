@@ -43,26 +43,6 @@ public class Map : MonoBehaviour {
           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
           0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0 };
 
-<<<<<<< HEAD
-    static int[] startScreen = new int[]
-        { 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-=======
     static int[] map1 = new int[]
           { 5, 0, 0, 0, 5, 0, 0, 2, 0, 0, 5, 0, 0, 0, 5,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -100,20 +80,14 @@ public class Map : MonoBehaviour {
         5, 1, 1, 0,-1, 0, 0, 0, 0,-1, 0, 0, 0, 1, 5,
         5, 1, 0, 0, 0, 0, 0, 0,-1, 5, 0, 0, 1, 1, 5,
         5, 5, 5, 5, 5, 5, 4, 4, 4, 5, 5, 5, 5, 5, 5 };
->>>>>>> 29130418c377a16a4e50fcd5996fa2d39cf318ca
 
     // Use this for initialization
     void Start() {
 
-        maps[0] = startScreen ;
-        maps[1] = testMap;
+        //maps[0] = startScreen;
+        //maps[1] = testMap;
 
         //createRectangleMap(width, height, offset);
-<<<<<<< HEAD
-        curMap = maps[0];
-        //createMapFromArray(testMap);
-        createMapFromArray(curMap);
-=======
         float ran = Random.Range(0, 3);
         if(ran < 1) { createMapFromArray(map1); }
         else if(ran < 2) { createMapFromArray(map2); }
@@ -121,7 +95,6 @@ public class Map : MonoBehaviour {
         {
             createMapFromArray(testMap);
         }
->>>>>>> 29130418c377a16a4e50fcd5996fa2d39cf318ca
         //player = GameObject.Find("Player_obj");
 
         //player.GetComponent<playerScript>().mapReference = this.GetComponent<Map>();
