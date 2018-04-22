@@ -26,8 +26,8 @@ public class enemyController : MonoBehaviour
     private int manaMax = 10;
     private bool enemyDiedLastTurn = false;
     private bool infoBallTaken = false;
-    private List<GameObject> bigEnemies;
-    private List<GameObject> smallEnemies;
+    public List<GameObject> bigEnemies;
+    public List<GameObject> smallEnemies;
     private Hex[] spawnHexs;
     private Hex infoHex;
     public GameObject smolMinion;
@@ -86,6 +86,7 @@ public class enemyController : MonoBehaviour
                                 boi.GetComponent<agentScript>().mapLocal = mapLocal;
                                 boi.GetComponent<agentScript>().spawnIn(leftToSpawnHex[0], this.gameController);
                                 boi.GetComponent<agentScript>().Alligence = false;
+                                boi.GetComponent<mobBase>().ArrayPos = bigEnemies.Count;
                                 bigEnemies.Add(boi);
                                 mana -= MOD_BIG_BOI_COST;
                             }
@@ -99,6 +100,7 @@ public class enemyController : MonoBehaviour
                                 boi.GetComponent<agentScript>().mapLocal = mapLocal;
                                 boi.GetComponent<agentScript>().spawnIn(leftToSpawnHex[0], this.gameController);
                                 boi.GetComponent<agentScript>().Alligence = false;
+                                boi.GetComponent<mobBase>().ArrayPos = smallEnemies.Count;
                                 smallEnemies.Add(boi);
                                 mana -= MOD_SMALL_BOI_COST;
                             }
@@ -392,6 +394,7 @@ public class enemyController : MonoBehaviour
         Debug.Log("removing");
         if (type == 0) //small
         {
+            Debug.Log("here small");
             if (smallEnemies[pos].GetComponent<mobBase>().Health <=0)
             {
                 Debug.Log("Remove small");
@@ -405,8 +408,10 @@ public class enemyController : MonoBehaviour
         }
         else if (type == 1)//big
         {
+            Debug.Log("heres big");
             if (bigEnemies[pos].GetComponent<mobBase>().Health <= 0)
             {
+                Debug.Log("Remove big");
                 Destroy(bigEnemies[pos]);
                 bigEnemies.RemoveAt(pos);
                 for (int i = 0; i < bigEnemies.Count; i++)
