@@ -102,7 +102,7 @@ public class mobBase : agentScript {
 
         Debug.Log(gameObject.name + " ATTACKING " + target.gameObject.name);
         this.gameObject.transform.rotation = Quaternion.LookRotation(((new Vector3(target.gameObject.transform.position.x, gameObject.transform.position.y, target.gameObject.transform.position.z)) - gameObject.transform.position).normalized); //rotates so agent is looking forward when attacking
-        if (target.tag != "player")
+        if (target.tag != "Player")
         {
             target.gameObject.transform.rotation = Quaternion.LookRotation((gameObject.transform.position - (new Vector3(target.gameObject.transform.position.x, gameObject.transform.position.y, target.gameObject.transform.position.z))).normalized); //rotates so agent is looking forward when being hit
         }

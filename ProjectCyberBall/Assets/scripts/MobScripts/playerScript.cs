@@ -148,10 +148,8 @@ public class playerScript : agentScript {
 
             endTurn();
         }
-        Debug.Log(gameController.BeforeGame + " " + "ahh");
         if(!gameController.InGame)
         {
-            Debug.Log("inside");
             gameObject.GetComponent<MotionControllers>().StartUI(gameController.BeforeGame);
         }
 

@@ -327,6 +327,7 @@ public class Map : MonoBehaviour {
     /// <returns>all hexs in the map with the desired type</returns>
     public Hex[] getHexsWithType(Hex.TYPE type)
     {
+        if (map == null) Debug.Log("why tho");
         List<Hex> hexs = new List<Hex>();
         foreach (Hex h in map)
         {

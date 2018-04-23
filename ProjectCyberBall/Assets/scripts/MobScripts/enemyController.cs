@@ -54,8 +54,8 @@ public class enemyController : MonoBehaviour
     {
         gameController = GameObject.Find("Game Controller").GetComponent<GameController>();
         mapLocal = gameController.theMap;
-        spawnHexs = mapLocal.getHexsWithType(Hex.TYPE.SPAWN);
-        infoHex = mapLocal.getHexsWithType(Hex.TYPE.INFO)[0];
+        //spawnHexs = mapLocal.getHexsWithType(Hex.TYPE.SPAWN);
+        //infoHex = mapLocal.getHexsWithType(Hex.TYPE.INFO)[0];
         bigEnemies = new List<GameObject>();
         smallEnemies = new List<GameObject>();
         mana = manaMax;
@@ -69,6 +69,11 @@ public class enemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(spawnHexs == null)
+        {
+            spawnHexs = mapLocal.getHexsWithType(Hex.TYPE.SPAWN);
+            infoHex = mapLocal.getHexsWithType(Hex.TYPE.INFO)[0];
+        }
         if (!gameController.PlayersTurn)
         {
             //spawn
@@ -151,6 +156,8 @@ public class enemyController : MonoBehaviour
     /// </summary>
     public void newTurn()
     {
+        if (bigEnemies == null) Debug.Log("no");
+        if (smallEnemies == null) Debug.Log("da duck");
         enemyDiedLastTurn = false;
         int temptMana = manaMax;
         foreach (GameObject enemy in bigEnemies) //resets big bois

@@ -86,10 +86,8 @@ public class MotionControllers : MonoBehaviour
     }
     public void StartUI(bool before)
     {
-        Debug.Log(before);
         if (leftUICreate == false)
         {
-            Debug.Log("create");
             lUI = Instantiate(LeftUIInteract, leftPosition, new Quaternion(0, 0, 0, 0), LeftUICan.transform);
             leftUICreate = true;
         }
@@ -138,6 +136,7 @@ public class MotionControllers : MonoBehaviour
     }
     public void HexInteraction(GameObject curSel)
     {
+        int distance = gameObject.GetComponent<playerScript>().mapLocal.distanceBetween(gameObject.GetComponent<playerScript>().StandingHex, curSel.GetComponent<Hex>());
         if (preHex!= null && curSel.transform.position != preHex.transform.position)
         {
             if (!createHexHL)
@@ -151,7 +150,7 @@ public class MotionControllers : MonoBehaviour
             lUI = Instantiate(LeftUIInteract, leftPosition, new Quaternion(0, 0, 0, 0), LeftUICan.transform);
             leftUICreate = true;
         }
-        if (createHexHL && !curSel.GetComponent<Hex>().occupant)
+        if (createHexHL && !curSel.GetComponent<Hex>().occupant && distance <= 2)
         {
             myHexHL = Instantiate(hexHL, (curSel.transform.position + new Vector3(0,1,0)), new Quaternion(0, 0, 0, 0));
             createHexHL = false;
@@ -166,9 +165,10 @@ public class MotionControllers : MonoBehaviour
                 createEnemyHL = true;
             }
         }
-        lUI.transform.GetChild(0).GetComponent<Text>().text = "Summon Browse";
-        lUI.transform.GetChild(1).GetComponent<Text>().text = "Summon Tab";
-        lUI.transform.GetChild(3).GetComponent<Text>().text = "Move";
+        lUI.transform.GetChild(0).GetComponent<Text>().text = "Summon Minion:\n Browse\n Cost: " + gameObject.GetComponent<playerScript>().BigSumCost;
+        lUI.transform.GetChild(1).GetComponent<Text>().text = "Summon Minion:\n Tab\n Cost: " + gameObject.GetComponent<playerScript>().SmolSumCost;
+        if (gameObject.GetComponent<playerScript>().CanMove) lUI.transform.GetChild(3).GetComponent<Text>().text = "Move";
+        else lUI.transform.GetChild(3).GetComponent<Text>().text = "";
         lUI.transform.GetChild(4).GetComponent<Text>().text = "";
         lUI.transform.GetChild(5).GetComponent<Text>().text = "";
         if (Input.GetAxis("Left_Touchpad_X") == 1 && Input.GetAxis("Left_Touchpad_Y") == -1)
@@ -255,6 +255,7 @@ public class MotionControllers : MonoBehaviour
     }
     public void BoiInteraction(GameObject curSel)
     {
+        int distance = gameObject.GetComponent<playerScript>().mapLocal.distanceBetween(gameObject.GetComponent<playerScript>().StandingHex, curSel.GetComponent<mobBase>().StandingHex);
         if (preHex != null && curSel.transform.position != preHex.transform.position)
         {
             if (!createBoiHL)
@@ -268,7 +269,7 @@ public class MotionControllers : MonoBehaviour
             lUI = Instantiate(LeftUIInteract, leftPosition, new Quaternion(0, 0, 0, 0), LeftUICan.transform);
             leftUICreate = true;
         }
-        if (createBoiHL)
+        if (createBoiHL && distance <= 3)
         {
             myBoiHL = Instantiate(boiHL, curSel.transform.position, new Quaternion(0, 0, 0, 0));
             createBoiHL = false;
@@ -284,8 +285,10 @@ public class MotionControllers : MonoBehaviour
             }
         }
         lUI.transform.GetChild(0).GetComponent<Text>().text = "Move";
-        lUI.transform.GetChild(1).GetComponent<Text>().text = "Have Attack";
-        if(gameObject.GetComponent<playerScript>().HasBall || curSel.GetComponent<mobBase>().HasBall) lUI.transform.GetChild(3).GetComponent<Text>().text = "Ball Pass";
+        if (curSel.GetComponent<mobBase>().CanAttack) lUI.transform.GetChild(1).GetComponent<Text>().text = "Have Attack";
+        else lUI.transform.GetChild(1).GetComponent<Text>().text = "";
+        if (gameObject.GetComponent<playerScript>().HasBall || curSel.GetComponent<mobBase>().HasBall) lUI.transform.GetChild(3).GetComponent<Text>().text = "Ball Pass\nCost: " + gameObject.GetComponent<playerScript>().UseBallCost;
+        else lUI.transform.GetChild(3).GetComponent<Text>().text = "";
         lUI.transform.GetChild(4).GetComponent<Text>().text = curSel.GetComponent<mobBase>().mobName;
         lUI.transform.GetChild(5).GetComponent<Text>().text = "Health: " + curSel.GetComponent<mobBase>().Health;
         if (Input.GetAxis("Left_Touchpad_X") == 1 && Input.GetAxis("Left_Touchpad_Y") == -1)
@@ -359,12 +362,13 @@ public class MotionControllers : MonoBehaviour
     }
     public void EnemyInteraction(GameObject curSel)
     {
+        int distance = gameObject.GetComponent<playerScript>().mapLocal.distanceBetween(gameObject.GetComponent<playerScript>().StandingHex, curSel.GetComponent<mobBase>().StandingHex);
         if (leftUICreate == false)
         {
             lUI = Instantiate(LeftUIInteract, leftPosition, new Quaternion(0, 0, 0, 0), LeftUICan.transform);
             leftUICreate = true;
         }
-        if (createEnemyHL)
+        if (createEnemyHL && distance <= 3)
         {
             myEnemyHL = Instantiate(enemyHL, curSel.transform.position, new Quaternion(0, 0, 0, 0));
             createEnemyHL = false;
@@ -374,7 +378,7 @@ public class MotionControllers : MonoBehaviour
                 createHexHL = true;
             }
         }
-        lUI.transform.GetChild(3).GetComponent<Text>().text = "Fireball";
+        lUI.transform.GetChild(3).GetComponent<Text>().text = "Fireball\nCost: " + gameObject.GetComponent<playerScript>().FireBallCost;
         lUI.transform.GetChild(1).GetComponent<Text>().text = "";
         lUI.transform.GetChild(0).GetComponent<Text>().text = "";
         lUI.transform.GetChild(4).GetComponent<Text>().text = curSel.GetComponent<mobBase>().mobName;

@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour {
         enemyControl = gameObject.GetComponent<enemyController>();
         theUser = Instantiate(userPrefab, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
         theInfo = Instantiate(infoPrefab, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
-
+        Debug.Log("awake");
     }
 
     void Start()
