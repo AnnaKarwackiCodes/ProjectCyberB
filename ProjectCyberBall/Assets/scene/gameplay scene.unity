@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -217,6 +217,111 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
+--- !u!1 &935295904
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 935295905}
+  - component: {fileID: 935295906}
+  - component: {fileID: 935295907}
+  - component: {fileID: 935295908}
+  - component: {fileID: 935295909}
+  m_Layer: 0
+  m_Name: Game Controller
+  m_TagString: GameController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &935295905
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 935295904}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &935295906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 935295904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a838ead5fe9fe2747a5ba99b5178a412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theMap: {fileID: 0}
+  userPrefab: {fileID: 1861096741457680, guid: 48e76e7be73397940b0c916a17ce0aa4, type: 2}
+  infoPrefab: {fileID: 1321136283286750, guid: c39eb1c43a21f25458cc4072c350fa1b, type: 2}
+  pillarPrefab: {fileID: 1058948651368844, guid: 0e06eb264a40be14691e6fd50cc362fb,
+    type: 2}
+  theInfo: {fileID: 0}
+  playersTurn: 0
+  turnNum: 0
+  gameWin: 0
+--- !u!114 &935295907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 935295904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f26685b9f39742041860ee62a690bccc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hexagon: {fileID: 1047380410823306, guid: cc63e51dda0f6874c86ab452c0ad2e91, type: 2}
+  offset: 1
+  width: 15
+  height: 17
+  curMap: 
+--- !u!114 &935295908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 935295904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aecb90fa9896d774a8defb48009cdfe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameController: {fileID: 0}
+  mapLocal: {fileID: 0}
+  theInfo: {fileID: 0}
+<<<<<<< HEAD
+  smolMinion: {fileID: 1653789012109782, guid: 538711e8d1b23284bbcc9671386261e0, type: 2}
+  bigMinion: {fileID: 1597847958509082, guid: ec275f6ea543d274c9a8fbbf35f3125e, type: 2}
+  turnSubPhase: 0
+--- !u!114 &935295909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 935295904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86cd0533e3f31e14ba869c1cfb787cae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+=======
+  smolMinion: {fileID: 1303233649943174, guid: 631e4617ca4ede340aa63510b4361288, type: 2}
+  bigMinion: {fileID: 1058961496591992, guid: 8b8c08621fec04e419c31f9ddd21d492, type: 2}
+  turnSubPhase: 0
+>>>>>>> 29130418c377a16a4e50fcd5996fa2d39cf318ca
+=======
+>>>>>>> 6e1d898028d4580cafdc59cfd45489fc87d6f3e3
 --- !u!1 &1688514901
 GameObject:
   m_ObjectHideFlags: 0

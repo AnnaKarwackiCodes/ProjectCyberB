@@ -19,6 +19,10 @@ public class Map : MonoBehaviour {
         { { 1, -1, 0 }, { 1, 0, -1 }, { 0, 1, -1 },
           { -1, 1, 0 }, { -1, 0, 1 }, { 0, -1, 1 } };
 
+    public int[] curMap;
+
+    public int[][] maps = new int[5][];
+
     static int[] testMap = new int[]
 
         { 0, 0, 0, 0,-1,-1, 0, 2, 0,-1,-1, 0, 0, 0, 0,
@@ -78,7 +82,11 @@ public class Map : MonoBehaviour {
         5, 5, 5, 5, 5, 5, 4, 4, 4, 5, 5, 5, 5, 5, 5 };
 
     // Use this for initialization
-    void Start () {
+    void Start() {
+
+        //maps[0] = startScreen;
+        //maps[1] = testMap;
+
         //createRectangleMap(width, height, offset);
         float ran = Random.Range(0, 3);
         if(ran < 1) { createMapFromArray(map1); }
@@ -129,6 +137,12 @@ public class Map : MonoBehaviour {
         arr[0] = xx;
         arr[1] = zz + (xx - (xx & 1)) / 2;
         return arr; // [row, col]
+    }
+
+    public void sceneChange() {
+
+        createMapFromArray(curMap);
+
     }
 
     /// <summary>

@@ -84,8 +84,8 @@ public class mobBase : agentScript {
 	// Update is called once per frame
 	void Update () {
         
-
         base.Update();
+
     }
 
     public override void spawnIn(Hex newHex, GameController gCon)
