@@ -325,7 +325,6 @@ public class enemyController : MonoBehaviour
                 orderToClosest(boi, goalTarget, out moveToHexs);
                 //Debug.Log("Enemy move, " + boi.StandingHex.ToString() + " closest " + moveToHexs[0].ToString());
                 if (!boi.StandingHex.Equals(moveToHexs[0])) { boi.Move(moveToHexs[0]); }//if not already on the tile
-
                 break;
         }
     }
