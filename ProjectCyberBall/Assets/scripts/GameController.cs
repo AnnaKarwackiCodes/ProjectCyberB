@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour {
     public GameObject userPrefab;
     public GameObject infoPrefab;
     public GameObject pillarPrefab;
+    [SerializeField] public Material MATERIAL_PILLAR_PT;
+    [SerializeField] public Material MATERIAL_PILLAR_ET;
     private GameObject theUser;
     public GameObject theInfo;
     private bool userIsIn = false;
@@ -41,8 +43,8 @@ public class GameController : MonoBehaviour {
         Debug.Log("start");
         playersTurn = true;
         //inGame = true;
-        inGame = false;
-        beforeGame = true;
+        inGame = true;
+        beforeGame = false;
         turnNum = 1;
     }
 	
@@ -178,6 +180,11 @@ public class GameController : MonoBehaviour {
             turnNum++;
         }
         playersTurn = newTurn;
+
+        //change pillar objective color
+        foreach(GameObject po in GameObject.FindGameObjectsWithTag("Pillar"))
+        if (newTurn) { po.GetComponent<MeshRenderer>().material = MATERIAL_PILLAR_PT; } //player turn
+        else { po.GetComponent<MeshRenderer>().material = MATERIAL_PILLAR_ET; } //enemy turn
     }
 
     public void updateObjective()

@@ -15,6 +15,7 @@ public class enemyController : MonoBehaviour
     private const int GOAL_RETURN_BALL = 4;
 
     private static int MOD_DEFEND_INFO_RANGE = 3;
+    private static int MOD_DEFEND_TURN_MAX = 10;
     private static int MOD_SMALL_BOI_COST = 2;
     private static int MOD_BIG_BOI_COST = 3;
     private static int MOD_SPAWN_BEFORE_INFO_TAKEN = 2;
@@ -225,13 +226,22 @@ public class enemyController : MonoBehaviour
                 goalTarget = infoHex;
                 return;
             }
+        }
 
-            //defend target
-            ///player/minion are far away from ball --> defend target 
-            goal = GOAL_DEFEND_TARGET;
-            goalTarget = mapLocal.getHex(theInfo.X, theInfo.Y, theInfo.Z);
+        //attack general
+        ///minions have waited around enough, attack player
+        if (gameController.turnNum >= MOD_DEFEND_TURN_MAX)
+        {
+            goal = GOAL_ATTACK_GENERAL;
+            goalTarget = infoHex;
             return;
         }
+
+        //defend target
+        ///player/minion are far away from ball --> defend target 
+        goal = GOAL_DEFEND_TARGET;
+        goalTarget = mapLocal.getHex(theInfo.X, theInfo.Y, theInfo.Z);
+        return;
     }
 
     /// <summary>

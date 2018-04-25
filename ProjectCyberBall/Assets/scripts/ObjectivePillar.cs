@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ObjectivePillar : MonoBehaviour {
 
-    [SerializeField] float turnSpeed = 1f; 
+    [SerializeField] float turnSpeed = 25f;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 	}
 	

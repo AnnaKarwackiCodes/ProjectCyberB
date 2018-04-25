@@ -56,6 +56,8 @@ MonoBehaviour:
   gameController: {fileID: 0}
   mapLocal: {fileID: 0}
   theInfo: {fileID: 0}
+  bigEnemies: []
+  smallEnemies: []
   smolMinion: {fileID: 1303233649943174, guid: 631e4617ca4ede340aa63510b4361288, type: 2}
   bigMinion: {fileID: 1058961496591992, guid: 8b8c08621fec04e419c31f9ddd21d492, type: 2}
   turnSubPhase: 0
@@ -74,6 +76,7 @@ MonoBehaviour:
   offset: 1
   width: 15
   height: 17
+  curMap: 
 --- !u!114 &114756588044920686
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -90,7 +93,10 @@ MonoBehaviour:
   infoPrefab: {fileID: 1130169741591908, guid: 2c12bf1ec2f8c714b8593ddb20eaccd7, type: 2}
   pillarPrefab: {fileID: 1058948651368844, guid: 0e06eb264a40be14691e6fd50cc362fb,
     type: 2}
+  MATERIAL_PILLAR_PT: {fileID: 2100000, guid: f7ab20abe1a6d9343bbffda658adc9b3, type: 2}
+  MATERIAL_PILLAR_ET: {fileID: 2100000, guid: 02a3b9ddf69b0fb408c870996a0bc1eb, type: 2}
   theInfo: {fileID: 1130169741591908, guid: 2c12bf1ec2f8c714b8593ddb20eaccd7, type: 2}
   playersTurn: 0
   turnNum: 0
+  menu: {fileID: 0}
   gameWin: 0
