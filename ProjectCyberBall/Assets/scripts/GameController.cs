@@ -43,8 +43,8 @@ public class GameController : MonoBehaviour {
         Debug.Log("start");
         playersTurn = true;
         //inGame = true;
-        inGame = true;
-        beforeGame = false;
+        inGame = false;
+        beforeGame = true;
         turnNum = 1;
     }
 	

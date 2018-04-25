@@ -53,7 +53,7 @@ public class RayCasting : MonoBehaviour {
             switch (hit.collider.gameObject.tag)
             {
                 case "Hex":
-                    if (user.Action != "Move Boi" && hit.collider.gameObject.GetComponent<Hex>().occupant == null)
+                    if (user.Action != "Move Boi" && user.SelectedMinion == null && hit.collider.gameObject.GetComponent<Hex>().occupant == null)
                     {
                         myControls.HexInteraction(hit.collider.gameObject);
                         //RemoveHighlight();
@@ -116,6 +116,7 @@ public class RayCasting : MonoBehaviour {
 
     public void BoiFind(float distance, string look)
     {
+        Debug.Log("here please");
         line.enabled = true;
         Ray ray = new Ray(transform.position, transform.forward);
 

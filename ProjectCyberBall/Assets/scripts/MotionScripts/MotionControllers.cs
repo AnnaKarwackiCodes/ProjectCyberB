@@ -38,6 +38,11 @@ public class MotionControllers : MonoBehaviour
 
     private GameObject preHex;
 
+    private string selectX;
+    private string selectY;
+    private string selectButton;
+    private float axisDegree;
+
     // Use this for initialization
     void Start()
     {
@@ -47,6 +52,11 @@ public class MotionControllers : MonoBehaviour
         curOption = -1; //this will select none of the menu options
         gCon = this.gameObject.GetComponent<playerScript>().gameController;
         preHex = null;
+
+        selectX = "Left_Thumbstick_X";
+        selectY = "Left_Thumbstick_Y";
+        selectButton = "Left_Trigger";
+        axisDegree = .05f;
     }
 
     // Update is called once per frame
@@ -84,48 +94,6 @@ public class MotionControllers : MonoBehaviour
         righty.transform.localPosition = rightPosition;
         righty.transform.localRotation = rightRotation;
     }
-    public void StartUI(bool before)
-    {
-        if (leftUICreate == false)
-        {
-            lUI = Instantiate(LeftUIInteract, leftPosition, new Quaternion(0, 0, 0, 0), LeftUICan.transform);
-            leftUICreate = true;
-        }
-        lUI.transform.GetChild(0).GetComponent<Text>().text = "";
-        lUI.transform.GetChild(1).GetComponent<Text>().text = "";
-        if (before)
-        {
-            lUI.transform.GetChild(3).GetComponent<Text>().text = "Start";
-        }
-        else
-        {
-            lUI.transform.GetChild(3).GetComponent<Text>().text = "Play Again";
-        }
-        lUI.transform.GetChild(4).GetComponent<Text>().text = "";
-        lUI.transform.GetChild(5).GetComponent<Text>().text = "";
-        if (Input.GetAxis("Left_Touchpad_X") == 1 && Input.GetAxis("Left_Touchpad_Y") == 1)
-        {
-            curOption = 1;
-            lUI.transform.GetChild(3).GetComponent<Text>().color = Color.blue;
-            lUI.transform.GetChild(1).GetComponent<Text>().color = Color.white;
-            lUI.transform.GetChild(0).GetComponent<Text>().color = Color.white;
-            lUI.transform.GetChild(2).GetComponent<Text>().color = Color.white;
-        }
-        else { curOption = 0; }
-
-        if (Input.GetButtonDown("Left_Touchpad_Pressed"))
-        {
-            if (before)
-            {
-                gameObject.GetComponent<playerScript>().Action = "Lets go";
-            }
-            else
-            {
-                Debug.Log("reset");
-                gameObject.GetComponent<playerScript>().Action = "Reset";
-            }
-        }
-    }
     public void RemoveUI()
     {
         if (leftUICreate)
@@ -136,6 +104,7 @@ public class MotionControllers : MonoBehaviour
     }
     public void HexInteraction(GameObject curSel)
     {
+        curOption = -1;
         int distance = gameObject.GetComponent<playerScript>().mapLocal.distanceBetween(gameObject.GetComponent<playerScript>().StandingHex, curSel.GetComponent<Hex>());
         if (preHex!= null && curSel.transform.position != preHex.transform.position)
         {
@@ -171,7 +140,7 @@ public class MotionControllers : MonoBehaviour
         else lUI.transform.GetChild(3).GetComponent<Text>().text = "";
         lUI.transform.GetChild(4).GetComponent<Text>().text = "";
         lUI.transform.GetChild(5).GetComponent<Text>().text = "";
-        if (Input.GetAxis("Left_Touchpad_X") == 1 && Input.GetAxis("Left_Touchpad_Y") == -1)
+        if (Input.GetAxis(selectX) > axisDegree)// && Input.GetAxis(selectY) < -axisDegree)
         {
             //summon browser
             curOption = 0;
@@ -180,7 +149,7 @@ public class MotionControllers : MonoBehaviour
             lUI.transform.GetChild(2).GetComponent<Text>().color = Color.white;
             lUI.transform.GetChild(3).GetComponent<Text>().color = Color.white;
         }
-        if (Input.GetAxis("Left_Touchpad_X") == -1 && Input.GetAxis("Left_Touchpad_Y") == 1)
+        if (Input.GetAxis(selectX) < -axisDegree)// && Input.GetAxis(selectY) > axisDegree)
         {
             //summon tab
             curOption = 1;
@@ -189,7 +158,7 @@ public class MotionControllers : MonoBehaviour
             lUI.transform.GetChild(2).GetComponent<Text>().color = Color.white;
             lUI.transform.GetChild(3).GetComponent<Text>().color = Color.white;
         }
-        if (Input.GetAxis("Left_Touchpad_X") == 1 && Input.GetAxis("Left_Touchpad_Y") == 1)
+        if (Input.GetAxis(selectY) > axisDegree)//(Input.GetAxis(selectX) > axisDegree && Input.GetAxis(selectY) < axisDegree)
         {
             //Move
             curOption = 2;
@@ -198,7 +167,14 @@ public class MotionControllers : MonoBehaviour
             lUI.transform.GetChild(0).GetComponent<Text>().color = Color.white;
             lUI.transform.GetChild(2).GetComponent<Text>().color = Color.white;
         }
-        if (Input.GetButtonDown("Left_Touchpad_Pressed"))
+        if (curOption == -1)
+        {
+            lUI.transform.GetChild(3).GetComponent<Text>().color = Color.white;
+            lUI.transform.GetChild(1).GetComponent<Text>().color = Color.white;
+            lUI.transform.GetChild(0).GetComponent<Text>().color = Color.white;
+            lUI.transform.GetChild(2).GetComponent<Text>().color = Color.white;
+        }
+        if (Input.GetAxis(selectButton) > axisDegree)
         {
             switch (curOption)
             {
@@ -255,6 +231,8 @@ public class MotionControllers : MonoBehaviour
     }
     public void BoiInteraction(GameObject curSel)
     {
+        Debug.Log("fuck this POS");
+        curOption = -1;
         int distance = gameObject.GetComponent<playerScript>().mapLocal.distanceBetween(gameObject.GetComponent<playerScript>().StandingHex, curSel.GetComponent<mobBase>().StandingHex);
         if (preHex != null && curSel.transform.position != preHex.transform.position)
         {
@@ -284,14 +262,15 @@ public class MotionControllers : MonoBehaviour
                 createEnemyHL = true;
             }
         }
-        lUI.transform.GetChild(0).GetComponent<Text>().text = "Move";
+        if (curSel.GetComponent<mobBase>().CanMove) lUI.transform.GetChild(0).GetComponent<Text>().text = "Move";
+        else lUI.transform.GetChild(0).GetComponent<Text>().text = "";
         if (curSel.GetComponent<mobBase>().CanAttack) lUI.transform.GetChild(1).GetComponent<Text>().text = "Have Attack";
         else lUI.transform.GetChild(1).GetComponent<Text>().text = "";
         if (gameObject.GetComponent<playerScript>().HasBall || curSel.GetComponent<mobBase>().HasBall) lUI.transform.GetChild(3).GetComponent<Text>().text = "Ball Pass\nCost: " + gameObject.GetComponent<playerScript>().UseBallCost;
         else lUI.transform.GetChild(3).GetComponent<Text>().text = "";
         lUI.transform.GetChild(4).GetComponent<Text>().text = curSel.GetComponent<mobBase>().mobName;
         lUI.transform.GetChild(5).GetComponent<Text>().text = "Health: " + curSel.GetComponent<mobBase>().Health;
-        if (Input.GetAxis("Left_Touchpad_X") == 1 && Input.GetAxis("Left_Touchpad_Y") == -1)
+        if (Input.GetAxis(selectX) > axisDegree)
         {
             //move
             curOption = 0;
@@ -300,7 +279,7 @@ public class MotionControllers : MonoBehaviour
             lUI.transform.GetChild(2).GetComponent<Text>().color = Color.white;
             lUI.transform.GetChild(3).GetComponent<Text>().color = Color.white;
         }
-        if (Input.GetAxis("Left_Touchpad_X") == -1 && Input.GetAxis("Left_Touchpad_Y") == 1)
+        if (Input.GetAxis(selectX) < -axisDegree)
         {
             //attack
             curOption = 1;
@@ -309,7 +288,7 @@ public class MotionControllers : MonoBehaviour
             lUI.transform.GetChild(2).GetComponent<Text>().color = Color.white;
             lUI.transform.GetChild(3).GetComponent<Text>().color = Color.white;
         }
-        if ((gameObject.GetComponent<playerScript>().HasBall || curSel.GetComponent<mobBase>().HasBall) && Input.GetAxis("Left_Touchpad_X") == 1 && Input.GetAxis("Left_Touchpad_Y") == 1)
+        if ((gameObject.GetComponent<playerScript>().HasBall || curSel.GetComponent<mobBase>().HasBall) && (Input.GetAxis(selectY) > axisDegree))
         {
             //pass ball
             curOption = 2;
@@ -318,13 +297,22 @@ public class MotionControllers : MonoBehaviour
             lUI.transform.GetChild(0).GetComponent<Text>().color = Color.white;
             lUI.transform.GetChild(2).GetComponent<Text>().color = Color.white;
         }
-        if (Input.GetButtonDown("Left_Touchpad_Pressed"))
+        if(curOption == -1)
         {
+            lUI.transform.GetChild(3).GetComponent<Text>().color = Color.white;
+            lUI.transform.GetChild(1).GetComponent<Text>().color = Color.white;
+            lUI.transform.GetChild(0).GetComponent<Text>().color = Color.white;
+            lUI.transform.GetChild(2).GetComponent<Text>().color = Color.white;
+        }
+        if (Input.GetAxis(selectButton) > axisDegree)
+        {
+            if(gameObject.GetComponent<playerScript>().SelectedMinion!=null)Debug.Log("FDsafdsfdafdfd");
             switch (curOption)
             {
                 case 0:
-                    if (gameObject.GetComponent<playerScript>().SelectedMinion.CanMove)
+                    if (curSel.GetComponent<mobBase>().CanMove)
                     {
+                        Debug.Log("moving");
                         lUI.transform.GetChild(0).GetComponent<Text>().color = Color.cyan;
                         gameObject.GetComponent<playerScript>().SelectedMinion = curSel.GetComponent<mobBase>();
                         gameObject.GetComponent<playerScript>().Action = "Move Boi";
@@ -362,6 +350,7 @@ public class MotionControllers : MonoBehaviour
     }
     public void EnemyInteraction(GameObject curSel)
     {
+        curOption = -1;
         int distance = gameObject.GetComponent<playerScript>().mapLocal.distanceBetween(gameObject.GetComponent<playerScript>().StandingHex, curSel.GetComponent<mobBase>().StandingHex);
         if (leftUICreate == false)
         {
@@ -383,7 +372,7 @@ public class MotionControllers : MonoBehaviour
         lUI.transform.GetChild(0).GetComponent<Text>().text = "";
         lUI.transform.GetChild(4).GetComponent<Text>().text = curSel.GetComponent<mobBase>().mobName;
         lUI.transform.GetChild(5).GetComponent<Text>().text = "Health: " + curSel.GetComponent<mobBase>().Health;
-        if (Input.GetAxis("Left_Touchpad_X") == 1 && Input.GetAxis("Left_Touchpad_Y") == 1)
+        if (Input.GetAxis(selectY) > axisDegree)
         {
             //fireball that minion
             curOption = 0;
@@ -391,7 +380,12 @@ public class MotionControllers : MonoBehaviour
             lUI.transform.GetChild(1).GetComponent<Text>().color = Color.white;
             lUI.transform.GetChild(0).GetComponent<Text>().color = Color.white;
         }
-        if (Input.GetButtonDown("Left_Touchpad_Pressed"))
+        else
+        {
+            lUI.transform.GetChild(3).GetComponent<Text>().color = Color.white;
+            curOption = -1;
+        }
+        if (Input.GetAxis(selectButton) > axisDegree && curOption == 0)
         {
             if (gameObject.GetComponent<playerScript>().Mana - gameObject.GetComponent<playerScript>().FireBallCost >= 0)
             {
@@ -425,13 +419,17 @@ public class MotionControllers : MonoBehaviour
         lUI.transform.GetChild(0).GetComponent<Text>().text = "";
         lUI.transform.GetChild(4).GetComponent<Text>().text = "";
         lUI.transform.GetChild(5).GetComponent<Text>().text = "";
-        if (Input.GetAxis("Left_Touchpad_X") == 1 && Input.GetAxis("Left_Touchpad_Y") == 1)
+        if (Input.GetAxis(selectY) > axisDegree)
         {
             lUI.transform.GetChild(3).GetComponent<Text>().color = Color.blue;
             lUI.transform.GetChild(1).GetComponent<Text>().color = Color.white;
             lUI.transform.GetChild(0).GetComponent<Text>().color = Color.white;
         }
-        if (Input.GetButtonDown("Left_Touchpad_Pressed"))
+        else
+        {
+            lUI.transform.GetChild(3).GetComponent<Text>().color = Color.white;
+        }
+        if (Input.GetAxis(selectButton) > axisDegree)
         {
             int range = gameObject.GetComponent<playerScript>().mapLocal.distanceBetween(gameObject.GetComponent<playerScript>().StandingHex, curSel.GetComponent<InfoBall>().StandingHex);
             if (range <= 1 && gameObject.GetComponent<playerScript>().Mana - gameObject.GetComponent<playerScript>().UseBallCost >= 0)
@@ -447,6 +445,48 @@ public class MotionControllers : MonoBehaviour
             }
         }
         preHex = curSel;
+    }
+    public void StartUI(bool before)
+    {
+        if (leftUICreate == false)
+        {
+            lUI = Instantiate(LeftUIInteract, leftPosition, new Quaternion(0, 0, 0, 0), LeftUICan.transform);
+            leftUICreate = true;
+        }
+        lUI.transform.GetChild(0).GetComponent<Text>().text = "";
+        lUI.transform.GetChild(1).GetComponent<Text>().text = "";
+        if (before)
+        {
+            lUI.transform.GetChild(3).GetComponent<Text>().text = "Start";
+        }
+        else
+        {
+            lUI.transform.GetChild(3).GetComponent<Text>().text = "Play Again";
+        }
+        lUI.transform.GetChild(4).GetComponent<Text>().text = "";
+        lUI.transform.GetChild(5).GetComponent<Text>().text = "";
+        if (Input.GetAxis(selectY) > axisDegree)
+        {
+            lUI.transform.GetChild(3).GetComponent<Text>().color = Color.blue;
+            curOption = 1;
+        }
+        else
+        {
+            lUI.transform.GetChild(3).GetComponent<Text>().color = Color.white;
+            curOption = -1;
+        }
+        if (Input.GetAxis(selectButton) > axisDegree && curOption == 1)
+        {
+            if (before)
+            {
+                gameObject.GetComponent<playerScript>().Action = "Lets go";
+            }
+            else
+            {
+                Debug.Log("reset");
+                gameObject.GetComponent<playerScript>().Action = "Reset";
+            }
+        }
     }
     public void RemoveHighlight()
     {
