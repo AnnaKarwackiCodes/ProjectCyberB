@@ -79,7 +79,9 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'End Turn?
 
-    Press and Hold both grip buttons'
+    Press Right Trigger
+
+    to End'
 --- !u!114 &114325565816455142
 MonoBehaviour:
   m_ObjectHideFlags: 1

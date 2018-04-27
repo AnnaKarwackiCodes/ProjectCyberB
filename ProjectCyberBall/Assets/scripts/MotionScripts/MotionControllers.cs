@@ -43,6 +43,8 @@ public class MotionControllers : MonoBehaviour
     private string selectButton;
     private float axisDegree;
 
+    private float preDegree;
+
     // Use this for initialization
     void Start()
     {
@@ -62,6 +64,7 @@ public class MotionControllers : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(Input.GetAxis(selectButton));
         Track();
         gCon = this.gameObject.GetComponent<playerScript>().gameController;
         if (gCon.PlayersTurn)
@@ -88,11 +91,11 @@ public class MotionControllers : MonoBehaviour
 
         //moving the left "hand"
         lefty.transform.localPosition = leftPosition;
-        lefty.transform.localRotation = leftRotation;
+        lefty.transform.localRotation = leftRotation;// * new Quaternion(90,0,0,0);
 
         //moving the right "hand"
         righty.transform.localPosition = rightPosition;
-        righty.transform.localRotation = rightRotation;
+        righty.transform.localRotation = rightRotation;// * new Quaternion(0,90,0,0);
     }
     public void RemoveUI()
     {
@@ -104,6 +107,7 @@ public class MotionControllers : MonoBehaviour
     }
     public void HexInteraction(GameObject curSel)
     {
+        
         curOption = -1;
         int distance = gameObject.GetComponent<playerScript>().mapLocal.distanceBetween(gameObject.GetComponent<playerScript>().StandingHex, curSel.GetComponent<Hex>());
         if (preHex!= null && curSel.transform.position != preHex.transform.position)
@@ -174,8 +178,9 @@ public class MotionControllers : MonoBehaviour
             lUI.transform.GetChild(0).GetComponent<Text>().color = Color.white;
             lUI.transform.GetChild(2).GetComponent<Text>().color = Color.white;
         }
-        if (Input.GetAxis(selectButton) > axisDegree)
+        if (Input.GetAxis(selectButton) > axisDegree && preDegree != Input.GetAxis(selectButton))
         {
+            preDegree = Input.GetAxis(selectButton);
             switch (curOption)
             {
                 case 0:
@@ -225,13 +230,14 @@ public class MotionControllers : MonoBehaviour
             {
                 Destroy(lUI);
                 leftUICreate = false;
-            }   
+            }
+            Input.ResetInputAxes();
         }
         preHex = curSel;
+        preDegree = Input.GetAxis(selectButton);
     }
     public void BoiInteraction(GameObject curSel)
     {
-        Debug.Log("fuck this POS");
         curOption = -1;
         int distance = gameObject.GetComponent<playerScript>().mapLocal.distanceBetween(gameObject.GetComponent<playerScript>().StandingHex, curSel.GetComponent<mobBase>().StandingHex);
         if (preHex != null && curSel.transform.position != preHex.transform.position)
@@ -270,6 +276,7 @@ public class MotionControllers : MonoBehaviour
         else lUI.transform.GetChild(3).GetComponent<Text>().text = "";
         lUI.transform.GetChild(4).GetComponent<Text>().text = curSel.GetComponent<mobBase>().mobName;
         lUI.transform.GetChild(5).GetComponent<Text>().text = "Health: " + curSel.GetComponent<mobBase>().Health;
+
         if (Input.GetAxis(selectX) > axisDegree)
         {
             //move
@@ -304,9 +311,8 @@ public class MotionControllers : MonoBehaviour
             lUI.transform.GetChild(0).GetComponent<Text>().color = Color.white;
             lUI.transform.GetChild(2).GetComponent<Text>().color = Color.white;
         }
-        if (Input.GetAxis(selectButton) > axisDegree)
+        if (Input.GetAxis(selectButton) > axisDegree && preDegree != Input.GetAxis(selectButton))//(Input.GetAxis(selectButton) > axisDegree)
         {
-            if(gameObject.GetComponent<playerScript>().SelectedMinion!=null)Debug.Log("FDsafdsfdafdfd");
             switch (curOption)
             {
                 case 0:
@@ -345,8 +351,10 @@ public class MotionControllers : MonoBehaviour
                 Destroy(lUI);
                 leftUICreate = false;
             }
+            //Input.ResetInputAxes();
         }
         preHex = curSel;
+        preDegree = Input.GetAxis(selectButton);
     }
     public void EnemyInteraction(GameObject curSel)
     {
@@ -367,11 +375,19 @@ public class MotionControllers : MonoBehaviour
                 createHexHL = true;
             }
         }
-        lUI.transform.GetChild(3).GetComponent<Text>().text = "Fireball\nCost: " + gameObject.GetComponent<playerScript>().FireBallCost;
-        lUI.transform.GetChild(1).GetComponent<Text>().text = "";
-        lUI.transform.GetChild(0).GetComponent<Text>().text = "";
-        lUI.transform.GetChild(4).GetComponent<Text>().text = curSel.GetComponent<mobBase>().mobName;
-        lUI.transform.GetChild(5).GetComponent<Text>().text = "Health: " + curSel.GetComponent<mobBase>().Health;
+        if(gameObject.GetComponent<playerScript>().Action != "Boi Attack")
+        {
+            lUI.transform.GetChild(3).GetComponent<Text>().text = "Fireball\nCost: " + gameObject.GetComponent<playerScript>().FireBallCost;
+            lUI.transform.GetChild(1).GetComponent<Text>().text = "";
+            lUI.transform.GetChild(0).GetComponent<Text>().text = "";
+            lUI.transform.GetChild(4).GetComponent<Text>().text = curSel.GetComponent<mobBase>().mobName;
+            lUI.transform.GetChild(5).GetComponent<Text>().text = "Health: " + curSel.GetComponent<mobBase>().Health;
+        }
+        else
+        {
+            lUI.transform.GetChild(3).GetComponent<Text>().text = "";
+        }
+        
         if (Input.GetAxis(selectY) > axisDegree)
         {
             //fireball that minion
@@ -385,7 +401,7 @@ public class MotionControllers : MonoBehaviour
             lUI.transform.GetChild(3).GetComponent<Text>().color = Color.white;
             curOption = -1;
         }
-        if (Input.GetAxis(selectButton) > axisDegree && curOption == 0)
+        if (Input.GetAxis(selectButton) > axisDegree && curOption == 0 && preDegree != Input.GetAxis(selectButton) && gameObject.GetComponent<playerScript>().Action != "Boi Attack")
         {
             if (gameObject.GetComponent<playerScript>().Mana - gameObject.GetComponent<playerScript>().FireBallCost >= 0)
             {
@@ -399,52 +415,60 @@ public class MotionControllers : MonoBehaviour
                 Destroy(lUI);
                 leftUICreate = false;
             }
+            Input.ResetInputAxes();
         }
         preHex = curSel;
+        preDegree = Input.GetAxis(selectButton);
     }
     public void InfoInteraction(GameObject curSel)
     {
-        if (leftUICreate == false)
+        int distance = gameObject.GetComponent<playerScript>().mapLocal.distanceBetween(gameObject.GetComponent<playerScript>().StandingHex, curSel.GetComponent<agentScript>().StandingHex);
+        if (leftUICreate == false && distance <= 1)
         {
             lUI = Instantiate(LeftUIInteract, leftPosition, new Quaternion(0, 0, 0, 0), LeftUICan.transform);
             leftUICreate = true;
         }
-        if (createHexHL)
+        if (createHexHL && distance <= 1)
         {
             myHexHL = Instantiate(hexHL, curSel.transform.position, new Quaternion(0, 0, 0, 0));
             createHexHL = false;
         }
-        lUI.transform.GetChild(3).GetComponent<Text>().text = "Pick Up";
-        lUI.transform.GetChild(1).GetComponent<Text>().text = "";
-        lUI.transform.GetChild(0).GetComponent<Text>().text = "";
-        lUI.transform.GetChild(4).GetComponent<Text>().text = "";
-        lUI.transform.GetChild(5).GetComponent<Text>().text = "";
-        if (Input.GetAxis(selectY) > axisDegree)
+        if (leftUICreate == true)
         {
-            lUI.transform.GetChild(3).GetComponent<Text>().color = Color.blue;
-            lUI.transform.GetChild(1).GetComponent<Text>().color = Color.white;
-            lUI.transform.GetChild(0).GetComponent<Text>().color = Color.white;
-        }
-        else
-        {
-            lUI.transform.GetChild(3).GetComponent<Text>().color = Color.white;
-        }
-        if (Input.GetAxis(selectButton) > axisDegree)
-        {
-            int range = gameObject.GetComponent<playerScript>().mapLocal.distanceBetween(gameObject.GetComponent<playerScript>().StandingHex, curSel.GetComponent<InfoBall>().StandingHex);
-            if (range <= 1 && gameObject.GetComponent<playerScript>().Mana - gameObject.GetComponent<playerScript>().UseBallCost >= 0)
+            lUI.transform.GetChild(3).GetComponent<Text>().text = "Pick Up";
+            lUI.transform.GetChild(1).GetComponent<Text>().text = "";
+            lUI.transform.GetChild(0).GetComponent<Text>().text = "";
+            lUI.transform.GetChild(4).GetComponent<Text>().text = "";
+            lUI.transform.GetChild(5).GetComponent<Text>().text = "";
+            if (Input.GetAxis(selectY) > axisDegree)
             {
-                gameObject.GetComponent<playerScript>().pickUpBall();
-                GameObject.FindGameObjectWithTag("Info").GetComponent<InfoBall>().Move(gameObject.GetComponent<playerScript>().StandingHex);
+                lUI.transform.GetChild(3).GetComponent<Text>().color = Color.blue;
+                lUI.transform.GetChild(1).GetComponent<Text>().color = Color.white;
+                lUI.transform.GetChild(0).GetComponent<Text>().color = Color.white;
             }
-            curOption = -1;
-            if (leftUICreate)
+            else
             {
-                Destroy(lUI);
-                leftUICreate = false;
+                lUI.transform.GetChild(3).GetComponent<Text>().color = Color.white;
+            }
+            if (Input.GetAxis(selectButton) > axisDegree && preDegree != Input.GetAxis(selectButton))
+            {
+                int range = gameObject.GetComponent<playerScript>().mapLocal.distanceBetween(gameObject.GetComponent<playerScript>().StandingHex, curSel.GetComponent<InfoBall>().StandingHex);
+                if (range <= 1 && gameObject.GetComponent<playerScript>().Mana - gameObject.GetComponent<playerScript>().UseBallCost >= 0)
+                {
+                    gameObject.GetComponent<playerScript>().pickUpBall();
+                    GameObject.FindGameObjectWithTag("Info").GetComponent<InfoBall>().Move(gameObject.GetComponent<playerScript>().StandingHex);
+                }
+                curOption = -1;
+                if (leftUICreate)
+                {
+                    Destroy(lUI);
+                    leftUICreate = false;
+                }
+                Input.ResetInputAxes();
             }
         }
         preHex = curSel;
+        preDegree = Input.GetAxis(selectButton);
     }
     public void StartUI(bool before)
     {
@@ -487,6 +511,7 @@ public class MotionControllers : MonoBehaviour
                 gameObject.GetComponent<playerScript>().Action = "Reset";
             }
         }
+        preDegree = Input.GetAxis(selectButton);
     }
     public void RemoveHighlight()
     {

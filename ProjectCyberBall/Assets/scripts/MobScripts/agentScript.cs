@@ -291,6 +291,7 @@ public class agentScript : MonoBehaviour
                 }
                 else
                 {
+                    canMove = true;
                     Debug.LogError("Hex: " + newHex + " is not within range of movement");
                     return;
                 }

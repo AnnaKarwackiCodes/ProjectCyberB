@@ -1,0 +1,233 @@
+fileFormatVersion: 2
+guid: 51503963ac995904ba5f746279a0143e
+timeCreated: 1524804696
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: geo1
+    100002: hand_left_ctrls
+    100004: Handleft
+    100006: handLeft_joints
+    100008: joint10
+    100010: joint11
+    100012: joint12
+    100014: joint14
+    100016: joint15
+    100018: joint16
+    100020: joint18
+    100022: joint19
+    100024: joint2
+    100026: joint20
+    100028: joint21
+    100030: joint21_Ctrl
+    100032: joint21_joint2_joint10_Ctrl
+    100034: joint21_joint2_joint10_Ctrl_group
+    100036: joint21_joint2_joint10_joint11_Ctrl
+    100038: joint21_joint2_joint10_joint11_Ctrl_group
+    100040: joint21_joint2_joint10_joint11_joint12_Ctrl
+    100042: joint21_joint2_joint10_joint11_joint12_Ctrl_group
+    100044: joint21_joint2_joint10_joint11_joint12_null
+    100046: joint21_joint2_joint10_joint11_null
+    100048: joint21_joint2_joint10_null
+    100050: joint21_joint2_joint14_Ctrl
+    100052: joint21_joint2_joint14_joint15_Ctrl
+    100054: joint21_joint2_joint14_joint15_Ctrl_group
+    100056: joint21_joint2_joint14_joint15_joint16_Ctrl
+    100058: joint21_joint2_joint14_joint15_joint16_Ctrl_group
+    100060: joint21_joint2_joint14_joint15_joint16_null
+    100062: joint21_joint2_joint14_joint15_null
+    100064: joint21_joint2_joint18_Ctrl
+    100066: joint21_joint2_joint18_Ctrl_group
+    100068: joint21_joint2_joint18_joint19_Ctrl
+    100070: joint21_joint2_joint18_joint19_Ctrl_group
+    100072: joint21_joint2_joint18_joint19_joint20_Ctrl
+    100074: joint21_joint2_joint18_joint19_null
+    100076: joint21_joint2_joint18_null
+    100078: joint21_joint2_joint3_Ctrl
+    100080: joint21_joint2_joint3_Ctrl_Ctrl
+    100082: joint21_joint2_joint3_Ctrl_null
+    100084: joint21_joint2_joint3_joint4_Ctrl
+    100086: joint21_joint2_joint3_joint4_null
+    100088: joint21_joint2_joint3_null
+    100090: joint21_joint2_joint6_Ctrl
+    100092: joint21_joint2_joint6_Ctrl_group
+    100094: joint21_joint2_joint6_joint7_Ctrl
+    100096: joint21_joint2_joint6_joint7_Ctrl_group
+    100098: joint21_joint2_joint6_joint7_joint8_Ctrl
+    100100: joint21_joint2_joint6_joint7_joint8_Ctrl_group
+    100102: joint21_joint2_joint6_joint7_joint8_null
+    100104: joint21_joint2_joint6_joint7_null
+    100106: joint21_joint2_joint6_null
+    100108: joint21_null
+    100110: joint3
+    100112: joint4
+    100114: joint6
+    100116: joint7
+    100118: joint8
+    100120: //RootNode
+    100122: nurbsCircle8_Ctrl
+    100124: nurbsCircle8_null
+    100126: pCube15
+    100128: pSphere5
+    100130: pTorus1
+    400000: geo1
+    400002: hand_left_ctrls
+    400004: Handleft
+    400006: handLeft_joints
+    400008: joint10
+    400010: joint11
+    400012: joint12
+    400014: joint14
+    400016: joint15
+    400018: joint16
+    400020: joint18
+    400022: joint19
+    400024: joint2
+    400026: joint20
+    400028: joint21
+    400030: joint21_Ctrl
+    400032: joint21_joint2_joint10_Ctrl
+    400034: joint21_joint2_joint10_Ctrl_group
+    400036: joint21_joint2_joint10_joint11_Ctrl
+    400038: joint21_joint2_joint10_joint11_Ctrl_group
+    400040: joint21_joint2_joint10_joint11_joint12_Ctrl
+    400042: joint21_joint2_joint10_joint11_joint12_Ctrl_group
+    400044: joint21_joint2_joint10_joint11_joint12_null
+    400046: joint21_joint2_joint10_joint11_null
+    400048: joint21_joint2_joint10_null
+    400050: joint21_joint2_joint14_Ctrl
+    400052: joint21_joint2_joint14_joint15_Ctrl
+    400054: joint21_joint2_joint14_joint15_Ctrl_group
+    400056: joint21_joint2_joint14_joint15_joint16_Ctrl
+    400058: joint21_joint2_joint14_joint15_joint16_Ctrl_group
+    400060: joint21_joint2_joint14_joint15_joint16_null
+    400062: joint21_joint2_joint14_joint15_null
+    400064: joint21_joint2_joint18_Ctrl
+    400066: joint21_joint2_joint18_Ctrl_group
+    400068: joint21_joint2_joint18_joint19_Ctrl
+    400070: joint21_joint2_joint18_joint19_Ctrl_group
+    400072: joint21_joint2_joint18_joint19_joint20_Ctrl
+    400074: joint21_joint2_joint18_joint19_null
+    400076: joint21_joint2_joint18_null
+    400078: joint21_joint2_joint3_Ctrl
+    400080: joint21_joint2_joint3_Ctrl_Ctrl
+    400082: joint21_joint2_joint3_Ctrl_null
+    400084: joint21_joint2_joint3_joint4_Ctrl
+    400086: joint21_joint2_joint3_joint4_null
+    400088: joint21_joint2_joint3_null
+    400090: joint21_joint2_joint6_Ctrl
+    400092: joint21_joint2_joint6_Ctrl_group
+    400094: joint21_joint2_joint6_joint7_Ctrl
+    400096: joint21_joint2_joint6_joint7_Ctrl_group
+    400098: joint21_joint2_joint6_joint7_joint8_Ctrl
+    400100: joint21_joint2_joint6_joint7_joint8_Ctrl_group
+    400102: joint21_joint2_joint6_joint7_joint8_null
+    400104: joint21_joint2_joint6_joint7_null
+    400106: joint21_joint2_joint6_null
+    400108: joint21_null
+    400110: joint3
+    400112: joint4
+    400114: joint6
+    400116: joint7
+    400118: joint8
+    400120: //RootNode
+    400122: nurbsCircle8_Ctrl
+    400124: nurbsCircle8_null
+    400126: pCube15
+    400128: pSphere5
+    400130: pTorus1
+    2100000: phongE3
+    2100002: phongE2
+    2100004: lambert1
+    2100006: phongE4
+    2300000: pSphere5
+    2300002: pTorus1
+    3300000: pSphere5
+    3300002: pTorus1
+    4300000: pTorus1
+    4300002: pSphere5
+    4300004: pCube15
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: pCube15
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

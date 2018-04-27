@@ -44,6 +44,8 @@ public class playerScript : agentScript {
 
     private bool endMenuUp;
 
+    private float preTrigger;
+
     // Use this for initialization
     new void Start () {
         base.Start();
@@ -132,10 +134,10 @@ public class playerScript : agentScript {
                     ray.GetComponent<RayCasting>().RemoveHighlight();
                     break;
             }
-            if(Input.GetAxis("Right_Trigger") > .5f) //(Input.GetAxis("Right_Grip_Button") == 1 && (Input.GetAxis("Left_Trigger") != 1 && Input.GetAxis("Right_Trigger") != 1))
+            if(Input.GetAxis("Right_Trigger") > .5f && !Input.GetButton("Right_Start")) //(Input.GetAxis("Right_Grip_Button") == 1 && (Input.GetAxis("Left_Trigger") != 1 && Input.GetAxis("Right_Trigger") != 1))
             {
                 //MinionInteract();
-                ray.GetComponent<RayCasting>().SelectingObj(5);
+                ray.GetComponent<RayCasting>().SelectingObj(4);
             }
             else
             {
@@ -346,7 +348,7 @@ public class playerScript : agentScript {
     }
     public void endTurn() //doing this will end the player turn
     {
-        if(Input.GetButton("Right_Start"))//(Input.GetAxis("Left_Trigger") == 1 && Input.GetAxis("Right_Trigger") == 1)
+        if(Input.GetButton("Right_Start") && Input.GetButton("Right_Menu"))//(Input.GetAxis("Left_Trigger") == 1 && Input.GetAxis("Right_Trigger") == 1)
         {
             endMenuUp = true;
             if (!endPopCreate) //creates end of turn text
@@ -357,7 +359,7 @@ public class playerScript : agentScript {
                 transform.GetChild(2).GetChild(1).GetChild(2).GetComponent<Text>().text = "";
             }
             //pop up an end turn? menu
-            if(Input.GetAxis("Left_Trigger") > .5f)//(Input.GetAxis("Left_Grip_Button") == 1 && Input.GetAxis("Right_Grip_Button") == 1)
+            if(Input.GetAxis("Right_Trigger") > .5f)//(Input.GetAxis("Left_Grip_Button") == 1 && Input.GetAxis("Right_Grip_Button") == 1)
             {
                 if (!endOfTurnButtonHold)
                 {
@@ -386,12 +388,10 @@ public class playerScript : agentScript {
     }
     public void MinionInteract(string action)
     {
-        Debug.Log("1");
         ray.GetComponent<RayCasting>().BoiFind(10, action);
         //int range = mapLocal.distanceBetween(StandingHex, selectedMinion.StandingHex);
         if (action == "Move" && selectedMinion != null && selectedObj != null && selectedObj.tag == "Hex" && selectedObj.GetComponent<Hex>().occupant == null && Input.GetAxis("Left_Trigger") > .5f)
             {
-            Debug.Log("2");
                 selectedMinion.Move(selectedObj.GetComponent<Hex>());
                 //Input.ResetInputAxes();
                 selectedMinion.Selected = false;
@@ -402,7 +402,7 @@ public class playerScript : agentScript {
                 gameObject.GetComponent<MotionControllers>().RemoveHighlight();
                 ray.GetComponent<RayCasting>().RemoveHighlight();
             }
-        else if(action == "Attack" && selectedMinion != null && selectedObj != null && selectedObj.tag == "Enemy" && selectedObj.GetComponent<Hex>().occupant == null && Input.GetAxis("Left_Trigger") == 1)
+        else if(action == "Attack" && selectedMinion != null && selectedObj != null && selectedObj.tag == "Enemy"  && Input.GetAxis("Left_Trigger") == 1)
         {
             //do later when there are actually baddies to attack
             selectedMinion.mobAttack(selectedObj.GetComponent<agentScript>());
