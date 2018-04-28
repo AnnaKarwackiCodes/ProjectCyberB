@@ -45,6 +45,7 @@ public class playerScript : agentScript {
     private bool endMenuUp;
 
     private float preTrigger;
+    private bool triggerAnimation;
 
     // Use this for initialization
     new void Start () {
@@ -73,6 +74,7 @@ public class playerScript : agentScript {
 
         endOfTurnButtonHold = false;
         endMenuUp = false;
+        triggerAnimation = true;
     }
 
     void Awake() {
@@ -87,22 +89,22 @@ public class playerScript : agentScript {
         //base.Update();
         if (gameController.PlayersTurn && gameController.InGame)
         {
-            transform.GetChild(2).GetChild(1).GetChild(0).GetComponent<Image>().sprite = pTurn;
+            transform.GetChild(2).GetChild(3).GetChild(0).GetComponent<Image>().sprite = pTurn;
         }
         else if(!gameController.PlayersTurn && gameController.InGame)
         {
-            transform.GetChild(2).GetChild(1).GetChild(0).GetComponent<Image>().sprite = eTurn;
+            transform.GetChild(2).GetChild(3).GetChild(0).GetComponent<Image>().sprite = eTurn;
         }
         if (!endMenuUp && gameController.InGame)
         {
-            transform.GetChild(2).GetChild(1).GetChild(1).GetComponent<Text>().text = "Health: " + Health;
-            transform.GetChild(2).GetChild(1).GetChild(2).GetComponent<Text>().text = "Mana: " + mana;
+            transform.GetChild(2).GetChild(3).GetChild(1).GetComponent<Text>().text = "Health: " + Health;
+            transform.GetChild(2).GetChild(3).GetChild(2).GetComponent<Text>().text = "Mana: " + mana;
         }
         if (gameController.PlayersTurn && gameController.InGame)
         {
-            if (Input.GetKeyDown("q")) { selectedObj = mapLocal.getHex(4, -9, 5).gameObject; SummonBig(); }//noah testing
+            //if (Input.GetKeyDown("q")) { selectedObj = mapLocal.getHex(4, -9, 5).gameObject; SummonBig(); }//noah testing
             //if (Input.GetKeyDown("w")) { selectedObj = mapLocal.getHex(4, -9, 5).gameObject; SummonSmall(); }//noah testing
-            if (Input.GetKeyDown("e")) { gameController.changeTurn(false); } //noah testing
+            //if (Input.GetKeyDown("e")) { gameController.changeTurn(false); } //noah testing
 
                 switch (action)
             {
@@ -137,6 +139,11 @@ public class playerScript : agentScript {
             if(Input.GetAxis("Right_Trigger") > .5f && !Input.GetButton("Right_Start")) //(Input.GetAxis("Right_Grip_Button") == 1 && (Input.GetAxis("Left_Trigger") != 1 && Input.GetAxis("Right_Trigger") != 1))
             {
                 //MinionInteract();
+                if (triggerAnimation)
+                {
+                    gameObject.GetComponent<MotionControllers>().righty.GetComponent<Animator>().Play("Pew");
+                    triggerAnimation = false;
+                }
                 ray.GetComponent<RayCasting>().SelectingObj(4);
             }
             else
@@ -148,6 +155,7 @@ public class playerScript : agentScript {
                 action = "";
                 selectedMinion = null;
                 selectedObj = null;
+                triggerAnimation = true;
             }
 
             if (createFireball && myFB.GetComponent<FireBall>().HitTarget)
@@ -353,10 +361,10 @@ public class playerScript : agentScript {
             endMenuUp = true;
             if (!endPopCreate) //creates end of turn text
             {
-                etPop = Instantiate(endTurnPop, transform.GetChild(2).GetChild(1).transform.position, new Quaternion(0, 0, 0, 0),transform.GetChild(2).GetChild(1).transform);
+                etPop = Instantiate(endTurnPop, transform.GetChild(2).GetChild(3).transform.position, new Quaternion(0, 0, 0, 0),transform.GetChild(2).GetChild(3).transform);
                 endPopCreate = true;
-                transform.GetChild(2).GetChild(1).GetChild(1).GetComponent<Text>().text = "";
-                transform.GetChild(2).GetChild(1).GetChild(2).GetComponent<Text>().text = "";
+                transform.GetChild(2).GetChild(3).GetChild(1).GetComponent<Text>().text = "";
+                transform.GetChild(2).GetChild(3).GetChild(2).GetComponent<Text>().text = "";
             }
             //pop up an end turn? menu
             if(Input.GetAxis("Right_Trigger") > .5f)//(Input.GetAxis("Left_Grip_Button") == 1 && Input.GetAxis("Right_Grip_Button") == 1)

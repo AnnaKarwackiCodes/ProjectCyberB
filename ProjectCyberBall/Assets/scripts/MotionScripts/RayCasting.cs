@@ -43,7 +43,7 @@ public class RayCasting : MonoBehaviour {
         //Debug.Log("selecting obj");
         //drawing the line to show what it's interacting with
         line.enabled = true;
-        Ray ray = new Ray(transform.position, transform.forward);
+        Ray ray = new Ray(transform.position, -gameObject.transform.right);
 
         line.SetPosition(0, ray.origin);
         line.SetPosition(1, ray.GetPoint(distance));
@@ -55,23 +55,28 @@ public class RayCasting : MonoBehaviour {
                 case "Hex":
                     if (user.Action != "Move Boi" && user.SelectedMinion == null && hit.collider.gameObject.GetComponent<Hex>().occupant == null)
                     {
+                        transform.parent.transform.parent.GetComponent<MotionControllers>().lefty.GetComponent<Animator>().Play("Open");
+
                         myControls.HexInteraction(hit.collider.gameObject);
                         //RemoveHighlight();
                     }
                     user.SelectedObj = hit.collider.gameObject;
                     break;
                 case "Boi":
+                    transform.parent.transform.parent.GetComponent<MotionControllers>().lefty.GetComponent<Animator>().Play("Open");
                     myControls.BoiInteraction(hit.collider.gameObject);
                     user.SelectedMinion = hit.collider.gameObject.GetComponent<mobBase>();
                     break;
                 case "Enemy":
                     //player attack options
+                    transform.parent.transform.parent.GetComponent<MotionControllers>().lefty.GetComponent<Animator>().Play("Open");
                     myControls.EnemyInteraction(hit.collider.gameObject);
                     user.SelectedObj = hit.collider.gameObject;
                     break;
                 case "Info":
                     if (!user.HasBall)
                     {
+                        transform.parent.transform.parent.GetComponent<MotionControllers>().lefty.GetComponent<Animator>().Play("Open");
                         myControls.InfoInteraction(hit.collider.gameObject);
                         user.SelectedObj = hit.collider.gameObject;
                     }

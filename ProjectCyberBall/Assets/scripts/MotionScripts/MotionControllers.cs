@@ -45,6 +45,16 @@ public class MotionControllers : MonoBehaviour
 
     private float preDegree;
 
+    public float x;
+    public float y;
+    public float z;
+    public float w;
+
+    public float x2;
+    public float y2;
+    public float z2;
+    public float w2;
+
     // Use this for initialization
     void Start()
     {
@@ -59,7 +69,17 @@ public class MotionControllers : MonoBehaviour
         selectY = "Left_Thumbstick_Y";
         selectButton = "Left_Trigger";
         axisDegree = .05f;
-    }
+
+        //x =0;
+        //y = 0;
+        //z = 0;
+        //w = 0;
+        //
+        //x2 = 0;
+        //y2 = 0;
+        //z2 = 0;
+        //w2 = 0;
+}       
 
     // Update is called once per frame
     void Update()
@@ -76,6 +96,19 @@ public class MotionControllers : MonoBehaviour
             }
         }
     }
+    void LateUpdate()
+    {
+
+        if (gameObject.GetComponent<playerScript>().Action != "NOTHING")
+        {
+
+            lefty.transform.localScale = new Vector3(10, 10, 10);
+
+            righty.transform.localScale = new Vector3(10, 10, 10);
+
+        }
+        
+    }
     //everything that deals with tracking the controllers goes here
     private void Track()
     {
@@ -91,11 +124,11 @@ public class MotionControllers : MonoBehaviour
 
         //moving the left "hand"
         lefty.transform.localPosition = leftPosition;
-        lefty.transform.localRotation = leftRotation;// * new Quaternion(90,0,0,0);
+        lefty.transform.localRotation = leftRotation * new Quaternion(x,y,z,w);
 
         //moving the right "hand"
         righty.transform.localPosition = rightPosition;
-        righty.transform.localRotation = rightRotation;// * new Quaternion(0,90,0,0);
+        righty.transform.localRotation = rightRotation * new Quaternion(x2,y2,z2, w2);
     }
     public void RemoveUI()
     {
